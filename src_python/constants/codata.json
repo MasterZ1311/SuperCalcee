@@ -1,0 +1,63 @@
+{
+    "c": {
+        "name": "speed of light in vacuum",
+        "value": 299792458,
+        "unit": "m/s",
+        "exact": true
+    },
+    "h": {
+        "name": "Planck constant",
+        "value": 6.62607015e-34,
+        "unit": "J*s",
+        "exact": true
+    },
+    "G": {
+        "name": "Newtonian constant of gravitation",
+        "value": 6.67430e-11,
+        "unit": "m^3/(kg*s^2)",
+        "exact": false,
+        "uncertainty": 0.00015e-11
+    },
+    "e": {
+        "name": "elementary charge",
+        "value": 1.602176634e-19,
+        "unit": "C",
+        "exact": true
+    },
+    "k": {
+        "name": "Boltzmann constant",
+        "value": 1.380649e-23,
+        "unit": "J/K",
+        "exact": true
+    },
+    "N_A": {
+        "name": "Avogadro constant",
+        "value": 6.02214076e23,
+        "unit": "1/mol",
+        "exact": true
+    },
+    "R": {
+        "name": "molar gas constant",
+        "value": 8.314462618,
+        "unit": "J/(mol*K)",
+        "exact": true
+    },
+    "eps_0": {
+        "name": "vacuum electric permittivity",
+        "value": 8.8541878128e-12,
+        "unit": "F/m",
+        "exact": true
+    },
+    "mu_0": {
+        "name": "vacuum magnetic permeability",
+        "value": 1.25663706212e-6,
+        "unit": "N/A^2",
+        "exact": true
+    },
+    "F": {
+        "name": "Faraday constant",
+        "value": 96485.33212,
+        "unit": "C/mol",
+        "exact": true
+    }
+}
