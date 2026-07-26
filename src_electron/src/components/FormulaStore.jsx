@@ -13,6 +13,7 @@
 
 import React, { useState } from 'react';
 import { FORMULA_PACKS } from '../data/packRegistry';
+import { Check, Download, Trash2 } from 'lucide-react';
 
 /**
  * @typedef {Object} FormulaStoreProps
@@ -117,13 +118,29 @@ const FormulaStore = ({ installedPackIds, onToggleInstall }) => {
                 onClick={() => onToggleInstall(pack.id)}
                 style={{
                   width: '100%',
-                  background: isInstalled ? '#ef4444' : '#10b981',
-                  color: '#fff',
+                  background: isInstalled ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+                  color: isInstalled ? '#f87171' : '#34d399',
+                  border: isInstalled ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(16, 185, 129, 0.4)',
                   fontWeight: '600',
-                  cursor: 'pointer'
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  padding: '8px 12px',
+                  borderRadius: '6px',
+                  transition: 'all 0.2s ease'
                 }}
               >
-                {isInstalled ? '✓ Installed (Click to Uninstall)' : '↓ Download & Install Pack'}
+                {isInstalled ? (
+                  <>
+                    <Trash2 className="w-4 h-4" /> Installed (Click to Uninstall)
+                  </>
+                ) : (
+                  <>
+                    <Download className="w-4 h-4" /> Download & Install Pack
+                  </>
+                )}
               </button>
             </div>
           );
