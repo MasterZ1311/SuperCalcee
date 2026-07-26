@@ -1,0 +1,58 @@
+[
+  {
+    "id": "fin_simple_int",
+    "name": "Simple Interest Earned",
+    "desc": "I = P * R * T / 100",
+    "expression": "(P * R * T) / 100",
+    "variables": ["P", "R", "T"],
+    "unit": "$"
+  },
+  {
+    "id": "fin_compound_int",
+    "name": "Compound Interest Total Amount",
+    "desc": "A = P * (1 + R/(100*n))^(n*t)",
+    "expression": "P * ((1 + R / (100 * n))^(n * T))",
+    "variables": ["P", "R", "n", "T"],
+    "unit": "$"
+  },
+  {
+    "id": "fin_continuous_comp",
+    "name": "Continuous Compounding (A)",
+    "desc": "A = P * e^(r * t)",
+    "expression": "P * e^((R / 100) * T)",
+    "variables": ["P", "R", "T"],
+    "unit": "$"
+  },
+  {
+    "id": "fin_apy",
+    "name": "APY (Annual Percentage Yield)",
+    "desc": "APY = (1 + r/n)^n - 1",
+    "expression": "(((1 + (R / (100 * n)))^n) - 1) * 100",
+    "variables": ["R", "n"],
+    "unit": "%"
+  },
+  {
+    "id": "fin_rule_72",
+    "name": "Rule of 72 (Doubling Time)",
+    "desc": "Years to double = 72 / AnnualInterestRate%",
+    "expression": "72 / R",
+    "variables": ["R"],
+    "unit": "years"
+  },
+  {
+    "id": "fin_emi_loan",
+    "name": "EMI (Monthly Installment)",
+    "desc": "P * (r/1200) * (1+r/1200)^N / ((1+r/1200)^N - 1)",
+    "expression": "P * (R / 1200) * (((1 + R / 1200)^N) / (((1 + R / 1200)^N) - 1))",
+    "variables": ["P", "R", "N"],
+    "unit": "$/month"
+  },
+  {
+    "id": "fin_loan_balance",
+    "name": "Remaining Loan Balance after p Payments",
+    "desc": "B = P*(1+r)^p - EMI*((1+r)^p - 1)/r",
+    "expression": "P * ((1 + R/1200)^p) - EMI * (((1 + R/1200)^p - 1) / (R/1200))",
+    "variables": ["P", "R", "p", "EMI"],
+    "unit": "$"
+  }
+]

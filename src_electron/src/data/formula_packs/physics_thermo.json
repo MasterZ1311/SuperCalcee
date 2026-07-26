@@ -1,0 +1,50 @@
+[
+  {
+    "id": "thermo_ideal_gas",
+    "name": "Ideal Gas Law (Pressure)",
+    "desc": "P = (n * R * T) / V",
+    "expression": "(n * 8.314462618 * T) / V",
+    "variables": ["n", "T", "V"],
+    "unit": "Pa"
+  },
+  {
+    "id": "thermo_heat_capacity",
+    "name": "Specific Heat Energy",
+    "desc": "Q = m * c * ΔT",
+    "expression": "m * c * deltaT",
+    "variables": ["m", "c", "deltaT"],
+    "unit": "J"
+  },
+  {
+    "id": "thermo_linear_expansion",
+    "name": "Linear Thermal Expansion",
+    "desc": "ΔL = alpha * L0 * ΔT",
+    "expression": "alpha * L0 * deltaT",
+    "variables": ["alpha", "L0", "deltaT"],
+    "unit": "m"
+  },
+  {
+    "id": "thermo_carnot_eff",
+    "name": "Carnot Engine Efficiency (%)",
+    "desc": "eta = (1 - Tc/Th) * 100",
+    "expression": "(1 - (Tc / Th)) * 100",
+    "variables": ["Tc", "Th"],
+    "unit": "%"
+  },
+  {
+    "id": "thermo_stefan_boltzmann",
+    "name": "Stefan-Boltzmann Radiated Power",
+    "desc": "P = epsilon * sigma * A * T⁴",
+    "expression": "epsilon * 5.670374419e-8 * A * (T^4)",
+    "variables": ["epsilon", "A", "T"],
+    "unit": "W"
+  },
+  {
+    "id": "thermo_first_law",
+    "name": "First Law of Thermodynamics (ΔU)",
+    "desc": "deltaU = Q - W (heat added minus work done by system)",
+    "expression": "Q - W",
+    "variables": ["Q", "W"],
+    "unit": "J"
+  }
+]

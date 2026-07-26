@@ -1,0 +1,50 @@
+[
+  {
+    "id": "fin_wacc",
+    "name": "WACC (Weighted Average Cost of Capital)",
+    "desc": "(E/V)*Re + (D/V)*Rd*(1 - Tax)",
+    "expression": "(E / V) * Re + (D / V) * Rd * (1 - Tax / 100)",
+    "variables": ["E", "D", "V", "Re", "Rd", "Tax"],
+    "unit": "%"
+  },
+  {
+    "id": "fin_capm",
+    "name": "CAPM (Capital Asset Pricing Model)",
+    "desc": "Expected Return = Rf + Beta * (Rm - Rf)",
+    "expression": "Rf + Beta * (Rm - Rf)",
+    "variables": ["Rf", "Beta", "Rm"],
+    "unit": "%"
+  },
+  {
+    "id": "fin_npv_simple",
+    "name": "Net Present Value (Single Cash Flow)",
+    "desc": "NPV = (CashFlow / (1 + r)^t) - InitialInvestment",
+    "expression": "(CashFlow / ((1 + R/100)^t)) - InitialInvestment",
+    "variables": ["CashFlow", "R", "t", "InitialInvestment"],
+    "unit": "$"
+  },
+  {
+    "id": "fin_working_capital",
+    "name": "Net Working Capital",
+    "desc": "Current Assets - Current Liabilities",
+    "expression": "CurrentAssets - CurrentLiabilities",
+    "variables": ["CurrentAssets", "CurrentLiabilities"],
+    "unit": "$"
+  },
+  {
+    "id": "fin_dol",
+    "name": "Degree of Operating Leverage (DOL)",
+    "desc": "Contribution Margin / Net Operating Income",
+    "expression": "ContributionMargin / NetOperatingIncome",
+    "variables": ["ContributionMargin", "NetOperatingIncome"],
+    "unit": "ratio"
+  },
+  {
+    "id": "fin_break_even",
+    "name": "Break-Even Point (Units)",
+    "desc": "Fixed Costs / (PricePerUnit - VariableCostPerUnit)",
+    "expression": "FixedCosts / (Price - VarCost)",
+    "variables": ["FixedCosts", "Price", "VarCost"],
+    "unit": "units"
+  }
+]

@@ -1,6 +1,8 @@
-# 🧠 Understanding SuperCalcee — Universal Computational Engine
+# TECHNICAL ARCHITECTURE & ENGINEERING MANUAL
 
-> **Source:** [SUPERCALCEE.md](file:///c:/Users/sivak/OneDrive/Desktop/SuperCalcee/SUPERCALCEE.md)
+> **Document Type:** Architectural Deep-Dive & Engineering Design Manual  
+> **Unique Purpose:** Provides an exhaustive technical breakdown of SuperCalcee's 7-layer architecture, risk analysis, cross-domain matrix, CAS engine integration, and formula inversion mechanics.  
+> **Navigation:** [Root README](file:///e:/Github/GitProjects/SuperCalcee/README.md) | [PRD & Blueprint](file:///e:/Github/GitProjects/SuperCalcee/SUPERCALCEE.md) | [Verification Log](file:///e:/Github/GitProjects/SuperCalcee/walkthrough.md) | [Frontend Guide](file:///e:/Github/GitProjects/SuperCalcee/src_electron/README.md) | [Backend Guide](file:///e:/Github/GitProjects/SuperCalcee/src_python/README.md)
 
 ---
 
@@ -29,14 +31,14 @@ The system is organized into **7 core layers** that stack on top of each other:
 
 ```mermaid
 graph TD
-    A["🖥️ UI/UX Layer"] --> B["📊 Graphing Engine"]
-    A --> C["🔗 Interoperability Engine"]
-    C --> D["🧩 Domain Modules"]
-    D --> E["📐 Formula Engine"]
-    E --> F["⚙️ CAS Engine"]
-    F --> G["📝 Parser & Logic Engine"]
-    G --> H["📏 Dimensional Analysis Engine"]
-    H --> I["📦 Constants Database - CODATA 2022"]
+    A["UI/UX Layer"] --> B["Graphing Engine"]
+    A --> C["Interoperability Engine"]
+    C --> D["Domain Modules"]
+    D --> E["Formula Engine"]
+    E --> F["CAS Engine"]
+    F --> G["Parser & Logic Engine"]
+    G --> H["Dimensional Analysis Engine"]
+    H --> I["Constants Database - CODATA 2022"]
 
     style A fill:#6366f1,stroke:#4f46e5,color:#fff
     style B fill:#8b5cf6,stroke:#7c3aed,color:#fff
@@ -150,33 +152,33 @@ graph LR
 
 Six specialized modules, each encapsulating deep domain expertise:
 
-#### 📐 Physics Engine
+#### Physics Engine
 - Newton's Laws, Maxwell's Equations
 - Einstein's `E = mc²`
 - Quantum: Heisenberg Uncertainty Principle
 
-#### 🌌 Astrophysics
+#### Astrophysics
 - Kepler's Laws, Orbital Mechanics
 - Schwarzschild Radius (black hole physics)
 - Drake Equation (extraterrestrial civilizations)
 
-#### 🧪 Chemistry & Thermodynamics
+#### Chemistry & Thermodynamics
 - Nernst Equation (electrochemistry)
 - Gibbs Free Energy
 - Reaction Kinetics
 
-#### 🧬 Biology
+#### Biology
 - Michaelis-Menten Kinetics (enzyme behavior)
 - Hardy-Weinberg Equilibrium (population genetics)
 - Genetic Simulations
 
-#### 💰 Finance
+#### Finance
 - NPV (Net Present Value)
 - IRR (Internal Rate of Return — requires root solving)
 - WACC (Weighted Average Cost of Capital)
 - Black-Scholes (options pricing)
 
-#### 💻 Computer Science
+#### Computer Science
 - Big-O Analysis
 - Shannon Entropy
 - Algorithm Modeling

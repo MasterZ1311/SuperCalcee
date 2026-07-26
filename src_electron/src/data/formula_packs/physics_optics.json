@@ -1,0 +1,50 @@
+[
+  {
+    "id": "opt_snells_law",
+    "name": "Snell's Law (Reflected Angle θ2)",
+    "desc": "sin(theta2) = (n1 / n2) * sin(theta1)",
+    "expression": "asin((n1 / n2) * sin(theta1 * pi / 180)) * 180 / pi",
+    "variables": ["n1", "n2", "theta1"],
+    "unit": "deg"
+  },
+  {
+    "id": "opt_lens_formula",
+    "name": "Lens / Mirror Focal Length (f)",
+    "desc": "1/f = 1/v + 1/u => f = (u*v) / (u+v)",
+    "expression": "(u * v) / (u + v)",
+    "variables": ["u", "v"],
+    "unit": "m"
+  },
+  {
+    "id": "opt_photon_energy",
+    "name": "Photon Energy (E = h*f)",
+    "desc": "E = h * f",
+    "expression": "6.62607015e-34 * f",
+    "variables": ["f"],
+    "unit": "J"
+  },
+  {
+    "id": "opt_de_broglie",
+    "name": "de Broglie Wavelength",
+    "desc": "lambda = h / p (p = momentum)",
+    "expression": "6.62607015e-34 / p",
+    "variables": ["p"],
+    "unit": "m"
+  },
+  {
+    "id": "opt_einstein_mass_energy",
+    "name": "Mass-Energy Equivalence (E = m*c²)",
+    "desc": "E = m * c²",
+    "expression": "m * (299792458^2)",
+    "variables": ["m"],
+    "unit": "J"
+  },
+  {
+    "id": "opt_radioactive_decay",
+    "name": "Radioactive Decay Remaining (N)",
+    "desc": "N = N0 * e^(-lambda * t)",
+    "expression": "N0 * e^(-1 * lambda * t)",
+    "variables": ["N0", "lambda", "t"],
+    "unit": "particles"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "id": "alg_quad_pos",
+    "name": "Quadratic Root (+)",
+    "desc": "x = (-b + √(b² - 4ac)) / (2a)",
+    "expression": "(-b + sqrt(b^2 - 4*a*c)) / (2*a)",
+    "variables": ["a", "b", "c"],
+    "unit": ""
+  },
+  {
+    "id": "alg_quad_neg",
+    "name": "Quadratic Root (-)",
+    "desc": "x = (-b - √(b² - 4ac)) / (2a)",
+    "expression": "(-b - sqrt(b^2 - 4*a*c)) / (2*a)",
+    "variables": ["a", "b", "c"],
+    "unit": ""
+  },
+  {
+    "id": "alg_arithmetic_sum",
+    "name": "Arithmetic Progression (AP) Sum",
+    "desc": "Sn = (n / 2) * (2*a + (n - 1)*d)",
+    "expression": "(n / 2) * (2*a + (n - 1)*d)",
+    "variables": ["n", "a", "d"],
+    "unit": ""
+  },
+  {
+    "id": "alg_geometric_sum",
+    "name": "Geometric Progression (GP) Sum",
+    "desc": "Sn = a * (1 - r^n) / (1 - r)",
+    "expression": "a * ((1 - (r^n)) / (1 - r))",
+    "variables": ["a", "r", "n"],
+    "unit": ""
+  },
+  {
+    "id": "alg_distance_2d",
+    "name": "Euclidean Distance (2D)",
+    "desc": "d = √((x2-x1)² + (y2-y1)²)",
+    "expression": "sqrt((x2 - x1)^2 + (y2 - y1)^2)",
+    "variables": ["x1", "y1", "x2", "y2"],
+    "unit": ""
+  },
+  {
+    "id": "alg_line_slope",
+    "name": "Slope of a Line (m)",
+    "desc": "m = (y2 - y1) / (x2 - x1)",
+    "expression": "(y2 - y1) / (x2 - x1)",
+    "variables": ["x1", "y1", "x2", "y2"],
+    "unit": ""
+  },
+  {
+    "id": "trig_sine_law",
+    "name": "Law of Sines (Side b)",
+    "desc": "b = (a * sin(B)) / sin(A)",
+    "expression": "(a * sin(B * pi / 180)) / sin(A * pi / 180)",
+    "variables": ["a", "B", "A"],
+    "unit": "units"
+  },
+  {
+    "id": "trig_cosine_law",
+    "name": "Law of Cosines (Side c)",
+    "desc": "c = √(a² + b² - 2ab*cos(C))",
+    "expression": "sqrt((a^2) + (b^2) - 2*a*b*cos(C * pi / 180))",
+    "variables": ["a", "b", "C"],
+    "unit": "units"
+  }
+]

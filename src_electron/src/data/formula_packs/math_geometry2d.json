@@ -1,0 +1,82 @@
+[
+  {
+    "id": "geom2d_rect_area",
+    "name": "Rectangle Area",
+    "desc": "Area = length * width",
+    "expression": "l * w",
+    "variables": ["l", "w"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_rect_perim",
+    "name": "Rectangle Perimeter",
+    "desc": "Perimeter = 2 * (length + width)",
+    "expression": "2 * (l + w)",
+    "variables": ["l", "w"],
+    "unit": "units"
+  },
+  {
+    "id": "geom2d_triangle_area",
+    "name": "Triangle Area (Base & Height)",
+    "desc": "Area = 0.5 * base * height",
+    "expression": "0.5 * b * h",
+    "variables": ["b", "h"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_herons_formula",
+    "name": "Triangle Area (Heron's Formula)",
+    "desc": "Area = √(s*(s-a)*(s-b)*(s-c)) where s = (a+b+c)/2",
+    "expression": "sqrt(((a+b+c)/2) * (((a+b+c)/2)-a) * (((a+b+c)/2)-b) * (((a+b+c)/2)-c))",
+    "variables": ["a", "b", "c"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_parallelogram_area",
+    "name": "Parallelogram Area",
+    "desc": "Area = base * height",
+    "expression": "b * h",
+    "variables": ["b", "h"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_trapezoid_area",
+    "name": "Trapezoid Area",
+    "desc": "Area = 0.5 * (a + b) * h",
+    "expression": "0.5 * (a + b) * h",
+    "variables": ["a", "b", "h"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_rhombus_area",
+    "name": "Rhombus Area (Diagonals)",
+    "desc": "Area = (d1 * d2) / 2",
+    "expression": "(d1 * d2) / 2",
+    "variables": ["d1", "d2"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_circle_circumference",
+    "name": "Circle Circumference",
+    "desc": "C = 2 * π * r",
+    "expression": "2 * pi * r",
+    "variables": ["r"],
+    "unit": "units"
+  },
+  {
+    "id": "geom2d_sector_area",
+    "name": "Circle Sector Area",
+    "desc": "Area = (theta / 360) * π * r²",
+    "expression": "(theta / 360) * pi * (r^2)",
+    "variables": ["theta", "r"],
+    "unit": "sq units"
+  },
+  {
+    "id": "geom2d_ellipse_area",
+    "name": "Ellipse Area",
+    "desc": "Area = π * a * b (semi-major and semi-minor axes)",
+    "expression": "pi * a * b",
+    "variables": ["a", "b"],
+    "unit": "sq units"
+  }
+]

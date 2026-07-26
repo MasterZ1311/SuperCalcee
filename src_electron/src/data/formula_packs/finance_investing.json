@@ -1,0 +1,66 @@
+[
+  {
+    "id": "fin_pe_ratio",
+    "name": "P/E Ratio (Price-to-Earnings)",
+    "desc": "Stock Price / Earnings Per Share",
+    "expression": "StockPrice / EPS",
+    "variables": ["StockPrice", "EPS"],
+    "unit": "ratio"
+  },
+  {
+    "id": "fin_pb_ratio",
+    "name": "P/B Ratio (Price-to-Book)",
+    "desc": "Stock Price / Book Value Per Share",
+    "expression": "StockPrice / BVPS",
+    "variables": ["StockPrice", "BVPS"],
+    "unit": "ratio"
+  },
+  {
+    "id": "fin_div_yield",
+    "name": "Dividend Yield (%)",
+    "desc": "(Annual Dividend / Stock Price) * 100",
+    "expression": "(Dividend / StockPrice) * 100",
+    "variables": ["Dividend", "StockPrice"],
+    "unit": "%"
+  },
+  {
+    "id": "fin_gordon_growth",
+    "name": "Gordon Growth Model (Stock Value)",
+    "desc": "P0 = D1 / (r - g)",
+    "expression": "D1 / ((r / 100) - (g / 100))",
+    "variables": ["D1", "r", "g"],
+    "unit": "$"
+  },
+  {
+    "id": "fin_roe",
+    "name": "Return on Equity (ROE)",
+    "desc": "(Net Income / Shareholder Equity) * 100",
+    "expression": "(NetIncome / Equity) * 100",
+    "variables": ["NetIncome", "Equity"],
+    "unit": "%"
+  },
+  {
+    "id": "fin_roa",
+    "name": "Return on Assets (ROA)",
+    "desc": "(Net Income / Total Assets) * 100",
+    "expression": "(NetIncome / TotalAssets) * 100",
+    "variables": ["NetIncome", "TotalAssets"],
+    "unit": "%"
+  },
+  {
+    "id": "fin_sharpe_ratio",
+    "name": "Sharpe Ratio",
+    "desc": "(PortfolioReturn - RiskFreeRate) / StdDev",
+    "expression": "(Return - Rf) / StdDev",
+    "variables": ["Return", "Rf", "StdDev"],
+    "unit": "ratio"
+  },
+  {
+    "id": "fin_debt_equity",
+    "name": "Debt-to-Equity Ratio",
+    "desc": "Total Liabilities / Shareholder Equity",
+    "expression": "TotalLiabilities / Equity",
+    "variables": ["TotalLiabilities", "Equity"],
+    "unit": "ratio"
+  }
+]

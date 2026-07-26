@@ -1,0 +1,66 @@
+[
+  {
+    "id": "elec_coulombs_law",
+    "name": "Coulomb's Electrostatic Force",
+    "desc": "F = k * q1 * q2 / r²",
+    "expression": "(8.9875517923e9 * q1 * q2) / (r^2)",
+    "variables": ["q1", "q2", "r"],
+    "unit": "N"
+  },
+  {
+    "id": "elec_field_strength",
+    "name": "Electric Field Strength",
+    "desc": "E = F / q",
+    "expression": "F / q",
+    "variables": ["F", "q"],
+    "unit": "N/C"
+  },
+  {
+    "id": "elec_ohms_law",
+    "name": "Ohm's Law (Voltage)",
+    "desc": "V = I * R",
+    "expression": "I * R",
+    "variables": ["I", "R"],
+    "unit": "V"
+  },
+  {
+    "id": "elec_power",
+    "name": "Electrical Power (P = I²*R)",
+    "desc": "P = (I²) * R",
+    "expression": "(I^2) * R",
+    "variables": ["I", "R"],
+    "unit": "W"
+  },
+  {
+    "id": "elec_capacitance",
+    "name": "Capacitor Charge Storage",
+    "desc": "Q = C * V",
+    "expression": "C * V",
+    "variables": ["C", "V"],
+    "unit": "C"
+  },
+  {
+    "id": "elec_parallel_plate",
+    "name": "Parallel Plate Capacitance",
+    "desc": "C = (e0 * A) / d",
+    "expression": "(8.8541878128e-12 * A) / d",
+    "variables": ["A", "d"],
+    "unit": "F"
+  },
+  {
+    "id": "elec_magnetic_force",
+    "name": "Lorentz Magnetic Force",
+    "desc": "F = q * v * B * sin(theta)",
+    "expression": "q * v * B * sin(theta * pi / 180)",
+    "variables": ["q", "v", "B", "theta"],
+    "unit": "N"
+  },
+  {
+    "id": "elec_transformer_ratio",
+    "name": "Transformer Voltage Ratio (Vs)",
+    "desc": "Vs = Vp * (Ns / Np)",
+    "expression": "Vp * (Ns / Np)",
+    "variables": ["Vp", "Ns", "Np"],
+    "unit": "V"
+  }
+]
