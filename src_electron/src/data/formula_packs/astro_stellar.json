@@ -1,0 +1,66 @@
+[
+  {
+    "id": "astro_escape_velocity",
+    "name": "Escape Velocity",
+    "desc": "ve = √(2*G*M / R) minimum speed to escape gravitational pull",
+    "expression": "sqrt((2 * 6.6743e-11 * M) / R)",
+    "variables": ["M", "R"],
+    "unit": "m/s"
+  },
+  {
+    "id": "astro_orbital_velocity",
+    "name": "Circular Orbital Velocity",
+    "desc": "vo = √(G*M / r) velocity required for circular orbit",
+    "expression": "sqrt((6.6743e-11 * M) / r)",
+    "variables": ["M", "r"],
+    "unit": "m/s"
+  },
+  {
+    "id": "astro_hubbles_law",
+    "name": "Hubble's Law (Recession Velocity)",
+    "desc": "v = H0 * d (cosmic recession speed at distance d in Mpc)",
+    "expression": "H0 * d",
+    "variables": ["H0", "d"],
+    "unit": "km/s"
+  },
+  {
+    "id": "astro_wien_displacement",
+    "name": "Wien's Displacement Law",
+    "desc": "λmax = b / T peak blackbody radiation wavelength (b = 2.89777e-3 m·K)",
+    "expression": "2.897771955e-3 / T",
+    "variables": ["T"],
+    "unit": "m"
+  },
+  {
+    "id": "astro_parallax_distance",
+    "name": "Stellar Parallax Distance",
+    "desc": "d = 1 / p distance in parsecs given parallax angle p in arcseconds",
+    "expression": "1 / p",
+    "variables": ["p"],
+    "unit": "parsecs"
+  },
+  {
+    "id": "astro_redshift_velocity",
+    "name": "Cosmological Redshift Velocity (Non-relativistic)",
+    "desc": "v = z * c velocity from redshift parameter z",
+    "expression": "z * 299792458",
+    "variables": ["z"],
+    "unit": "m/s"
+  },
+  {
+    "id": "astro_stellar_luminosity",
+    "name": "Stellar Luminosity (Stefan-Boltzmann)",
+    "desc": "L = 4 * π * R² * σ * T⁴ total radiated power of a star",
+    "expression": "4 * pi * (R^2) * 5.670374e-8 * (T^4)",
+    "variables": ["R", "T"],
+    "unit": "W"
+  },
+  {
+    "id": "astro_apparent_brightness",
+    "name": "Inverse Square Law for Light",
+    "desc": "b = L / (4 * π * d²) flux received at distance d",
+    "expression": "L / (4 * pi * (d^2))",
+    "variables": ["L", "d"],
+    "unit": "W/m²"
+  }
+]

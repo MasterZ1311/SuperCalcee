@@ -2,149 +2,225 @@
  * SuperCalcee Formula Store Component
  * ====================================
  * 
- * Modular Formula Store library allowing users to browse and download domain-specific
- * section packs (e.g. Classical Mechanics, Thermodynamics, Corporate Finance, Geometry).
- * Packs are referenced from open sources like GeeksForGeeks and FinanceFormulas.net.
+ * Modular Formula Store library allowing users to browse and enable domain-specific
+ * section packs (e.g. Classical Mechanics, Thermodynamics, Corporate Finance, Geometry,
+ * Stellar Physics, Reaction Kinetics, Population Genetics, Systems Architecture).
  * 
  * @component
  * @author SuperCalcee Open Source Team
  * @license MIT
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { FORMULA_PACKS } from '../data/packRegistry';
-import { Check, Download, Trash2 } from 'lucide-react';
+import { Check, Plus, Trash2, Search, Sparkles, BookOpen } from 'lucide-react';
 
-/**
- * @typedef {Object} FormulaStoreProps
- * @property {string[]} installedPackIds - Array of currently installed pack IDs.
- * @property {(packId: string) => void} onToggleInstall - Callback function to install or uninstall a pack.
- */
+const CATEGORIES = [
+  'All',
+  'Physics',
+  'Accounts',
+  'Math',
+  'Astrophysics',
+  'Chemistry',
+  'Biology',
+  'ComputerScience'
+];
 
-/**
- * Formula Store React Component.
- * 
- * @param {FormulaStoreProps} props - Component properties.
- * @returns {JSX.Element} Rendered Formula Store catalog UI.
- */
 const FormulaStore = ({ installedPackIds, onToggleInstall }) => {
-  /** @type {[string, React.Dispatch<React.SetStateAction<string>>]} Active category filter state */
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter packs based on selected category tab
-  const filteredPacks = selectedCategory === 'All' 
-    ? FORMULA_PACKS 
-    : FORMULA_PACKS.filter(p => p.category === selectedCategory);
+  // Total available formulas count across all packs
+  const totalFormulasCount = useMemo(() => {
+    return FORMULA_PACKS.reduce((sum, p) => sum + p.count, 0);
+  }, []);
+
+  // Total installed formulas count
+  const installedFormulasCount = useMemo(() => {
+    return FORMULA_PACKS
+      .filter(p => installedPackIds.includes(p.id))
+      .reduce((sum, p) => sum + p.count, 0);
+  }, [installedPackIds]);
+
+  // Filter packs based on category and search query
+  const filteredPacks = useMemo(() => {
+    return FORMULA_PACKS.filter(p => {
+      const matchCategory = selectedCategory === 'All' || p.category === selectedCategory;
+      const q = searchQuery.toLowerCase();
+      const matchSearch = !searchQuery || 
+        p.title.toLowerCase().includes(q) || 
+        p.desc.toLowerCase().includes(q) || 
+        p.source.toLowerCase().includes(q);
+      return matchCategory && matchSearch;
+    });
+  }, [selectedCategory, searchQuery]);
 
   return (
-    <div>
-      {/* Store Header & Category Filter Panel */}
-      <div className="glass-panel" style={{ marginBottom: '2rem', background: '#1c1c1e', border: '1px solid #FF9500' }}>
-        <h3 style={{ color: '#FF9500', marginBottom: '0.5rem' }}>Formula Pack Download Library</h3>
-        <p style={{ color: '#a5a5a5', fontSize: '0.9rem', marginBottom: '1rem' }}>
-          Additional formulas are stored section-wise in separate JSON modules so they do not consume default storage. 
-          Download only the sections you need from GeeksForGeeks and FinanceFormulas.net references!
-        </p>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      {/* Store Header Banner */}
+      <div className="glass-panel" style={{ background: '#1C1C1E', border: '1px solid #FF9500' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+          <div>
+            <h3 style={{ color: '#FF9500', margin: '0 0 0.4rem 0', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <BookOpen size={22} />
+              Modular Formula Pack Catalog
+            </h3>
+            <p style={{ color: '#A5A5A5', fontSize: '0.9rem', margin: 0 }}>
+              Specialized scientific and financial packs divided section-wise. Enable only what you need to keep your workspace fast and focused!
+            </p>
+          </div>
 
-        {/* Filter Tab Buttons */}
-        <div style={{ display: 'flex', gap: '0.8rem', flexWrap: 'wrap' }}>
-          {['All', 'Physics', 'Accounts', 'Math'].map(cat => (
+          {/* Stats Badges */}
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ background: '#2C2C2E', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
+              <div style={{ fontSize: '0.75rem', color: '#8E8E93' }}>AVAILABLE</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#fff' }}>{totalFormulasCount} formulas</div>
+            </div>
+            <div style={{ background: 'rgba(255,149,0,0.15)', border: '1px solid #FF9500', padding: '6px 14px', borderRadius: '12px', textAlign: 'center' }}>
+              <div style={{ fontSize: '0.75rem', color: '#FF9500' }}>ENABLED</div>
+              <div style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#FF9500' }}>{installedPackIds.length} packs ({installedFormulasCount} formulas)</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Search Bar */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '10px',
+          background: 'rgba(0,0,0,0.5)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          borderRadius: '8px',
+          padding: '8px 12px',
+          marginBottom: '1rem'
+        }}>
+          <Search size={16} color="#8E8E93" />
+          <input
+            type="text"
+            placeholder="Search packs by topic, formula name, or source..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#fff',
+              fontSize: '0.9rem',
+              width: '100%',
+              outline: 'none',
+              padding: 0,
+              margin: 0
+            }}
+          />
+        </div>
+
+        {/* Category Tabs */}
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {CATEGORIES.map(cat => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               style={{
-                background: selectedCategory === cat ? '#FF9500' : 'transparent',
-                color: selectedCategory === cat ? '#000' : '#fff',
-                border: '1px solid #FF9500',
-                padding: '0.5rem 1rem',
-                fontSize: '0.9rem',
-                cursor: 'pointer'
+                background: selectedCategory === cat ? '#FF9500' : 'rgba(255, 255, 255, 0.05)',
+                color: selectedCategory === cat ? '#000' : '#E5E5EA',
+                border: selectedCategory === cat ? 'none' : '1px solid rgba(255, 255, 255, 0.1)',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                fontSize: '0.85rem',
+                fontWeight: '600',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
               }}
             >
-              {cat === 'Accounts' ? 'Finance' : cat}
+              {cat === 'Accounts' ? 'Finance' : cat === 'ComputerScience' ? 'Comp Sci' : cat}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Formula Pack Cards Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '1.5rem' }}>
-        {filteredPacks.map(pack => {
-          const isInstalled = installedPackIds.includes(pack.id);
-          return (
-            <div 
-              key={pack.id} 
-              className="glass-panel"
-              style={{
-                background: isInstalled ? 'rgba(255, 149, 0, 0.15)' : 'rgba(28, 28, 30, 0.8)',
-                border: isInstalled ? '2px solid #FF9500' : '1px solid var(--border-color)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between'
-              }}
-            >
-              <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-                  <h4 style={{ color: '#FF9500', fontSize: '1.1rem' }}>{pack.title}</h4>
-                  <span style={{ 
-                    fontSize: '0.8rem', 
-                    background: 'rgba(255, 255, 255, 0.1)', 
-                    padding: '0.2rem 0.5rem', 
-                    borderRadius: '4px',
-                    color: '#10b981'
-                  }}>
-                    {pack.count} formulas
-                  </span>
-                </div>
-                
-                <p style={{ color: '#a5a5a5', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
-                  {pack.desc}
-                </p>
-                
-                <div style={{ fontSize: '0.75rem', color: '#64748b', marginBottom: '1rem' }}>
-                  Source: <em>{pack.source}</em>
-                </div>
-
-                {/* Preview Sample Formula Titles */}
-                <div style={{ fontSize: '0.8rem', color: '#cbd5e1', marginBottom: '1rem', background: 'rgba(0,0,0,0.4)', padding: '0.6rem', borderRadius: '6px' }}>
-                  <strong>Included: </strong>
-                  {pack.formulas.slice(0, 3).map(f => f.name).join(', ')}
-                  {pack.formulas.length > 3 && ` ... +${pack.formulas.length - 3} more`}
-                </div>
-              </div>
-
-              {/* Install / Uninstall Toggle Button */}
-              <button
-                onClick={() => onToggleInstall(pack.id)}
+      {/* Packs Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '1.5rem' }}>
+        {filteredPacks.length === 0 ? (
+          <div style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#8E8E93', padding: '40px' }}>
+            No formula packs match your filter.
+          </div>
+        ) : (
+          filteredPacks.map(pack => {
+            const isInstalled = installedPackIds.includes(pack.id);
+            return (
+              <div 
+                key={pack.id} 
+                className="glass-panel"
                 style={{
-                  width: '100%',
-                  background: isInstalled ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)',
-                  color: isInstalled ? '#f87171' : '#34d399',
-                  border: isInstalled ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(16, 185, 129, 0.4)',
-                  fontWeight: '600',
-                  cursor: 'pointer',
+                  background: isInstalled ? 'rgba(255, 149, 0, 0.08)' : '#1C1C1E',
+                  border: isInstalled ? '1px solid #FF9500' : '1px solid rgba(255, 255, 255, 0.08)',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '8px',
-                  padding: '8px 12px',
-                  borderRadius: '6px',
-                  transition: 'all 0.2s ease'
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  borderRadius: '16px',
+                  padding: '1.4rem'
                 }}
               >
-                {isInstalled ? (
-                  <>
-                    <Trash2 className="w-4 h-4" /> Installed (Click to Uninstall)
-                  </>
-                ) : (
-                  <>
-                    <Download className="w-4 h-4" /> Download & Install Pack
-                  </>
-                )}
-              </button>
-            </div>
-          );
-        })}
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+                    <h4 style={{ color: '#fff', fontSize: '1.1rem', margin: 0, fontWeight: '600' }}>
+                      {pack.title}
+                    </h4>
+                    <span style={{ 
+                      fontSize: '0.75rem', 
+                      background: 'rgba(255, 149, 0, 0.15)', 
+                      padding: '3px 8px', 
+                      borderRadius: '6px',
+                      color: '#FF9500',
+                      fontWeight: '600',
+                      whiteSpace: 'nowrap'
+                    }}>
+                      {pack.count} formulas
+                    </span>
+                  </div>
+                  
+                  <p style={{ color: '#8E8E93', fontSize: '0.85rem', marginBottom: '8px', lineHeight: '1.4' }}>
+                    {pack.desc}
+                  </p>
+                  
+                  <div style={{ fontSize: '0.75rem', color: '#636366', marginBottom: '12px' }}>
+                    Attribution: <em>{pack.source}</em>
+                  </div>
+                </div>
+
+                <button
+                  onClick={() => onToggleInstall(pack.id)}
+                  style={{
+                    width: '100%',
+                    background: isInstalled ? 'rgba(239, 68, 68, 0.15)' : '#FF9500',
+                    border: isInstalled ? '1px solid #ef4444' : 'none',
+                    color: isInstalled ? '#ef4444' : '#000',
+                    fontWeight: 'bold',
+                    padding: '10px 16px',
+                    borderRadius: '8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px',
+                    cursor: 'pointer',
+                    transition: 'all 0.15s ease'
+                  }}
+                >
+                  {isInstalled ? (
+                    <>
+                      <Trash2 size={16} />
+                      Disable Pack
+                    </>
+                  ) : (
+                    <>
+                      <Plus size={16} />
+                      Enable Pack
+                    </>
+                  )}
+                </button>
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

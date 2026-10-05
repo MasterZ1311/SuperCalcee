@@ -1,0 +1,66 @@
+[
+  {
+    "id": "chem_arrhenius_k",
+    "name": "Arrhenius Reaction Rate Constant",
+    "desc": "k = A * e^(-Ea / (R * T)) rate constant from activation energy",
+    "expression": "A * exp(-Ea / (8.31446 * T))",
+    "variables": ["A", "Ea", "T"],
+    "unit": "s⁻¹"
+  },
+  {
+    "id": "chem_henderson_hasselbalch",
+    "name": "Henderson-Hasselbalch Buffer pH",
+    "desc": "pH = pKa + log10([A-] / [HA])",
+    "expression": "pKa + log10(A_minus / HA)",
+    "variables": ["pKa", "A_minus", "HA"],
+    "unit": "pH"
+  },
+  {
+    "id": "chem_beer_lambert",
+    "name": "Beer-Lambert Absorbance",
+    "desc": "A = ε * c * l absorbance given molar absorptivity ε, concentration c, and path length l",
+    "expression": "epsilon * c * l",
+    "variables": ["epsilon", "c", "l"],
+    "unit": "absorbance"
+  },
+  {
+    "id": "chem_molarity",
+    "name": "Solution Molarity (M)",
+    "desc": "M = moles / volume in liters",
+    "expression": "moles / volume",
+    "variables": ["moles", "volume"],
+    "unit": "mol/L"
+  },
+  {
+    "id": "chem_dilution",
+    "name": "Dilution Equation (Final Volume V2)",
+    "desc": "V2 = (M1 * V1) / M2",
+    "expression": "(M1 * V1) / M2",
+    "variables": ["M1", "V1", "M2"],
+    "unit": "L"
+  },
+  {
+    "id": "chem_half_life_first_order",
+    "name": "First-Order Half-Life",
+    "desc": "t1/2 = ln(2) / k = 0.693147 / k",
+    "expression": "0.69314718 / k",
+    "variables": ["k"],
+    "unit": "s"
+  },
+  {
+    "id": "chem_osmotic_pressure",
+    "name": "Van 't Hoff Osmotic Pressure",
+    "desc": "Π = i * M * R * T osmotic pressure in atmospheres",
+    "expression": "i * M * 0.082057 * T",
+    "variables": ["i", "M", "T"],
+    "unit": "atm"
+  },
+  {
+    "id": "chem_boyles_law",
+    "name": "Boyle's Law (Final Pressure P2)",
+    "desc": "P2 = (P1 * V1) / V2 at constant temperature",
+    "expression": "(P1 * V1) / V2",
+    "variables": ["P1", "V1", "V2"],
+    "unit": "atm"
+  }
+]

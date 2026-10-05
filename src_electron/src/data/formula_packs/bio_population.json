@@ -1,0 +1,66 @@
+[
+  {
+    "id": "bio_exponential_growth",
+    "name": "Exponential Population Growth (Nt)",
+    "desc": "Nt = N0 * e^(r * t) unrestricted population growth",
+    "expression": "N0 * exp(r * t)",
+    "variables": ["N0", "r", "t"],
+    "unit": "individuals"
+  },
+  {
+    "id": "bio_logistic_growth_rate",
+    "name": "Logistic Growth Rate (dN/dt)",
+    "desc": "dN/dt = r * N * (1 - N / K) population growth with carrying capacity K",
+    "expression": "r * N * (1 - (N / K))",
+    "variables": ["r", "N", "K"],
+    "unit": "individuals/time"
+  },
+  {
+    "id": "bio_bmi_metric",
+    "name": "Body Mass Index (BMI)",
+    "desc": "BMI = weight / (height²) with weight in kg and height in meters",
+    "expression": "weight / (height^2)",
+    "variables": ["weight", "height"],
+    "unit": "kg/m²"
+  },
+  {
+    "id": "bio_cardiac_output",
+    "name": "Cardiac Output (CO)",
+    "desc": "CO = HR * SV (Heart Rate in bpm * Stroke Volume in mL)",
+    "expression": "HR * SV",
+    "variables": ["HR", "SV"],
+    "unit": "mL/min"
+  },
+  {
+    "id": "bio_ficks_diffusion",
+    "name": "Fick's First Law of Diffusion",
+    "desc": "J = -D * (delta_C / delta_x) diffusion flux across membrane",
+    "expression": "-1 * D * (delta_C / delta_x)",
+    "variables": ["D", "delta_C", "delta_x"],
+    "unit": "mol/(m²·s)"
+  },
+  {
+    "id": "bio_harris_benedict_bmr_male",
+    "name": "Basal Metabolic Rate (BMR Male)",
+    "desc": "BMR = 88.362 + (13.397 * weight_kg) + (4.799 * height_cm) - (5.677 * age_years)",
+    "expression": "88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)",
+    "variables": ["weight", "height", "age"],
+    "unit": "kcal/day"
+  },
+  {
+    "id": "bio_generation_time",
+    "name": "Bacterial Generation Doubling Time (G)",
+    "desc": "G = t / (3.3 * log10(b / B)) doubling time where b is final and B is initial cell count",
+    "expression": "t / (3.322 * log10(b / B))",
+    "variables": ["t", "b", "B"],
+    "unit": "minutes"
+  },
+  {
+    "id": "bio_simpsons_diversity",
+    "name": "Simpson's Dominance Index (D)",
+    "desc": "D = sum(n * (n - 1)) / (N * (N - 1)) for species with count n in total community N",
+    "expression": "(n * (n - 1)) / (N * (N - 1))",
+    "variables": ["n", "N"],
+    "unit": "index"
+  }
+]
