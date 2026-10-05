@@ -45,15 +45,41 @@ src_electron/
 
 ## Development Commands
 
-From the `src_electron` directory:
+From the repository root:
 
 ```bash
-# Start Vite development server and Electron shell
+# Launch unified desktop app (Vite + Electron + auto-managed Python backend)
+npm start
+
+# Run Vite dev server only
 npm run dev
 
-# Preview production client build
-npm run preview
+# Run frontend contract test suite
+npm run test:frontend
 
 # Package standalone desktop executable
 npm run package
 ```
+
+From the `src_electron` directory:
+
+```bash
+# Launch unified desktop app
+npm start
+
+# Start Vite development server only
+npm run dev
+
+# Start Electron shell connected to Vite
+npm run electron:start
+
+# Build production client bundle
+npm run build
+
+# Package standalone desktop executable
+npm run package
+
+# Run frontend test suite
+npm test
+```
+

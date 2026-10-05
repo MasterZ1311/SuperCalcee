@@ -53,10 +53,15 @@ src_python/
 ## Execution Instructions
 
 ```bash
-# Activate virtual environment
-source venv/bin/activate  # or .\venv\Scripts\activate on Windows
+# 1. Activate canonical virtual environment from repository root:
+# Windows (PowerShell):
+.\venv\Scripts\activate
 
-# Launch backend API server
-python api.py
+# macOS / Linux:
+source venv/bin/activate
+
+# 2. Launch backend API server:
+python src_python/api.py
 ```
 Backend services will start on `http://127.0.0.1:8000`. Interactive OpenAPI documentation is accessible at `http://127.0.0.1:8000/docs`.
+
