@@ -2,7 +2,7 @@
 Computer Algebra System (CAS) Module
 ====================================
 
-Provides symbolic expression parsing, simplification, differentiation, 
+Provides symbolic expression parsing, simplification, differentiation,
 integration, limit evaluation, and algebraic equation solving.
 """
 

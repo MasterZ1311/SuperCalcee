@@ -10,7 +10,12 @@ Author: SuperCalcee Core Team
 License: MIT
 """
 
-from typing import Dict, Optional, Any
+from typing import Dict, Optional
+
+from src_python.validation import (
+    validate_allele_frequencies,
+    validate_michaelis_menten,
+)
 
 
 class BiologyEngine:
@@ -26,23 +31,21 @@ class BiologyEngine:
             $$v = \\frac{V_{max} [S]}{K_m + [S]}$$
 
         Args:
-            Vmax (float): Maximum reaction velocity ($mol/L \\cdot s$).
-            Km (float): Michaelis constant (substrate concentration at half $V_{max}$).
-            S (float): Substrate concentration $[S]$.
+            Vmax (float): Maximum reaction velocity ($mol/L \\cdot s$). Must be > 0.
+            Km (float): Michaelis constant (substrate concentration at half $V_{max}$). Must be > 0.
+            S (float): Substrate concentration $[S]$. Must be >= 0.
 
         Returns:
             float: Reaction velocity $v$.
 
         Raises:
-            ValueError: If $K_m + [S] = 0$ or negative values are passed.
+            ValueError: If Vmax <= 0, Km <= 0, S < 0, or if inputs are NaN/infinite.
+            ZeroDenominatorError: If denominator Km + [S] == 0.
         """
-        if (Km + S) == 0:
-            raise ValueError("Denominator (Km + S) cannot be zero.")
-        return (Vmax * S) / (Km + S)
+        vmax_val, km_val, s_val = validate_michaelis_menten(Vmax, Km, S)
+        return (vmax_val * s_val) / (km_val + s_val)
 
-    def hardy_weinberg(
-        self, p: Optional[float] = None, q: Optional[float] = None
-    ) -> Dict[str, float]:
+    def hardy_weinberg(self, p: Optional[float] = None, q: Optional[float] = None) -> Dict[str, float]:
         """
         Calculates population allele frequencies and genotype proportions under Hardy-Weinberg Equilibrium.
 
@@ -63,25 +66,17 @@ class BiologyEngine:
                 - 'q_squared (homozygous recessive)': $q^2$
 
         Raises:
-            ValueError: If neither parameter is specified, or allele values fall outside [0, 1].
+            ValueError: If neither parameter is specified, allele values fall outside [0, 1],
+                        or both are specified and do not sum to 1.0 (within 1e-4 tolerance).
         """
-        if p is not None and q is None:
-            if not (0 <= p <= 1):
-                raise ValueError("Allele frequency p must be between 0 and 1.")
-            q = 1.0 - p
-        elif q is not None and p is None:
-            if not (0 <= q <= 1):
-                raise ValueError("Allele frequency q must be between 0 and 1.")
-            p = 1.0 - q
-        elif p is None and q is None:
-            raise ValueError("Must provide either allele frequency 'p' or 'q'.")
+        p_val, q_val = validate_allele_frequencies(p, q)
 
         return {
-            "p": float(p), # type: ignore
-            "q": float(q), # type: ignore
-            "p_squared (homozygous dominant)": float(p**2), # type: ignore
-            "2pq (heterozygous)": float(2 * p * q), # type: ignore
-            "q_squared (homozygous recessive)": float(q**2), # type: ignore
+            "p": float(p_val),
+            "q": float(q_val),
+            "p_squared (homozygous dominant)": float(p_val**2),
+            "2pq (heterozygous)": float(2.0 * p_val * q_val),
+            "q_squared (homozygous recessive)": float(q_val**2),
         }
 
 

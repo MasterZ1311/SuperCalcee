@@ -17,14 +17,18 @@ License: MIT
 """
 
 from typing import Any
+
 import sympy.physics.units as u
 from sympy.physics.units import convert_to
-from sympy.parsing.sympy_parser import parse_expr
+from sympy.physics.units.systems.si import SI
+
+from src_python.security import parse_safe
 
 
 class DimensionalEngine:
     """
-    Handles physical unit parsing and dimensional unit conversion.
+    Handles physical unit parsing and dimensional unit conversion
+    using safe expression parsing and dimensional compatibility validation.
     """
 
     def __init__(self) -> None:
@@ -32,15 +36,12 @@ class DimensionalEngine:
         Populates a local namespace dictionary mapping standard unit symbols
         from `sympy.physics.units` for seamless expression parsing.
         """
-        self.unit_namespace = {
-            dir_name: getattr(u, dir_name)
-            for dir_name in dir(u)
-            if not dir_name.startswith("_")
-        }
+        self.unit_namespace = {dir_name: getattr(u, dir_name) for dir_name in dir(u) if not dir_name.startswith("_")}
 
     def evaluate_with_units(self, expr_str: str) -> Any:
         """
         Parses an expression string containing unit symbols into a physical quantity object.
+        Rejects unknown unit symbols and arbitrary expressions.
 
         Args:
             expr_str (str): Mathematical expression with units (e.g., "5 * meter / second").
@@ -52,7 +53,11 @@ class DimensionalEngine:
             ValueError: If the expression contains invalid syntax or unknown unit symbols.
         """
         try:
-            expr = parse_expr(expr_str, local_dict=self.unit_namespace)
+            expr = parse_safe(
+                expr_str,
+                allowed_symbols=self.unit_namespace,
+                allow_free_symbols=False,
+            )
             return expr
         except Exception as e:
             raise ValueError(f"Failed to parse unit expression '{expr_str}': {e}")
@@ -60,6 +65,7 @@ class DimensionalEngine:
     def convert_units(self, expr_str: str, target_unit_str: str) -> Any:
         """
         Converts a physical quantity from its current units to target compatible units.
+        Validates dimensional compatibility before conversion.
 
         Args:
             expr_str (str): Source quantity expression (e.g., "100 * kilometer / hour").
@@ -78,6 +84,15 @@ class DimensionalEngine:
         """
         expr = self.evaluate_with_units(expr_str)
         target = self.evaluate_with_units(target_unit_str)
+
+        # Validate dimensional compatibility using SI system
+        dim_expr = SI.get_dimensional_expr(expr)
+        dim_target = SI.get_dimensional_expr(target)
+        if dim_expr != dim_target:
+            raise ValueError(
+                f"Unit conversion failed from '{expr_str}' to '{target_unit_str}'. "
+                f"Incompatible dimensions: cannot convert '{dim_expr}' to '{dim_target}'."
+            )
 
         try:
             return convert_to(expr, target)

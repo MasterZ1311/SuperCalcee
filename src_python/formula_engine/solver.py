@@ -4,26 +4,33 @@ Generic Formula & Algebraic Solver Engine
 
 Solves arbitrary multi-variable formulas symbolically for any target unknown,
 substitutes user-provided parameter values, and returns numeric solutions.
-Also integrates SciPy numerical root-finding (`fsolve`) for non-analytical equations.
+Integrates robust numerical root-finding with convergence and residual verification.
 
 Features:
     - Symbolic isolate-and-solve workflow via SymPy `solve`.
     - Handles multi-variable equations with arbitrary user scopes.
-    - Filters real roots from complex root sets.
-    - Numerical root-finding fallback using SciPy `fsolve`.
+    - Filters real roots from complex root sets with diagnostics.
+    - Verified numerical root-finding using Brent's method and hybrid MINPACK fsolve.
 
 Author: SuperCalcee Core Team
 License: MIT
 """
 
-from typing import Dict, Any, Callable
+import math
+from typing import Any, Callable, Dict, List, Optional
+
 import sympy as sp
-from scipy.optimize import fsolve
+
+from src_python.numerical import (
+    NumericalConvergenceError,
+    robust_root_scalar,
+)
+from src_python.security import SecurityError, parse_safe, validate_safe_identifier
 
 
 class FormulaEngine:
     """
-    Multi-variable formula solver utilizing symbolic algebra and numerical solvers.
+    Multi-variable formula solver utilizing symbolic algebra and verified numerical solvers.
     """
 
     def __init__(self) -> None:
@@ -31,8 +38,12 @@ class FormulaEngine:
         pass
 
     def algebraic_solve(
-        self, eq_str: str, variable_to_solve: str, given_values: Dict[str, float]
-    ) -> float:
+        self,
+        eq_str: str,
+        variable_to_solve: str,
+        given_values: Dict[str, float],
+        allow_complex: bool = False,
+    ) -> Any:
         """
         Symbolically solves an equation for a target variable given known values for other parameters.
 
@@ -40,25 +51,40 @@ class FormulaEngine:
             eq_str (str): Multi-variable equation string (e.g., "P * V = n * R * T" or "v = u + a*t").
             variable_to_solve (str): Name of the unknown variable to solve for (e.g., "P").
             given_values (Dict[str, float]): Dictionary mapping known variable names to numerical values.
+            allow_complex (bool): If True, returns complex solutions when no real solutions exist.
 
         Returns:
-            float: Numerical result for the target variable.
+            float or complex or dict: Numerical result for the target variable.
 
         Raises:
-            ValueError: If the target variable cannot be isolated or solved.
+            ValueError: If the target variable cannot be isolated or has no real solution.
 
         Example:
             >>> solver = FormulaEngine()
             >>> solver.algebraic_solve("F = m * a", "a", {"F": 10.0, "m": 2.0})
             5.0
         """
-        # Step 1: Parse equation string into SymPy Eq object
+        # Validate target unknown identifier
+        validate_safe_identifier(variable_to_solve)
+
+        # Validate known variable identifiers and ensure numeric values
+        for k, v in given_values.items():
+            validate_safe_identifier(k)
+            if not isinstance(v, (int, float)) or not math.isfinite(v):
+                raise SecurityError(f"Given value for parameter '{k}' must be a finite number.")
+
+        # Step 1: Parse equation string into SymPy Eq object using safe parser
         if "=" in eq_str:
-            lhs, rhs = eq_str.split("=")
-            eq = sp.Eq(sp.parse_expr(lhs), sp.parse_expr(rhs))
+            parts = eq_str.split("=")
+            if len(parts) != 2:
+                raise ValueError("Equation must contain exactly one '=' sign.")
+            lhs = parse_safe(parts[0])
+            rhs = parse_safe(parts[1])
+            eq = sp.Eq(lhs, rhs)
         else:
             # Assume expression equals zero if no '=' present
-            eq = sp.Eq(sp.parse_expr(eq_str), 0)
+            expr = parse_safe(eq_str)
+            eq = sp.Eq(expr, 0)
 
         target = sp.Symbol(variable_to_solve)
 
@@ -74,34 +100,87 @@ class FormulaEngine:
                 f"with given inputs: {given_values}"
             )
 
-        # Step 4: Return the first real solution if multiple roots exist
+        # Step 4: Classify real and complex roots
+        real_roots: List[float] = []
+        complex_roots: List[complex] = []
+
         for sol in solutions:
             try:
-                eval_sol = complex(sol)
+                eval_sol = complex(sol.evalf())
                 if abs(eval_sol.imag) < 1e-9:
-                    return float(eval_sol.real)
+                    real_roots.append(float(eval_sol.real))
+                else:
+                    complex_roots.append(eval_sol)
             except Exception:
-                if sol.is_real:
-                    return float(sol)
+                if getattr(sol, "is_real", False):
+                    try:
+                        real_roots.append(float(sol))
+                    except Exception:
+                        pass
 
-        # Fallback to first solution if no explicit real check matched
-        return float(solutions[0])
+        if real_roots:
+            return real_roots[0]
+
+        if allow_complex and complex_roots:
+            return complex_roots[0]
+
+        if complex_roots and not real_roots:
+            raise ValueError(
+                f"Equation '{eq_str}' has no real solution for '{variable_to_solve}'. "
+                f"Found {len(complex_roots)} complex solution(s): {[str(c) for c in complex_roots]}"
+            )
+
+        # Fallback to first solution if no explicit classification succeeded
+        try:
+            return float(solutions[0])
+        except Exception:
+            raise ValueError(f"Could not convert algebraic solution '{solutions[0]}' to numeric float.")
 
     def numeric_solve(
-        self, func: Callable[[float], float], initial_guess: float = 1.0
+        self,
+        func: Callable[[Any], Any],
+        initial_guess: float = 1.0,
+        bracket: Optional[tuple] = None,
     ) -> float:
         """
-        Uses SciPy's `fsolve` for numerical root-finding of non-linear or non-analytical functions.
+        Numerically finds a root of func(x) = 0 with verified convergence and residual checking.
 
         Args:
-            func (Callable[[float], float]): Objective function returning 0 at the desired root.
+            func (Callable[[Any], Any]): Objective function returning 0 at the desired root.
             initial_guess (float, optional): Initial numerical guess. Defaults to 1.0.
+            bracket (tuple, optional): Known (a, b) interval bracketing the root.
 
         Returns:
-            float: Numerically converged root value.
+            float: Verified numerical root value.
+
+        Raises:
+            NumericalConvergenceError: If the solver fails to converge within tolerances.
         """
-        result = fsolve(func, initial_guess)
-        return float(result[0])
+        result = robust_root_scalar(func, initial_guess=initial_guess, bracket=bracket)
+        if result.converged and result.solution is not None:
+            return float(result.solution)
+
+        raise NumericalConvergenceError(
+            f"Numerical solver failed to converge: {result.warning or result.status} "
+            f"(residual={result.residual}, method={result.method})",
+            result=result,
+        )
+
+    def numeric_solve_detailed(
+        self,
+        func: Callable[[Any], Any],
+        initial_guess: float = 1.0,
+        bracket: Optional[tuple] = None,
+        tol: float = 1e-8,
+    ) -> Dict[str, Any]:
+        """
+        Executes robust root finding and returns the complete structured diagnostic dictionary.
+
+        Returns:
+            Dict[str, Any]: {status, solution, residual, iterations, method, warning, diagnostics}
+        """
+        res = robust_root_scalar(func, initial_guess=initial_guess, bracket=bracket, tol=tol)
+        return res.to_dict()
 
 
 # Global singleton instance for formula operations

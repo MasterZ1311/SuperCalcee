@@ -12,8 +12,16 @@ License: MIT
 """
 
 from typing import Optional, Union
+
 import sympy as sp
+
 from src_python.constants.loader import DB
+from src_python.validation import (
+    validate_mass,
+    validate_non_negative,
+    validate_positive,
+    validate_probability,
+)
 
 
 class AstrophysicsEngine:
@@ -38,16 +46,16 @@ class AstrophysicsEngine:
             $$R_s = \frac{2GM}{c^2}$$
 
         Args:
-            mass (float): Mass of the body in kilograms (kg).
+            mass (float): Mass of the body in kilograms (kg). Must be >= 0.
 
         Returns:
             float: Schwarzschild radius in meters (m).
 
-        Example:
-            >>> astro_engine.schwarzschild_radius(1.989e30) # Solar Mass
-            2954.04...
+        Raises:
+            ValueError: If mass < 0 or is NaN/infinite.
         """
-        return (2 * self.G * mass) / (self.c ** 2)
+        m_val = validate_mass(mass, name="Mass", allow_zero=True)
+        return (2.0 * self.G * m_val) / (self.c**2)
 
     def keplers_third_law(
         self,
@@ -60,30 +68,33 @@ class AstrophysicsEngine:
         $$T^2 = \frac{4\pi^2 a^3}{G M}$$
 
         Args:
-            period (float, optional): Orbital period T in seconds.
-            semi_major_axis (float, optional): Semi-major axis a in meters.
-            mass_central (float, optional): Central body mass M in kilograms.
+            period (float, optional): Orbital period T in seconds. Must be > 0.
+            semi_major_axis (float, optional): Semi-major axis a in meters. Must be > 0.
+            mass_central (float, optional): Central body mass M in kilograms. Must be > 0.
 
         Returns:
             Union[float, str]: Calculated missing parameter (T, a, or M).
 
         Raises:
-            ValueError: If fewer than 2 parameters are provided.
+            ValueError: If fewer than 2 parameters are provided, or if any parameter is <= 0 or invalid.
         """
         specified = sum(p is not None for p in (period, semi_major_axis, mass_central))
         if specified < 2:
             raise ValueError("Must provide at least 2 of (period, semi_major_axis, mass_central).")
 
         T, a, M = sp.symbols("T a M", positive=True)
-        eq = sp.Eq(T ** 2, (4 * sp.pi ** 2 * a ** 3) / (self.G * M))
+        eq = sp.Eq(T**2, (4 * sp.pi**2 * a**3) / (self.G * M))
 
         subs = {}
         if period is not None:
-            subs[T] = period
+            t_val = validate_positive(period, name="Orbital period (T)")
+            subs[T] = t_val
         if semi_major_axis is not None:
-            subs[a] = semi_major_axis
+            a_val = validate_positive(semi_major_axis, name="Semi-major axis (a)")
+            subs[a] = a_val
         if mass_central is not None:
-            subs[M] = mass_central
+            m_val = validate_positive(mass_central, name="Central mass (M)")
+            subs[M] = m_val
 
         eq_subbed = eq.subs(subs)
 
@@ -116,18 +127,29 @@ class AstrophysicsEngine:
             $$N = R^* \cdot f_p \cdot n_e \cdot f_l \cdot f_i \cdot f_c \cdot L$$
 
         Args:
-            R (float): Average rate of star formation in our galaxy (stars/year).
-            fp (float): Fraction of stars that have planetary systems (0-1).
-            ne (float): Average number of planets per star with planets that could support life.
-            fl (float): Fraction of suitable planets on which life actually develops (0-1).
-            fi (float): Fraction of life-bearing planets that develop intelligent life (0-1).
-            fc (float): Fraction of intelligent civilizations that develop detectable radio technology (0-1).
-            L (float): Length of time such civilizations broadcast signals into space (years).
+            R (float): Average rate of star formation in our galaxy (stars/year). Must be > 0.
+            fp (float): Fraction of stars that have planetary systems (0 <= fp <= 1).
+            ne (float): Average number of planets per star that could support life (ne >= 0).
+            fl (float): Fraction of suitable planets on which life develops (0 <= fl <= 1).
+            fi (float): Fraction of life-bearing planets that develop intelligent life (0 <= fi <= 1).
+            fc (float): Fraction of civilizations that develop detectable radio technology (0 <= fc <= 1).
+            L (float): Length of time such civilizations broadcast signals into space in years (L > 0).
 
         Returns:
             float: Estimated number of active communicative civilizations N.
+
+        Raises:
+            ValueError: If parameters violate physical or probabilistic bounds, or are NaN/infinite.
         """
-        return R * fp * ne * fl * fi * fc * L
+        r_val = validate_positive(R, name="Star formation rate (R*)")
+        fp_val = validate_probability(fp, name="Planetary fraction (fp)")
+        ne_val = validate_non_negative(ne, name="Habitable planets per system (ne)")
+        fl_val = validate_probability(fl, name="Life fraction (fl)")
+        fi_val = validate_probability(fi, name="Intelligence fraction (fi)")
+        fc_val = validate_probability(fc, name="Communication fraction (fc)")
+        l_val = validate_positive(L, name="Civilization broadcast lifetime (L)")
+
+        return r_val * fp_val * ne_val * fl_val * fi_val * fc_val * l_val
 
 
 # Global singleton instance for astrophysics engine

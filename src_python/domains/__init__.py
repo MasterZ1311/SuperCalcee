@@ -11,18 +11,24 @@ Contains domain-specific computation modules:
 - ComputerScienceEngine (e.g. Shannon Entropy, Asymptotic Complexity Big-O Limit)
 """
 
-from src_python.domains.physics import PhysicsEngine, physics_engine
 from src_python.domains.astrophysics import AstrophysicsEngine, astro_engine
-from src_python.domains.chemistry import ChemistryEngine, chem_engine
 from src_python.domains.biology import BiologyEngine, bio_engine
-from src_python.domains.finance import FinanceEngine, finance_engine
+from src_python.domains.chemistry import ChemistryEngine, chem_engine
 from src_python.domains.cs import ComputerScienceEngine, cs_engine
+from src_python.domains.finance import FinanceEngine, finance_engine
+from src_python.domains.physics import PhysicsEngine, physics_engine
 
 __all__ = [
-    "PhysicsEngine", "physics_engine",
-    "AstrophysicsEngine", "astro_engine",
-    "ChemistryEngine", "chem_engine",
-    "BiologyEngine", "bio_engine",
-    "FinanceEngine", "finance_engine",
-    "ComputerScienceEngine", "cs_engine",
+    "PhysicsEngine",
+    "physics_engine",
+    "AstrophysicsEngine",
+    "astro_engine",
+    "ChemistryEngine",
+    "chem_engine",
+    "BiologyEngine",
+    "bio_engine",
+    "FinanceEngine",
+    "finance_engine",
+    "ComputerScienceEngine",
+    "cs_engine",
 ]

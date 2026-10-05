@@ -10,10 +10,12 @@ Author: SuperCalcee Core Team
 License: MIT
 """
 
-from typing import List
 import math
-import numpy as np
+from typing import List
+
 import sympy as sp
+
+from src_python.validation import validate_probability_distribution
 
 
 class ComputerScienceEngine:
@@ -35,15 +37,15 @@ class ComputerScienceEngine:
             float: Information entropy in bits per symbol.
 
         Raises:
-            ValueError: If probabilities do not sum to 1.0 (within 1e-4 tolerance).
+            ValueError: If probabilities do not sum to 1.0 (within 1e-4 tolerance),
+                        if any probability is outside [0, 1], if list is empty, or if NaN/inf is present.
+            TypeError: If elements are not valid numbers.
         """
-        prob_sum = sum(probabilities)
-        if not np.isclose(prob_sum, 1.0, atol=1e-4):
-            raise ValueError(f"Probabilities must sum to 1.0 (Current sum: {prob_sum}).")
+        probs = validate_probability_distribution(probabilities, name="Probabilities")
 
         entropy = 0.0
-        for p in probabilities:
-            if p > 0:
+        for p in probs:
+            if p > 0.0:
                 entropy -= p * math.log2(p)
         return float(entropy)
 
@@ -65,18 +67,23 @@ class ComputerScienceEngine:
         Returns:
             str: Human-readable Big-O / Asymptotic bound classification string.
         """
-        from sympy.parsing.sympy_parser import parse_expr
+        from src_python.security import parse_safe
+
+        if not isinstance(f_str, str) or not f_str.strip():
+            raise ValueError("f(n) expression must be a non-empty string.")
+        if not isinstance(g_str, str) or not g_str.strip():
+            raise ValueError("g(n) expression must be a non-empty string.")
 
         n = sp.Symbol("n", positive=True)
-        f = parse_expr(f_str, local_dict={"n": n})
-        g = parse_expr(g_str, local_dict={"n": n})
+        f = parse_safe(f_str, allowed_symbols={"n": n})
+        g = parse_safe(g_str, allowed_symbols={"n": n})
 
         limit_val = sp.limit(f / g, n, sp.oo)
 
         if limit_val == 0:
-            return f"f(n) = o(g(n)). Faster asymptotic growth: g(n)."
+            return "f(n) = o(g(n)). Faster asymptotic growth: g(n)."
         elif limit_val == sp.oo:
-            return f"f(n) = w(g(n)). Faster asymptotic growth: f(n)."
+            return "f(n) = w(g(n)). Faster asymptotic growth: f(n)."
         else:
             return f"f(n) = Theta(g(n)). Identical growth class. Scaling ratio: {limit_val}"
 

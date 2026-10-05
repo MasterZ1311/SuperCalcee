@@ -2,8 +2,8 @@
 Computer Algebra System (CAS) Engine
 ====================================
 
-This module encapsulates SymPy functionality to provide high-level symbolic 
-mathematics operations including simplification, factorization, expansion, 
+This module encapsulates SymPy functionality to provide high-level symbolic
+mathematics operations including simplification, factorization, expansion,
 differentiation, integration, limit calculations, and algebraic equation solving.
 
 Key Features:
@@ -15,41 +15,37 @@ Author: SuperCalcee Core Team
 License: MIT
 """
 
-from typing import List, Union
+from typing import List
+
 import sympy as sp
-from sympy.parsing.sympy_parser import (
-    parse_expr,
-    standard_transformations,
-    implicit_multiplication_application,
-)
+
+from src_python.security import parse_safe, validate_safe_identifier
 
 
 class CASEngine:
     """
-    Symbolic mathematics computation engine wrapping SymPy parsers and solvers.
+    Symbolic mathematics computation engine wrapping SymPy parsers and solvers
+    protected by the SuperCalcee security validation layer.
     """
 
     def __init__(self) -> None:
-        """
-        Initializes the CAS engine with standard AST transformations.
-        Enables implicit multiplication so expressions like '2x' or '3(a+b)' are parsed correctly.
-        """
-        self.transformations = standard_transformations + (
-            implicit_multiplication_application,
-        )
+        """Initializes the CAS engine instance."""
+        pass
 
     def parse(self, expr_str: str) -> sp.Expr:
         """
-        Converts a string representation of a mathematical expression into a SymPy expression object.
+        Safely converts a string representation of a mathematical expression
+        into a SymPy expression object without calling Python eval().
 
         Args:
-            expr_str (str): Math expression as a string (e.g., "2*x + 5").
+            expr_str (str): Math expression as a string (e.g., "2*x + 5" or "2x + 5").
 
         Returns:
             sp.Expr: Parsed SymPy expression instance.
 
         Raises:
-            SyntaxError: If the expression string cannot be parsed.
+            SecurityError: If an unauthorized construct or arbitrary code execution probe is detected.
+            InvalidExpressionError: If the expression string cannot be parsed.
 
         Example:
             >>> engine = CASEngine()
@@ -57,7 +53,7 @@ class CASEngine:
             >>> type(expr)
             <class 'sympy.core.add.Add'>
         """
-        return parse_expr(expr_str, transformations=self.transformations)
+        return parse_safe(expr_str)
 
     def simplify(self, expr_str: str) -> str:
         """
@@ -117,6 +113,7 @@ class CASEngine:
             >>> engine.differentiate("x**3", "x")
             '3*x**2'
         """
+        validate_safe_identifier(variable)
         expr = self.parse(expr_str)
         var = sp.Symbol(variable)
         return str(sp.diff(expr, var))
@@ -136,6 +133,7 @@ class CASEngine:
             >>> engine.integrate("3*x**2", "x")
             'x**3'
         """
+        validate_safe_identifier(variable)
         expr = self.parse(expr_str)
         var = sp.Symbol(variable)
         return str(sp.integrate(expr, var))
@@ -156,6 +154,7 @@ class CASEngine:
             >>> engine.limit("sin(x)/x", "x", "0")
             '1'
         """
+        validate_safe_identifier(variable)
         expr = self.parse(expr_str)
         var = sp.Symbol(variable)
         val = self.parse(approach)
@@ -164,7 +163,7 @@ class CASEngine:
     def solve(self, equation_str: str, variable: str = "x") -> List[str]:
         """
         Solves an algebraic equation symbolically for the target variable.
-        
+
         Note:
             If equation_str contains an equals sign '=', it parses it as `lhs - rhs = 0`.
             Otherwise, it treats the expression as equal to 0.
@@ -180,9 +179,14 @@ class CASEngine:
             >>> engine.solve("x**2 - 9 = 0", "x")
             ['-3', '3']
         """
+        validate_safe_identifier(variable)
         if "=" in equation_str:
-            lhs, rhs = equation_str.split("=")
-            expr = self.parse(f"({lhs}) - ({rhs})")
+            parts = equation_str.split("=")
+            if len(parts) != 2:
+                raise ValueError("Equation must contain exactly one '=' sign.")
+            lhs_expr = self.parse(parts[0])
+            rhs_expr = self.parse(parts[1])
+            expr = lhs_expr - rhs_expr
         else:
             expr = self.parse(equation_str)
 

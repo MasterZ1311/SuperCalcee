@@ -17,7 +17,7 @@ License: MIT
 
 import json
 import os
-from typing import Dict, Any, Union
+from typing import Any, Dict, Union
 
 
 class ConstantsDatabase:

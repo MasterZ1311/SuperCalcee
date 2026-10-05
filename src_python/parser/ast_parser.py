@@ -19,51 +19,27 @@ Author: SuperCalcee Core Team
 License: MIT
 """
 
-from typing import Dict, Any
-from sympy.parsing.sympy_parser import parse_expr
-from sympy.logic.boolalg import simplify_logic, to_cnf, to_dnf
+from typing import Dict
+
 import sympy
+from sympy.logic.boolalg import simplify_logic
+
+from src_python.security import parse_safe
 
 
 class LogicParser:
     """
-    Parser and evaluation engine for formal logic expressions.
+    Parser and evaluation engine for formal logic expressions,
+    protected by the SuperCalcee safe expression security layer.
     """
 
     def __init__(self) -> None:
-        """
-        Defines translation maps for mathematical/symbolic logic glyphs to SymPy boolean operators.
-        """
-        self.replacements: Dict[str, str] = {
-            "∧": "&",
-            "∨": "|",
-            "⊕": "^",
-            "~": "~",
-            "→": ">>",
-            "↔": "==",
-        }
-
-    def _preprocess(self, expr_str: str) -> str:
-        """
-        Replaces standard Unicode logic symbols with SymPy-compatible operators.
-
-        Args:
-            expr_str (str): Raw input logic string (e.g. "A ∧ B → C").
-
-        Returns:
-            str: Preprocessed string safe for SymPy parsing (e.g. "A & B >> C").
-        """
-        for k, v in self.replacements.items():
-            expr_str = expr_str.replace(k, v)
-
-        # Compound NAND and NOR expansions
-        expr_str = expr_str.replace("↑", " ~& ")
-        expr_str = expr_str.replace("↓", " ~| ")
-        return expr_str
+        """Initializes the logic parser instance."""
+        pass
 
     def parse(self, expr_str: str) -> sympy.Expr:
         """
-        Parses a logic string into a SymPy boolean AST object.
+        Parses a logic string into a SymPy boolean AST object safely without eval().
 
         Args:
             expr_str (str): Raw or preprocessed boolean logic string.
@@ -72,11 +48,10 @@ class LogicParser:
             sympy.Expr: SymPy boolean AST representation.
 
         Raises:
-            ValueError: If parsing fails.
+            ValueError: If parsing fails or an invalid construct is detected.
         """
-        processed = self._preprocess(expr_str)
         try:
-            return parse_expr(processed)
+            return parse_safe(expr_str, logic_mode=True)
         except Exception as e:
             raise ValueError(f"Failed to parse logic expression '{expr_str}': {e}")
 
@@ -129,4 +104,5 @@ def parse_equation(expr_str: str) -> sympy.Expr:
         sympy.Expr: Parsed SymPy expression.
     """
     from src_python.cas.symbolic_engine import cas_engine
+
     return cas_engine.parse(expr_str)
