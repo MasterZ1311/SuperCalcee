@@ -9,3 +9,7 @@ build/
 .vscode/
 SuperCalcee/
 
+
+src_electron/release/
+src_electron/dist/
+

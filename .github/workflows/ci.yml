@@ -1,0 +1,159 @@
+name: CI
+
+on:
+  push:
+    branches: [ "MZ-Main", "main", "master" ]
+  pull_request:
+    branches: [ "MZ-Main", "main", "master" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend CI (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff mypy pytest httpx
+
+      - name: Enforce Code Formatting (ruff format)
+        run: |
+          ruff format --check src_python tests
+
+      - name: Lint Backend Codebase (ruff check)
+        run: |
+          ruff check src_python tests
+
+      - name: Static Type Checking (mypy)
+        run: |
+          mypy src_python
+
+      - name: Security Regression Tests (AST allowlists & input sanitization)
+        run: |
+          pytest tests/test_security.py -v
+
+      - name: Run Full Pytest Suite (Scientific Domains, CAS, Units, Solvers)
+        run: |
+          pytest -v
+
+  frontend:
+    name: Frontend CI (Node ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ["18", "20", "22"]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: src_electron/package-lock.json
+
+      - name: Install Frontend Dependencies
+        run: |
+          npm ci --prefix src_electron
+
+      - name: Lint Frontend Codebase (ESLint)
+        run: |
+          npm run lint --prefix src_electron
+
+      - name: Run Frontend & Electron Unit Tests
+        run: |
+          npm test --prefix src_electron
+
+      - name: Build Production Frontend Assets (Vite)
+        run: |
+          npm run build --prefix src_electron
+
+  electron-validation:
+    name: Electron Packaging & Config Validation
+    runs-on: ubuntu-latest
+    needs: [frontend]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: src_electron/package-lock.json
+
+      - name: Install Frontend Dependencies
+        run: |
+          npm ci --prefix src_electron
+
+      - name: Verify Electron Architecture & Packaging Configuration
+        run: |
+          node --test src_electron/test/security.test.js
+
+      - name: Validate Production Build Output
+        run: |
+          npm run build --prefix src_electron
+          test -f src_electron/dist/index.html || exit 1
+
+  security-scan:
+    name: Security & Vulnerability Audits
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: src_electron/package-lock.json
+
+      - name: Frontend Dependency Vulnerability Audit
+        run: |
+          npm audit --prefix src_electron --audit-level=high
+
+      - name: Backend Dependency Vulnerability Audit (pip-audit)
+        run: |
+          python -m pip install --upgrade pip
+          pip install pip-audit
+          pip-audit -r requirements.txt
+
+      - name: Secret Scanning (Gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+        continue-on-error: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

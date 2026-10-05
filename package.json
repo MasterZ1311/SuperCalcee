@@ -1,0 +1,32 @@
+{
+  "name": "supercalcee",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Desktop Multi-Domain Scientific Calculator and Computer Algebra System",
+  "workspaces": [
+    "src_electron"
+  ],
+  "scripts": {
+    "start": "npm --prefix src_electron start",
+    "dev": "npm --prefix src_electron run dev",
+    "dev:lan": "npm --prefix src_electron run dev:lan",
+    "backend:lan": "python src_python/api.py --host 0.0.0.0 --port 8000",
+    "build": "npm --prefix src_electron run build",
+    "package": "npm --prefix src_electron run package",
+    "lint:frontend": "npm --prefix src_electron run lint",
+    "lint:backend": "python -m ruff check src_python tests",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "format:check": "python -m ruff format --check src_python tests",
+    "format:fix": "python -m ruff format src_python tests",
+    "typecheck": "python -m mypy src_python",
+    "test:frontend": "npm --prefix src_electron test",
+    "test:backend": "python -m pytest -v",
+    "test:security": "python -m pytest tests/test_security.py -v",
+    "test": "npm --prefix src_electron test && python -m pytest -v",
+    "audit:frontend": "npm --prefix src_electron audit",
+    "audit:backend": "python -m pip_audit -r requirements.txt",
+    "audit": "npm run audit:frontend && npm run audit:backend"
+  },
+  "author": "SuperCalcee Open Source Team",
+  "license": "MIT"
+}
