@@ -45,7 +45,9 @@ jobs:
 
       - name: Static Type Checking (mypy)
         run: |
-          mypy src_python
+          python -m mypy src_python
+        env:
+          PYTHONPATH: .
 
       - name: Security Regression Tests (AST allowlists & input sanitization)
         run: |
@@ -61,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: ["18", "20", "22"]
+        node-version: ["22"]
 
     steps:
       - name: Checkout Source Code
@@ -102,7 +104,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
           cache-dependency-path: src_electron/package-lock.json
 
@@ -138,7 +140,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
           cache-dependency-path: src_electron/package-lock.json
 

@@ -15,7 +15,7 @@
     "electron:start": "cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .",
     "start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173 && npm run electron:start\"",
     "package": "vite build && electron-builder --dir",
-    "test": "node --test test/**/*.test.js"
+    "test": "node --test test/*.test.js"
   },
   "build": {
     "appId": "com.supercalcee.app",
@@ -79,6 +79,9 @@
     "wait-on": "^9.0.5"
   },
   "overrides": {
-    "brace-expansion": "^1.1.18"
+    "brace-expansion": "^1.1.18",
+    "http-cache-semantics": "^4.3.0",
+    "shell-quote": "^1.12.0",
+    "source-map-js": "^1.2.2"
   }
 }

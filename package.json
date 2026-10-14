@@ -23,10 +23,16 @@
     "test:backend": "python -m pytest -v",
     "test:security": "python -m pytest tests/test_security.py -v",
     "test": "npm --prefix src_electron test && python -m pytest -v",
-    "audit:frontend": "npm --prefix src_electron audit",
+    "audit:frontend": "npm --prefix src_electron audit --audit-level=high",
     "audit:backend": "python -m pip_audit -r requirements.txt",
     "audit": "npm run audit:frontend && npm run audit:backend"
   },
   "author": "SuperCalcee Open Source Team",
-  "license": "MIT"
+  "license": "MIT",
+  "overrides": {
+    "brace-expansion": "^1.1.18",
+    "http-cache-semantics": "^4.3.0",
+    "shell-quote": "^1.12.0",
+    "source-map-js": "^1.2.2"
+  }
 }

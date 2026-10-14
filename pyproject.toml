@@ -18,7 +18,8 @@ ignore = [
 "tests/*" = ["F401", "F841", "E402"]
 
 [tool.mypy]
-python_version = "3.12"
+mypy_path = "."
+explicit_package_bases = true
 ignore_missing_imports = true
 warn_unused_configs = true
 files = ["src_python"]
