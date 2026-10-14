@@ -1113,7 +1113,10 @@ def start_parent_watchdog(parent_pid: int) -> None:
             try:
                 if is_windows:
                     # Query process exit code via kernel32
-                    kernel32 = ctypes.windll.kernel32
+                    windll = getattr(ctypes, "windll", None)
+                    if not windll:
+                        os._exit(0)
+                    kernel32 = windll.kernel32
                     handle = kernel32.OpenProcess(0x1000, False, parent_pid)  # PROCESS_QUERY_LIMITED_INFORMATION
                     if not handle:
                         os._exit(0)
