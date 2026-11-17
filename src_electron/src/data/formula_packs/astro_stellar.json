@@ -1,66 +1,238 @@
 [
   {
-    "id": "astro_escape_velocity",
-    "name": "Escape Velocity",
-    "desc": "ve = √(2*G*M / R) minimum speed to escape gravitational pull",
-    "expression": "sqrt((2 * 6.6743e-11 * M) / R)",
-    "variables": ["M", "R"],
-    "unit": "m/s"
+    "id": "astro_schwarzschild_radius",
+    "name": "Schwarzschild Event Horizon",
+    "desc": "Rs = 2 * G * M / c²",
+    "expression": "2 * G * M / (c^2)",
+    "variables": [
+      "G",
+      "M",
+      "c"
+    ],
+    "unit": "m"
   },
   {
     "id": "astro_orbital_velocity",
     "name": "Circular Orbital Velocity",
-    "desc": "vo = √(G*M / r) velocity required for circular orbit",
-    "expression": "sqrt((6.6743e-11 * M) / r)",
-    "variables": ["M", "r"],
+    "desc": "v = sqrt(G * M / r)",
+    "expression": "sqrt(G * M / r)",
+    "variables": [
+      "G",
+      "M",
+      "r"
+    ],
     "unit": "m/s"
   },
   {
-    "id": "astro_hubbles_law",
-    "name": "Hubble's Law (Recession Velocity)",
-    "desc": "v = H0 * d (cosmic recession speed at distance d in Mpc)",
-    "expression": "H0 * d",
-    "variables": ["H0", "d"],
-    "unit": "km/s"
+    "id": "astro_escape_velocity",
+    "name": "Escape Velocity",
+    "desc": "v_esc = sqrt(2 * G * M / r)",
+    "expression": "sqrt(2 * G * M / r)",
+    "variables": [
+      "G",
+      "M",
+      "r"
+    ],
+    "unit": "m/s"
   },
   {
-    "id": "astro_wien_displacement",
-    "name": "Wien's Displacement Law",
-    "desc": "λmax = b / T peak blackbody radiation wavelength (b = 2.89777e-3 m·K)",
-    "expression": "2.897771955e-3 / T",
-    "variables": ["T"],
+    "id": "astro_kepler_period",
+    "name": "Kepler's Third Law Orbital Period",
+    "desc": "T = 2 * pi * sqrt(r³ / (G * M))",
+    "expression": "2 * pi * sqrt((r^3) / (G * M))",
+    "variables": [
+      "r",
+      "G",
+      "M"
+    ],
+    "unit": "s"
+  },
+  {
+    "id": "astro_semimajor_axis",
+    "name": "Semi-Major Axis from Period",
+    "desc": "a = ((G * M * T²) / (4 * pi²))^(1/3)",
+    "expression": "((G * M * (T^2)) / (4 * (pi^2)))^(1/3)",
+    "variables": [
+      "G",
+      "M",
+      "T"
+    ],
     "unit": "m"
   },
   {
-    "id": "astro_parallax_distance",
-    "name": "Stellar Parallax Distance",
-    "desc": "d = 1 / p distance in parsecs given parallax angle p in arcseconds",
-    "expression": "1 / p",
-    "variables": ["p"],
-    "unit": "parsecs"
-  },
-  {
-    "id": "astro_redshift_velocity",
-    "name": "Cosmological Redshift Velocity (Non-relativistic)",
-    "desc": "v = z * c velocity from redshift parameter z",
-    "expression": "z * 299792458",
-    "variables": ["z"],
+    "id": "astro_hubble_law",
+    "name": "Hubble-Lemaître Recessional Velocity",
+    "desc": "v = H0 * d",
+    "expression": "H0 * d",
+    "variables": [
+      "H0",
+      "d"
+    ],
     "unit": "m/s"
   },
   {
-    "id": "astro_stellar_luminosity",
-    "name": "Stellar Luminosity (Stefan-Boltzmann)",
-    "desc": "L = 4 * π * R² * σ * T⁴ total radiated power of a star",
-    "expression": "4 * pi * (R^2) * 5.670374e-8 * (T^4)",
-    "variables": ["R", "T"],
+    "id": "astro_redshift_z",
+    "name": "Cosmological Redshift",
+    "desc": "z = (lambda_obs - lambda_emit) / lambda_emit",
+    "expression": "(lambda_obs - lambda_emit) / lambda_emit",
+    "variables": [
+      "lambda_obs",
+      "lambda_emit"
+    ],
+    "unit": "dimensionless"
+  },
+  {
+    "id": "astro_stefan_luminosity",
+    "name": "Stellar Blackbody Luminosity",
+    "desc": "L = 4 * pi * (R^2) * sigma * (T^4)",
+    "expression": "4 * pi * (R^2) * sigma * (T^4)",
+    "variables": [
+      "R",
+      "sigma",
+      "T"
+    ],
     "unit": "W"
   },
   {
-    "id": "astro_apparent_brightness",
-    "name": "Inverse Square Law for Light",
-    "desc": "b = L / (4 * π * d²) flux received at distance d",
+    "id": "astro_distance_modulus",
+    "name": "Distance Modulus Parsecs",
+    "desc": "d = 10^((m - M + 5) / 5)",
+    "expression": "10^((m - M + 5) / 5)",
+    "variables": [
+      "m",
+      "M"
+    ],
+    "unit": "pc"
+  },
+  {
+    "id": "astro_apparent_magnitude",
+    "name": "Apparent Magnitude from Parsecs",
+    "desc": "m = M + 5 * log10(d / 10)",
+    "expression": "M + 5 * (log(d / 10) / log(10))",
+    "variables": [
+      "M",
+      "d"
+    ],
+    "unit": "mag"
+  },
+  {
+    "id": "astro_stellar_flux",
+    "name": "Radiant Stellar Flux",
+    "desc": "F = L / (4 * pi * d²)",
     "expression": "L / (4 * pi * (d^2))",
-    "variables": ["L", "d"],
+    "variables": [
+      "L",
+      "d"
+    ],
     "unit": "W/m²"
+  },
+  {
+    "id": "astro_surface_gravity",
+    "name": "Stellar Surface Gravity",
+    "desc": "g = G * M / R²",
+    "expression": "G * M / (R^2)",
+    "variables": [
+      "G",
+      "M",
+      "R"
+    ],
+    "unit": "m/s²"
+  },
+  {
+    "id": "astro_gravitational_redshift",
+    "name": "Gravitational Redshift Ratio",
+    "desc": "z = (1 / sqrt(1 - (2 * G * M) / (r * c²))) - 1",
+    "expression": "(1 / sqrt(1 - (2 * G * M) / (r * (c^2)))) - 1",
+    "variables": [
+      "G",
+      "M",
+      "r",
+      "c"
+    ],
+    "unit": "dimensionless"
+  },
+  {
+    "id": "astro_eddington_limit",
+    "name": "Eddington Luminosity Limit",
+    "desc": "L_edd = (4 * pi * G * M * c) / kappa",
+    "expression": "(4 * pi * G * M * c) / kappa",
+    "variables": [
+      "G",
+      "M",
+      "c",
+      "kappa"
+    ],
+    "unit": "W"
+  },
+  {
+    "id": "astro_roche_limit",
+    "name": "Rigid Body Roche Limit",
+    "desc": "d = R_primary * ((2 * rho_M / rho_m)^(1/3))",
+    "expression": "R_primary * ((2 * rho_M / rho_m)^(1/3))",
+    "variables": [
+      "R_primary",
+      "rho_M",
+      "rho_m"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "astro_synodic_period",
+    "name": "Planet Synodic Period",
+    "desc": "P_syn = (P1 * P2) / abs(P1 - P2)",
+    "expression": "(P1 * P2) / abs(P1 - P2)",
+    "variables": [
+      "P1",
+      "P2"
+    ],
+    "unit": "days"
+  },
+  {
+    "id": "astro_solar_irradiance",
+    "name": "Planetary Solar Irradiance",
+    "desc": "S = L_sun / (4 * pi * (d^2))",
+    "expression": "L_sun / (4 * pi * (d^2))",
+    "variables": [
+      "L_sun",
+      "d"
+    ],
+    "unit": "W/m²"
+  },
+  {
+    "id": "astro_hawking_temp",
+    "name": "Hawking Radiation Temperature",
+    "desc": "T = (hbar * c³) / (8 * pi * G * M * kB)",
+    "expression": "(hbar * (c^3)) / (8 * pi * G * M * kB)",
+    "variables": [
+      "hbar",
+      "c",
+      "G",
+      "M",
+      "kB"
+    ],
+    "unit": "K"
+  },
+  {
+    "id": "astro_effective_temp",
+    "name": "Photosphere Effective Temperature",
+    "desc": "T = (L / (4 * pi * (R^2) * sigma))^(1/4)",
+    "expression": "(L / (4 * pi * (R^2) * sigma))^(1/4)",
+    "variables": [
+      "L",
+      "R",
+      "sigma"
+    ],
+    "unit": "K"
+  },
+  {
+    "id": "astro_wien_temp",
+    "name": "Stellar Color Temperature",
+    "desc": "T = b / lambda_peak",
+    "expression": "b / lambda_peak",
+    "variables": [
+      "b",
+      "lambda_peak"
+    ],
+    "unit": "K"
   }
 ]

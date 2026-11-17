@@ -2,113 +2,289 @@
   {
     "id": "mech_speed",
     "name": "Average Speed",
-    "desc": "Speed s = distance / time",
+    "desc": "Linear speed s = d / t",
     "expression": "d / t",
-    "variables": ["d", "t"],
+    "variables": [
+      "d",
+      "t"
+    ],
     "unit": "m/s"
   },
   {
     "id": "mech_acceleration",
     "name": "Linear Acceleration",
-    "desc": "a = (vf - vi) / t",
+    "desc": "Rate of velocity change a = (vf - vi) / t",
     "expression": "(vf - vi) / t",
-    "variables": ["vf", "vi", "t"],
+    "variables": [
+      "vf",
+      "vi",
+      "t"
+    ],
     "unit": "m/s²"
   },
   {
+    "id": "mech_kinematic_velocity",
+    "name": "Final Velocity Kinematic",
+    "desc": "Final velocity vf = vi + a * t",
+    "expression": "vi + a * t",
+    "variables": [
+      "vi",
+      "a",
+      "t"
+    ],
+    "unit": "m/s"
+  },
+  {
     "id": "mech_kinematic_dist",
-    "name": "Kinematic Distance",
-    "desc": "s = u*t + 0.5*a*t²",
+    "name": "Kinematic Displacement",
+    "desc": "Displacement s = u*t + 0.5*a*t²",
     "expression": "u * t + 0.5 * a * (t^2)",
-    "variables": ["u", "a", "t"],
+    "variables": [
+      "u",
+      "a",
+      "t"
+    ],
     "unit": "m"
+  },
+  {
+    "id": "mech_torricelli_vel",
+    "name": "Torricelli Final Velocity",
+    "desc": "Final velocity from displacement vf = sqrt(vi² + 2*a*s)",
+    "expression": "sqrt(vi^2 + 2 * a * s)",
+    "variables": [
+      "vi",
+      "a",
+      "s"
+    ],
+    "unit": "m/s"
   },
   {
     "id": "mech_newton_second",
     "name": "Newton's Second Law",
     "desc": "Force F = m * a",
     "expression": "m * a",
-    "variables": ["m", "a"],
+    "variables": [
+      "m",
+      "a"
+    ],
+    "unit": "N"
+  },
+  {
+    "id": "mech_weight",
+    "name": "Gravitational Weight",
+    "desc": "Weight force W = m * g",
+    "expression": "m * g",
+    "variables": [
+      "m",
+      "g"
+    ],
     "unit": "N"
   },
   {
     "id": "mech_frictional_force",
     "name": "Frictional Force",
-    "desc": "Ff = mu * N (coefficient of friction * normal force)",
+    "desc": "Friction Ff = mu * N",
     "expression": "mu * N",
-    "variables": ["mu", "N"],
+    "variables": [
+      "mu",
+      "N"
+    ],
     "unit": "N"
   },
   {
     "id": "mech_centripetal_force",
     "name": "Centripetal Force",
-    "desc": "Fc = (m * v²) / r",
-    "expression": "(m * (v^2)) / r",
-    "variables": ["m", "v", "r"],
+    "desc": "Circular motion force Fc = m * v² / r",
+    "expression": "m * (v^2) / r",
+    "variables": [
+      "m",
+      "v",
+      "r"
+    ],
     "unit": "N"
   },
   {
+    "id": "mech_centripetal_accel",
+    "name": "Centripetal Acceleration",
+    "desc": "Radial acceleration ac = v² / r",
+    "expression": "(v^2) / r",
+    "variables": [
+      "v",
+      "r"
+    ],
+    "unit": "m/s²"
+  },
+  {
+    "id": "mech_banking_angle",
+    "name": "Ideal Road Banking Angle",
+    "desc": "tan(theta) = v² / (r * g)",
+    "expression": "atan((v^2) / (r * g))",
+    "variables": [
+      "v",
+      "r",
+      "g"
+    ],
+    "unit": "rad"
+  },
+  {
     "id": "mech_kinetic_energy",
-    "name": "Kinetic Energy",
+    "name": "Translational Kinetic Energy",
     "desc": "KE = 0.5 * m * v²",
     "expression": "0.5 * m * (v^2)",
-    "variables": ["m", "v"],
+    "variables": [
+      "m",
+      "v"
+    ],
     "unit": "J"
   },
   {
     "id": "mech_potential_energy",
     "name": "Gravitational Potential Energy",
     "desc": "PE = m * g * h",
-    "expression": "m * 9.80665 * h",
-    "variables": ["m", "h"],
+    "expression": "m * g * h",
+    "variables": [
+      "m",
+      "g",
+      "h"
+    ],
     "unit": "J"
   },
   {
     "id": "mech_work_done",
-    "name": "Work Done by Force",
-    "desc": "W = F * d * cos(theta)",
-    "expression": "F * d * cos(theta * pi / 180)",
-    "variables": ["F", "d", "theta"],
+    "name": "Mechanical Work Done",
+    "desc": "Work W = F * d * cos(theta)",
+    "expression": "F * d * cos(theta)",
+    "variables": [
+      "F",
+      "d",
+      "theta"
+    ],
     "unit": "J"
   },
   {
     "id": "mech_power",
     "name": "Mechanical Power",
-    "desc": "P = W / t",
+    "desc": "Power P = W / t",
     "expression": "W / t",
-    "variables": ["W", "t"],
+    "variables": [
+      "W",
+      "t"
+    ],
     "unit": "W"
   },
   {
     "id": "mech_momentum",
     "name": "Linear Momentum",
-    "desc": "p = m * v",
+    "desc": "Momentum p = m * v",
     "expression": "m * v",
-    "variables": ["m", "v"],
+    "variables": [
+      "m",
+      "v"
+    ],
     "unit": "kg·m/s"
   },
   {
+    "id": "mech_impulse",
+    "name": "Impulse Force",
+    "desc": "Impulse J = F * dt",
+    "expression": "F * dt",
+    "variables": [
+      "F",
+      "dt"
+    ],
+    "unit": "N·s"
+  },
+  {
     "id": "mech_torque",
-    "name": "Torque",
-    "desc": "tau = r * F * sin(theta)",
-    "expression": "r * F * sin(theta * pi / 180)",
-    "variables": ["r", "F", "theta"],
+    "name": "Rotational Torque",
+    "desc": "Torque tau = r * F * sin(theta)",
+    "expression": "r * F * sin(theta)",
+    "variables": [
+      "r",
+      "F",
+      "theta"
+    ],
     "unit": "N·m"
   },
   {
-    "id": "mech_universal_gravitation",
-    "name": "Universal Gravitational Force",
-    "desc": "F = G * m1 * m2 / r²",
-    "expression": "(6.67430e-11 * m1 * m2) / (r^2)",
-    "variables": ["m1", "m2", "r"],
-    "unit": "N"
+    "id": "mech_angular_momentum",
+    "name": "Angular Momentum",
+    "desc": "L = I * omega",
+    "expression": "I * omega",
+    "variables": [
+      "I",
+      "omega"
+    ],
+    "unit": "kg·m²/s"
+  },
+  {
+    "id": "mech_rotational_ke",
+    "name": "Rotational Kinetic Energy",
+    "desc": "KE_rot = 0.5 * I * omega²",
+    "expression": "0.5 * I * (omega^2)",
+    "variables": [
+      "I",
+      "omega"
+    ],
+    "unit": "J"
+  },
+  {
+    "id": "mech_shm_spring_period",
+    "name": "Spring-Mass SHM Period",
+    "desc": "Period T = 2 * pi * sqrt(m / k)",
+    "expression": "2 * pi * sqrt(m / k)",
+    "variables": [
+      "m",
+      "k"
+    ],
+    "unit": "s"
+  },
+  {
+    "id": "mech_shm_pendulum_period",
+    "name": "Simple Pendulum Period",
+    "desc": "Period T = 2 * pi * sqrt(L / g)",
+    "expression": "2 * pi * sqrt(L / g)",
+    "variables": [
+      "L",
+      "g"
+    ],
+    "unit": "s"
   },
   {
     "id": "mech_hookes_law",
-    "name": "Hooke's Law (Spring Force)",
-    "desc": "Fs = -k * x",
-    "expression": "-1 * k * x",
-    "variables": ["k", "x"],
+    "name": "Hooke's Elastic Law",
+    "desc": "Restoring force F = k * x",
+    "expression": "k * x",
+    "variables": [
+      "k",
+      "x"
+    ],
+    "unit": "N"
+  },
+  {
+    "id": "mech_youngs_modulus",
+    "name": "Young's Elastic Modulus",
+    "desc": "Tensile modulus E = (F * L0) / (A * dL)",
+    "expression": "(F * L0) / (A * dL)",
+    "variables": [
+      "F",
+      "L0",
+      "A",
+      "dL"
+    ],
+    "unit": "Pa"
+  },
+  {
+    "id": "mech_universal_gravitation",
+    "name": "Universal Gravitation Force",
+    "desc": "Gravitational attraction F = G * m1 * m2 / r²",
+    "expression": "G * m1 * m2 / (r^2)",
+    "variables": [
+      "G",
+      "m1",
+      "m2",
+      "r"
+    ],
     "unit": "N"
   }
 ]

@@ -1,58 +1,233 @@
 [
   {
-    "id": "fin_simple_int",
-    "name": "Simple Interest Earned",
-    "desc": "I = P * R * T / 100",
-    "expression": "(P * R * T) / 100",
-    "variables": ["P", "R", "T"],
+    "id": "bank_simple_interest",
+    "name": "Simple Interest",
+    "desc": "Interest I = P * r * t",
+    "expression": "P * r * t",
+    "variables": [
+      "P",
+      "r",
+      "t"
+    ],
     "unit": "$"
   },
   {
-    "id": "fin_compound_int",
-    "name": "Compound Interest Total Amount",
-    "desc": "A = P * (1 + R/(100*n))^(n*t)",
-    "expression": "P * ((1 + R / (100 * n))^(n * T))",
-    "variables": ["P", "R", "n", "T"],
+    "id": "bank_total_simple",
+    "name": "Total Future Value Simple Interest",
+    "desc": "A = P * (1 + r * t)",
+    "expression": "P * (1 + r * t)",
+    "variables": [
+      "P",
+      "r",
+      "t"
+    ],
     "unit": "$"
   },
   {
-    "id": "fin_continuous_comp",
-    "name": "Continuous Compounding (A)",
-    "desc": "A = P * e^(r * t)",
-    "expression": "P * e^((R / 100) * T)",
-    "variables": ["P", "R", "T"],
+    "id": "bank_compound_interest",
+    "name": "Compound Interest Future Value",
+    "desc": "A = P * (1 + r / n)^(n * t)",
+    "expression": "P * ((1 + r / n)^(n * t))",
+    "variables": [
+      "P",
+      "r",
+      "n",
+      "t"
+    ],
     "unit": "$"
   },
   {
-    "id": "fin_apy",
-    "name": "APY (Annual Percentage Yield)",
-    "desc": "APY = (1 + r/n)^n - 1",
-    "expression": "(((1 + (R / (100 * n)))^n) - 1) * 100",
-    "variables": ["R", "n"],
-    "unit": "%"
+    "id": "bank_continuous_compounding",
+    "name": "Continuous Compounding Future Value",
+    "desc": "A = P * exp(r * t)",
+    "expression": "P * exp(r * t)",
+    "variables": [
+      "P",
+      "r",
+      "t"
+    ],
+    "unit": "$"
   },
   {
-    "id": "fin_rule_72",
-    "name": "Rule of 72 (Doubling Time)",
-    "desc": "Years to double = 72 / AnnualInterestRate%",
-    "expression": "72 / R",
-    "variables": ["R"],
+    "id": "bank_effective_annual_rate",
+    "name": "Effective Annual Rate (EAR / APY)",
+    "desc": "EAR = (1 + r / n)^n - 1",
+    "expression": "((1 + r / n)^n) - 1",
+    "variables": [
+      "r",
+      "n"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "bank_rule_of_72",
+    "name": "Rule of 72 Doubling Time",
+    "desc": "Years to double t = 72 / r_percent",
+    "expression": "72 / r_percent",
+    "variables": [
+      "r_percent"
+    ],
     "unit": "years"
   },
   {
-    "id": "fin_emi_loan",
-    "name": "EMI (Monthly Installment)",
-    "desc": "P * (r/1200) * (1+r/1200)^N / ((1+r/1200)^N - 1)",
-    "expression": "P * (R / 1200) * (((1 + R / 1200)^N) / (((1 + R / 1200)^N) - 1))",
-    "variables": ["P", "R", "N"],
-    "unit": "$/month"
+    "id": "bank_rule_of_70",
+    "name": "Rule of 70 Exact Doubling Time",
+    "desc": "Years to double t = 70 / r_percent",
+    "expression": "70 / r_percent",
+    "variables": [
+      "r_percent"
+    ],
+    "unit": "years"
   },
   {
-    "id": "fin_loan_balance",
-    "name": "Remaining Loan Balance after p Payments",
-    "desc": "B = P*(1+r)^p - EMI*((1+r)^p - 1)/r",
-    "expression": "P * ((1 + R/1200)^p) - EMI * (((1 + R/1200)^p - 1) / (R/1200))",
-    "variables": ["P", "R", "p", "EMI"],
+    "id": "bank_fv_ordinary_annuity",
+    "name": "Future Value of Ordinary Annuity",
+    "desc": "FV = PMT * (((1 + r)^n - 1) / r)",
+    "expression": "PMT * (((1 + r)^n - 1) / r)",
+    "variables": [
+      "PMT",
+      "r",
+      "n"
+    ],
     "unit": "$"
+  },
+  {
+    "id": "bank_pv_ordinary_annuity",
+    "name": "Present Value of Ordinary Annuity",
+    "desc": "PV = PMT * ((1 - (1 + r)^(-n)) / r)",
+    "expression": "PMT * ((1 - (1 + r)^(-n)) / r)",
+    "variables": [
+      "PMT",
+      "r",
+      "n"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_fv_annuity_due",
+    "name": "Future Value of Annuity Due",
+    "desc": "FV_due = PMT * (((1 + r)^n - 1) / r) * (1 + r)",
+    "expression": "PMT * (((1 + r)^n - 1) / r) * (1 + r)",
+    "variables": [
+      "PMT",
+      "r",
+      "n"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_pv_annuity_due",
+    "name": "Present Value of Annuity Due",
+    "desc": "PV_due = PMT * ((1 - (1 + r)^(-n)) / r) * (1 + r)",
+    "expression": "PMT * ((1 - (1 + r)^(-n)) / r) * (1 + r)",
+    "variables": [
+      "PMT",
+      "r",
+      "n"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_perpetuity_pv",
+    "name": "Present Value of Perpetuity",
+    "desc": "PV = C / r",
+    "expression": "C / r",
+    "variables": [
+      "C",
+      "r"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_growing_perpetuity",
+    "name": "Growing Perpetuity Present Value",
+    "desc": "PV = C / (r - g)",
+    "expression": "C / (r - g)",
+    "variables": [
+      "C",
+      "r",
+      "g"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_emi_monthly_payment",
+    "name": "Equated Monthly Installment (EMI)",
+    "desc": "EMI = P * r * (1 + r)^n / ((1 + r)^n - 1)",
+    "expression": "P * r * ((1 + r)^n) / (((1 + r)^n) - 1)",
+    "variables": [
+      "P",
+      "r",
+      "n"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_total_loan_interest",
+    "name": "Total Loan Interest Paid",
+    "desc": "Total interest = (EMI * n) - P",
+    "expression": "(EMI * n) - P",
+    "variables": [
+      "EMI",
+      "n",
+      "P"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_sinking_fund_payment",
+    "name": "Sinking Fund Periodic Deposit",
+    "desc": "PMT = FV * r / ((1 + r)^n - 1)",
+    "expression": "FV * r / (((1 + r)^n) - 1)",
+    "variables": [
+      "FV",
+      "r",
+      "n"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_fisher_real_rate",
+    "name": "Fisher Equation Real Interest Rate",
+    "desc": "r_real = ((1 + r_nom) / (1 + inf)) - 1",
+    "expression": "((1 + r_nom) / (1 + inf)) - 1",
+    "variables": [
+      "r_nom",
+      "inf"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "bank_future_purchasing_power",
+    "name": "Inflation-Adjusted Purchasing Power",
+    "desc": "PV = FV / ((1 + inf)^n)",
+    "expression": "FV / ((1 + inf)^n)",
+    "variables": [
+      "FV",
+      "inf",
+      "n"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "bank_after_tax_debt_cost",
+    "name": "After-Tax Cost of Debt",
+    "desc": "Rd_at = Rd * (1 - Tc)",
+    "expression": "Rd * (1 - Tc)",
+    "variables": [
+      "Rd",
+      "Tc"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "bank_continuous_rate_from_ear",
+    "name": "Continuous Rate from Annual Rate",
+    "desc": "rc = log(1 + EAR)",
+    "expression": "log(1 + EAR)",
+    "variables": [
+      "EAR"
+    ],
+    "unit": "ratio"
   }
 ]

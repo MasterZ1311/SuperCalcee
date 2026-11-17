@@ -1,50 +1,242 @@
 [
   {
-    "id": "thermo_ideal_gas",
-    "name": "Ideal Gas Law (Pressure)",
-    "desc": "P = (n * R * T) / V",
-    "expression": "(n * 8.314462618 * T) / V",
-    "variables": ["n", "T", "V"],
+    "id": "thermo_ideal_gas_p",
+    "name": "Ideal Gas Pressure",
+    "desc": "P = n * R * T / V",
+    "expression": "n * R * T / V",
+    "variables": [
+      "n",
+      "R",
+      "T",
+      "V"
+    ],
+    "unit": "Pa"
+  },
+  {
+    "id": "thermo_boyles_law",
+    "name": "Boyle's Law Final Volume",
+    "desc": "V2 = P1 * V1 / P2",
+    "expression": "P1 * V1 / P2",
+    "variables": [
+      "P1",
+      "V1",
+      "P2"
+    ],
+    "unit": "m³"
+  },
+  {
+    "id": "thermo_charles_law",
+    "name": "Charles's Law Final Volume",
+    "desc": "V2 = V1 * T2 / T1",
+    "expression": "V1 * T2 / T1",
+    "variables": [
+      "V1",
+      "T2",
+      "T1"
+    ],
+    "unit": "m³"
+  },
+  {
+    "id": "thermo_gay_lussac",
+    "name": "Gay-Lussac Pressure",
+    "desc": "P2 = P1 * T2 / T1",
+    "expression": "P1 * T2 / T1",
+    "variables": [
+      "P1",
+      "T2",
+      "T1"
+    ],
     "unit": "Pa"
   },
   {
     "id": "thermo_heat_capacity",
-    "name": "Specific Heat Energy",
-    "desc": "Q = m * c * ΔT",
-    "expression": "m * c * deltaT",
-    "variables": ["m", "c", "deltaT"],
+    "name": "Sensible Heat Transfer",
+    "desc": "Thermal energy Q = m * c * dT",
+    "expression": "m * c * dT",
+    "variables": [
+      "m",
+      "c",
+      "dT"
+    ],
+    "unit": "J"
+  },
+  {
+    "id": "thermo_latent_heat",
+    "name": "Latent Heat of Phase Change",
+    "desc": "Heat Q = m * L",
+    "expression": "m * L",
+    "variables": [
+      "m",
+      "L"
+    ],
     "unit": "J"
   },
   {
     "id": "thermo_linear_expansion",
     "name": "Linear Thermal Expansion",
-    "desc": "ΔL = alpha * L0 * ΔT",
-    "expression": "alpha * L0 * deltaT",
-    "variables": ["alpha", "L0", "deltaT"],
+    "desc": "dL = alpha * L0 * dT",
+    "expression": "alpha * L0 * dT",
+    "variables": [
+      "alpha",
+      "L0",
+      "dT"
+    ],
     "unit": "m"
   },
   {
-    "id": "thermo_carnot_eff",
-    "name": "Carnot Engine Efficiency (%)",
-    "desc": "eta = (1 - Tc/Th) * 100",
-    "expression": "(1 - (Tc / Th)) * 100",
-    "variables": ["Tc", "Th"],
-    "unit": "%"
-  },
-  {
-    "id": "thermo_stefan_boltzmann",
-    "name": "Stefan-Boltzmann Radiated Power",
-    "desc": "P = epsilon * sigma * A * T⁴",
-    "expression": "epsilon * 5.670374419e-8 * A * (T^4)",
-    "variables": ["epsilon", "A", "T"],
-    "unit": "W"
+    "id": "thermo_volumetric_expansion",
+    "name": "Volumetric Expansion",
+    "desc": "dV = beta * V0 * dT",
+    "expression": "beta * V0 * dT",
+    "variables": [
+      "beta",
+      "V0",
+      "dT"
+    ],
+    "unit": "m³"
   },
   {
     "id": "thermo_first_law",
-    "name": "First Law of Thermodynamics (ΔU)",
-    "desc": "deltaU = Q - W (heat added minus work done by system)",
+    "name": "First Law Internal Energy",
+    "desc": "Internal energy change dU = Q - W",
     "expression": "Q - W",
-    "variables": ["Q", "W"],
+    "variables": [
+      "Q",
+      "W"
+    ],
     "unit": "J"
+  },
+  {
+    "id": "thermo_carnot_eff",
+    "name": "Carnot Engine Efficiency",
+    "desc": "eta = 1 - (Tc / Th)",
+    "expression": "1 - (Tc / Th)",
+    "variables": [
+      "Tc",
+      "Th"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "thermo_entropy_change",
+    "name": "Isothermal Entropy Change",
+    "desc": "dS = n * R * log(V2 / V1)",
+    "expression": "n * R * log(V2 / V1)",
+    "variables": [
+      "n",
+      "R",
+      "V2",
+      "V1"
+    ],
+    "unit": "J/K"
+  },
+  {
+    "id": "thermo_stefan_boltzmann",
+    "name": "Stefan-Boltzmann Radiation",
+    "desc": "Radiant power P = eps * sigma * A * (T^4)",
+    "expression": "eps * sigma * A * (T^4)",
+    "variables": [
+      "eps",
+      "sigma",
+      "A",
+      "T"
+    ],
+    "unit": "W"
+  },
+  {
+    "id": "thermo_wiens_law",
+    "name": "Wien's Displacement Law",
+    "desc": "Peak wavelength lambda_max = b / T",
+    "expression": "b / T",
+    "variables": [
+      "b",
+      "T"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "thermo_fourier_conduction",
+    "name": "Fourier Heat Conduction",
+    "desc": "Heat rate q = k * A * dT / d",
+    "expression": "k * A * dT / d",
+    "variables": [
+      "k",
+      "A",
+      "dT",
+      "d"
+    ],
+    "unit": "W"
+  },
+  {
+    "id": "thermo_rms_speed",
+    "name": "RMS Molecular Gas Speed",
+    "desc": "v_rms = sqrt(3 * R * T / M)",
+    "expression": "sqrt(3 * R * T / M)",
+    "variables": [
+      "R",
+      "T",
+      "M"
+    ],
+    "unit": "m/s"
+  },
+  {
+    "id": "thermo_hydrostatic_pressure",
+    "name": "Hydrostatic Liquid Pressure",
+    "desc": "Gauge pressure P = rho * g * h",
+    "expression": "rho * g * h",
+    "variables": [
+      "rho",
+      "g",
+      "h"
+    ],
+    "unit": "Pa"
+  },
+  {
+    "id": "thermo_buoyant_force",
+    "name": "Archimedes Buoyancy Force",
+    "desc": "Buoyant force Fb = rho * V * g",
+    "expression": "rho * V * g",
+    "variables": [
+      "rho",
+      "V",
+      "g"
+    ],
+    "unit": "N"
+  },
+  {
+    "id": "thermo_continuity",
+    "name": "Fluid Continuity Velocity",
+    "desc": "Velocity v2 = (v1 * A1) / A2",
+    "expression": "(v1 * A1) / A2",
+    "variables": [
+      "v1",
+      "A1",
+      "A2"
+    ],
+    "unit": "m/s"
+  },
+  {
+    "id": "thermo_bernoulli_velocity",
+    "name": "Torricelli Efflux Speed",
+    "desc": "v = sqrt(2 * g * h)",
+    "expression": "sqrt(2 * g * h)",
+    "variables": [
+      "g",
+      "h"
+    ],
+    "unit": "m/s"
+  },
+  {
+    "id": "thermo_reynolds_number",
+    "name": "Reynolds Number",
+    "desc": "Re = (rho * v * L) / mu",
+    "expression": "(rho * v * L) / mu",
+    "variables": [
+      "rho",
+      "v",
+      "L",
+      "mu"
+    ],
+    "unit": "dimensionless"
   }
 ]

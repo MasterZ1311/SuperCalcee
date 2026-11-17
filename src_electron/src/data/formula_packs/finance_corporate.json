@@ -1,50 +1,244 @@
 [
   {
-    "id": "fin_wacc",
-    "name": "WACC (Weighted Average Cost of Capital)",
-    "desc": "(E/V)*Re + (D/V)*Rd*(1 - Tax)",
-    "expression": "(E / V) * Re + (D / V) * Rd * (1 - Tax / 100)",
-    "variables": ["E", "D", "V", "Re", "Rd", "Tax"],
-    "unit": "%"
-  },
-  {
-    "id": "fin_capm",
-    "name": "CAPM (Capital Asset Pricing Model)",
-    "desc": "Expected Return = Rf + Beta * (Rm - Rf)",
-    "expression": "Rf + Beta * (Rm - Rf)",
-    "variables": ["Rf", "Beta", "Rm"],
-    "unit": "%"
-  },
-  {
-    "id": "fin_npv_simple",
-    "name": "Net Present Value (Single Cash Flow)",
-    "desc": "NPV = (CashFlow / (1 + r)^t) - InitialInvestment",
-    "expression": "(CashFlow / ((1 + R/100)^t)) - InitialInvestment",
-    "variables": ["CashFlow", "R", "t", "InitialInvestment"],
-    "unit": "$"
-  },
-  {
-    "id": "fin_working_capital",
-    "name": "Net Working Capital",
-    "desc": "Current Assets - Current Liabilities",
-    "expression": "CurrentAssets - CurrentLiabilities",
-    "variables": ["CurrentAssets", "CurrentLiabilities"],
-    "unit": "$"
-  },
-  {
-    "id": "fin_dol",
-    "name": "Degree of Operating Leverage (DOL)",
-    "desc": "Contribution Margin / Net Operating Income",
-    "expression": "ContributionMargin / NetOperatingIncome",
-    "variables": ["ContributionMargin", "NetOperatingIncome"],
+    "id": "corp_wacc",
+    "name": "Weighted Average Cost of Capital",
+    "desc": "WACC = (E/V)*Re + (D/V)*Rd*(1 - Tc)",
+    "expression": "(E / V) * Re + (D / V) * Rd * (1 - Tc)",
+    "variables": [
+      "E",
+      "D",
+      "V",
+      "Re",
+      "Rd",
+      "Tc"
+    ],
     "unit": "ratio"
   },
   {
-    "id": "fin_break_even",
-    "name": "Break-Even Point (Units)",
-    "desc": "Fixed Costs / (PricePerUnit - VariableCostPerUnit)",
-    "expression": "FixedCosts / (Price - VarCost)",
-    "variables": ["FixedCosts", "Price", "VarCost"],
+    "id": "corp_capm_cost_equity",
+    "name": "CAPM Cost of Equity",
+    "desc": "Re = Rf + beta * (Rm - Rf)",
+    "expression": "Rf + beta * (Rm - Rf)",
+    "variables": [
+      "Rf",
+      "beta",
+      "Rm"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_cost_preferred",
+    "name": "Cost of Preferred Stock",
+    "desc": "Rp = Dp / Pp",
+    "expression": "Dp / Pp",
+    "variables": [
+      "Dp",
+      "Pp"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_gordon_equity_cost",
+    "name": "Gordon Growth Cost of Equity",
+    "desc": "Re = (D1 / P0) + g",
+    "expression": "(D1 / P0) + g",
+    "variables": [
+      "D1",
+      "P0",
+      "g"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_npv_uniform",
+    "name": "Net Present Value Uniform Inflows",
+    "desc": "NPV = CF * ((1 - (1 + r)^(-n)) / r) - C0",
+    "expression": "CF * ((1 - (1 + r)^(-n)) / r) - C0",
+    "variables": [
+      "CF",
+      "r",
+      "n",
+      "C0"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "corp_profitability_index",
+    "name": "Profitability Index (Benefit/Cost)",
+    "desc": "PI = PV_inflows / C0",
+    "expression": "PV_inflows / C0",
+    "variables": [
+      "PV_inflows",
+      "C0"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_simple_payback",
+    "name": "Simple Payback Period",
+    "desc": "Years = Initial_Cost / Annual_Cash_Flow",
+    "expression": "Initial_Cost / Annual_Cash_Flow",
+    "variables": [
+      "Initial_Cost",
+      "Annual_Cash_Flow"
+    ],
+    "unit": "years"
+  },
+  {
+    "id": "corp_fcff",
+    "name": "Free Cash Flow to Firm (FCFF)",
+    "desc": "FCFF = EBIT*(1 - t) + Dep - CapEx - dNWC",
+    "expression": "EBIT * (1 - t) + Dep - CapEx - dNWC",
+    "variables": [
+      "EBIT",
+      "t",
+      "Dep",
+      "CapEx",
+      "dNWC"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "corp_fcfe",
+    "name": "Free Cash Flow to Equity (FCFE)",
+    "desc": "FCFE = NI + Dep - CapEx - dNWC + NetBorrowing",
+    "expression": "NI + Dep - CapEx - dNWC + NetBorrowing",
+    "variables": [
+      "NI",
+      "Dep",
+      "CapEx",
+      "dNWC",
+      "NetBorrowing"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "corp_ebitda",
+    "name": "EBITDA Operating Earnings",
+    "desc": "EBITDA = EBIT + Dep + Amort",
+    "expression": "EBIT + Dep + Amort",
+    "variables": [
+      "EBIT",
+      "Dep",
+      "Amort"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "corp_dol",
+    "name": "Degree of Operating Leverage",
+    "desc": "DOL = (Q * (P - V)) / (Q * (P - V) - F)",
+    "expression": "(Q * (P - V)) / (Q * (P - V) - F)",
+    "variables": [
+      "Q",
+      "P",
+      "V",
+      "F"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_dfl",
+    "name": "Degree of Financial Leverage",
+    "desc": "DFL = EBIT / (EBIT - Interest)",
+    "expression": "EBIT / (EBIT - Interest)",
+    "variables": [
+      "EBIT",
+      "Interest"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_dcl",
+    "name": "Degree of Combined Leverage",
+    "desc": "DCL = DOL * DFL",
+    "expression": "DOL * DFL",
+    "variables": [
+      "DOL",
+      "DFL"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_breakeven_units",
+    "name": "Break-Even Sales Units",
+    "desc": "Q_be = Fixed_Costs / (Price - Variable_Cost)",
+    "expression": "Fixed_Costs / (Price - Variable_Cost)",
+    "variables": [
+      "Fixed_Costs",
+      "Price",
+      "Variable_Cost"
+    ],
     "unit": "units"
+  },
+  {
+    "id": "corp_breakeven_revenue",
+    "name": "Break-Even Sales Revenue",
+    "desc": "Rev_be = Fixed_Costs / CMR",
+    "expression": "Fixed_Costs / CMR",
+    "variables": [
+      "Fixed_Costs",
+      "CMR"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "corp_cmr",
+    "name": "Contribution Margin Ratio",
+    "desc": "CMR = (Price - Variable_Cost) / Price",
+    "expression": "(Price - Variable_Cost) / Price",
+    "variables": [
+      "Price",
+      "Variable_Cost"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_margin_of_safety",
+    "name": "Margin of Safety Percentage",
+    "desc": "MOS = (Actual_Sales - BE_Sales) / Actual_Sales",
+    "expression": "(Actual_Sales - BE_Sales) / Actual_Sales",
+    "variables": [
+      "Actual_Sales",
+      "BE_Sales"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "corp_altman_z",
+    "name": "Altman Z-Score (Manufacturing)",
+    "desc": "Z = 1.2*X1 + 1.4*X2 + 3.3*X3 + 0.6*X4 + 1.0*X5",
+    "expression": "1.2 * X1 + 1.4 * X2 + 3.3 * X3 + 0.6 * X4 + 1.0 * X5",
+    "variables": [
+      "X1",
+      "X2",
+      "X3",
+      "X4",
+      "X5"
+    ],
+    "unit": "score"
+  },
+  {
+    "id": "corp_eva",
+    "name": "Economic Value Added (EVA)",
+    "desc": "EVA = NOPAT - (WACC * Invested_Capital)",
+    "expression": "NOPAT - (WACC * Invested_Capital)",
+    "variables": [
+      "NOPAT",
+      "WACC",
+      "Invested_Capital"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "corp_nopat",
+    "name": "Net Operating Profit After Tax",
+    "desc": "NOPAT = EBIT * (1 - t)",
+    "expression": "EBIT * (1 - t)",
+    "variables": [
+      "EBIT",
+      "t"
+    ],
+    "unit": "$"
   }
 ]

@@ -3,61 +3,365 @@
         "name": "speed of light in vacuum",
         "value": 299792458,
         "unit": "m/s",
-        "exact": true
-    },
-    "h": {
-        "name": "Planck constant",
-        "value": 6.62607015e-34,
-        "unit": "J*s",
+        "category": "Physics",
         "exact": true
     },
     "G": {
         "name": "Newtonian constant of gravitation",
         "value": 6.67430e-11,
         "unit": "m^3/(kg*s^2)",
+        "category": "Physics",
         "exact": false,
         "uncertainty": 0.00015e-11
     },
-    "e": {
-        "name": "elementary charge",
-        "value": 1.602176634e-19,
-        "unit": "C",
+    "g": {
+        "name": "standard acceleration of gravity",
+        "value": 9.80665,
+        "unit": "m/s^2",
+        "category": "Physics",
+        "exact": true
+    },
+    "h": {
+        "name": "Planck constant",
+        "value": 6.62607015e-34,
+        "unit": "J*s",
+        "category": "Physics",
+        "exact": true
+    },
+    "hbar": {
+        "name": "reduced Planck constant",
+        "value": 1.054571817e-34,
+        "unit": "J*s",
+        "category": "Physics",
         "exact": true
     },
     "k": {
         "name": "Boltzmann constant",
         "value": 1.380649e-23,
         "unit": "J/K",
+        "category": "Physics",
         "exact": true
     },
     "N_A": {
         "name": "Avogadro constant",
         "value": 6.02214076e23,
         "unit": "1/mol",
+        "category": "Physics",
         "exact": true
     },
     "R": {
         "name": "molar gas constant",
         "value": 8.314462618,
         "unit": "J/(mol*K)",
+        "category": "Physics",
+        "exact": true
+    },
+    "sigma": {
+        "name": "Stefan-Boltzmann constant",
+        "value": 5.670374419e-8,
+        "unit": "W/(m^2*K^4)",
+        "category": "Physics",
+        "exact": true
+    },
+    "b": {
+        "name": "Wien displacement law constant",
+        "value": 2.897771955e-3,
+        "unit": "m*K",
+        "category": "Physics",
+        "exact": true
+    },
+    "P_atm": {
+        "name": "standard atmosphere pressure",
+        "value": 101325,
+        "unit": "Pa",
+        "category": "Physics",
+        "exact": true
+    },
+    "v_sound": {
+        "name": "speed of sound in dry air at 20 C",
+        "value": 343.0,
+        "unit": "m/s",
+        "category": "Physics",
+        "exact": false
+    },
+    "e": {
+        "name": "elementary charge",
+        "value": 1.602176634e-19,
+        "unit": "C",
+        "category": "Quantum",
+        "exact": true
+    },
+    "m_e": {
+        "name": "electron rest mass",
+        "value": 9.1093837015e-31,
+        "unit": "kg",
+        "category": "Quantum",
+        "exact": true
+    },
+    "m_p": {
+        "name": "proton rest mass",
+        "value": 1.67262192369e-27,
+        "unit": "kg",
+        "category": "Quantum",
+        "exact": true
+    },
+    "m_n": {
+        "name": "neutron rest mass",
+        "value": 1.67492749804e-27,
+        "unit": "kg",
+        "category": "Quantum",
+        "exact": true
+    },
+    "u": {
+        "name": "unified atomic mass unit",
+        "value": 1.66053906660e-27,
+        "unit": "kg",
+        "category": "Quantum",
+        "exact": true
+    },
+    "alpha": {
+        "name": "fine-structure constant",
+        "value": 7.2973525693e-3,
+        "unit": "",
+        "category": "Quantum",
+        "exact": false
+    },
+    "R_inf": {
+        "name": "Rydberg constant",
+        "value": 10973731.568160,
+        "unit": "1/m",
+        "category": "Quantum",
+        "exact": true
+    },
+    "a_0": {
+        "name": "Bohr radius",
+        "value": 5.29177210903e-11,
+        "unit": "m",
+        "category": "Quantum",
+        "exact": true
+    },
+    "E_h": {
+        "name": "Hartree energy",
+        "value": 4.3597447222071e-18,
+        "unit": "J",
+        "category": "Quantum",
+        "exact": true
+    },
+    "mu_B": {
+        "name": "Bohr magneton",
+        "value": 9.2740100783e-24,
+        "unit": "J/T",
+        "category": "Quantum",
+        "exact": true
+    },
+    "mu_N": {
+        "name": "nuclear magneton",
+        "value": 5.0507837461e-27,
+        "unit": "J/T",
+        "category": "Quantum",
         "exact": true
     },
     "eps_0": {
         "name": "vacuum electric permittivity",
         "value": 8.8541878128e-12,
         "unit": "F/m",
+        "category": "Electromagnetism",
         "exact": true
     },
     "mu_0": {
         "name": "vacuum magnetic permeability",
         "value": 1.25663706212e-6,
         "unit": "N/A^2",
+        "category": "Electromagnetism",
+        "exact": true
+    },
+    "k_e": {
+        "name": "Coulomb electrostatic constant",
+        "value": 8.9875517923e9,
+        "unit": "N*m^2/C^2",
+        "category": "Electromagnetism",
+        "exact": true
+    },
+    "Z_0": {
+        "name": "characteristic impedance of vacuum",
+        "value": 376.730313668,
+        "unit": "ohm",
+        "category": "Electromagnetism",
+        "exact": true
+    },
+    "Phi_0": {
+        "name": "magnetic flux quantum",
+        "value": 2.067833848e-15,
+        "unit": "Wb",
+        "category": "Electromagnetism",
+        "exact": true
+    },
+    "G_0": {
+        "name": "conductance quantum",
+        "value": 7.748091729e-5,
+        "unit": "S",
+        "category": "Electromagnetism",
+        "exact": true
+    },
+    "K_J": {
+        "name": "Josephson constant",
+        "value": 483597.8484e9,
+        "unit": "Hz/V",
+        "category": "Electromagnetism",
+        "exact": true
+    },
+    "R_K": {
+        "name": "von Klitzing constant",
+        "value": 25812.80745,
+        "unit": "ohm",
+        "category": "Electromagnetism",
         "exact": true
     },
     "F": {
         "name": "Faraday constant",
         "value": 96485.33212,
         "unit": "C/mol",
+        "category": "Chemistry",
+        "exact": true
+    },
+    "V_m_stp": {
+        "name": "molar volume of ideal gas at STP",
+        "value": 0.02271095464,
+        "unit": "m^3/mol",
+        "category": "Chemistry",
+        "exact": true
+    },
+    "rho_water": {
+        "name": "density of liquid water at 4 C",
+        "value": 1000.0,
+        "unit": "kg/m^3",
+        "category": "Chemistry",
+        "exact": true
+    },
+    "K_w": {
+        "name": "water autoionization constant at 25 C",
+        "value": 1.0e-14,
+        "unit": "",
+        "category": "Chemistry",
+        "exact": true
+    },
+    "c_water": {
+        "name": "specific heat capacity of water",
+        "value": 4184.0,
+        "unit": "J/(kg*K)",
+        "category": "Chemistry",
+        "exact": true
+    },
+    "M_sun": {
+        "name": "solar mass",
+        "value": 1.98847e30,
+        "unit": "kg",
+        "category": "Astrophysics",
+        "exact": false
+    },
+    "R_sun": {
+        "name": "solar radius",
+        "value": 6.957e8,
+        "unit": "m",
+        "category": "Astrophysics",
+        "exact": true
+    },
+    "L_sun": {
+        "name": "solar luminosity",
+        "value": 3.828e26,
+        "unit": "W",
+        "category": "Astrophysics",
+        "exact": true
+    },
+    "M_earth": {
+        "name": "Earth mass",
+        "value": 5.9722e24,
+        "unit": "kg",
+        "category": "Astrophysics",
+        "exact": false
+    },
+    "R_earth": {
+        "name": "Earth mean radius",
+        "value": 6.371e6,
+        "unit": "m",
+        "category": "Astrophysics",
+        "exact": true
+    },
+    "AU": {
+        "name": "astronomical unit",
+        "value": 149597870700.0,
+        "unit": "m",
+        "category": "Astrophysics",
+        "exact": true
+    },
+    "ly": {
+        "name": "light year",
+        "value": 9.4607304725808e15,
+        "unit": "m",
+        "category": "Astrophysics",
+        "exact": true
+    },
+    "pc": {
+        "name": "parsec",
+        "value": 3.08567758149137e16,
+        "unit": "m",
+        "category": "Astrophysics",
+        "exact": true
+    },
+    "H_0": {
+        "name": "Hubble constant",
+        "value": 2.268e-18,
+        "unit": "1/s",
+        "category": "Astrophysics",
+        "exact": false
+    },
+    "M_ch": {
+        "name": "Chandrasekhar mass limit",
+        "value": 2.765e30,
+        "unit": "kg",
+        "category": "Astrophysics",
+        "exact": false
+    },
+    "pi": {
+        "name": "pi Archimedes constant",
+        "value": 3.141592653589793,
+        "unit": "",
+        "category": "Math",
+        "exact": true
+    },
+    "e_math": {
+        "name": "Euler number",
+        "value": 2.718281828459045,
+        "unit": "",
+        "category": "Math",
+        "exact": true
+    },
+    "phi": {
+        "name": "golden ratio",
+        "value": 1.618033988749895,
+        "unit": "",
+        "category": "Math",
+        "exact": true
+    },
+    "sqrt2": {
+        "name": "Pythagoras constant square root of 2",
+        "value": 1.4142135623730951,
+        "unit": "",
+        "category": "Math",
+        "exact": true
+    },
+    "sqrt3": {
+        "name": "Theodorus constant square root of 3",
+        "value": 1.7320508075688772,
+        "unit": "",
+        "category": "Math",
+        "exact": true
+    },
+    "gamma_em": {
+        "name": "Euler-Mascheroni constant",
+        "value": 0.5772156649015329,
+        "unit": "",
+        "category": "Math",
         "exact": true
     }
 }

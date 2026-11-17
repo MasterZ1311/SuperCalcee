@@ -1,82 +1,240 @@
 [
   {
-    "id": "geom2d_rect_area",
+    "id": "geo2d_rect_area",
     "name": "Rectangle Area",
-    "desc": "Area = length * width",
+    "desc": "A = l * w",
     "expression": "l * w",
-    "variables": ["l", "w"],
-    "unit": "sq units"
+    "variables": [
+      "l",
+      "w"
+    ],
+    "unit": "m²"
   },
   {
-    "id": "geom2d_rect_perim",
+    "id": "geo2d_rect_perimeter",
     "name": "Rectangle Perimeter",
-    "desc": "Perimeter = 2 * (length + width)",
+    "desc": "P = 2 * (l + w)",
     "expression": "2 * (l + w)",
-    "variables": ["l", "w"],
-    "unit": "units"
+    "variables": [
+      "l",
+      "w"
+    ],
+    "unit": "m"
   },
   {
-    "id": "geom2d_triangle_area",
+    "id": "geo2d_triangle_base_height",
     "name": "Triangle Area (Base & Height)",
-    "desc": "Area = 0.5 * base * height",
+    "desc": "A = 0.5 * b * h",
     "expression": "0.5 * b * h",
-    "variables": ["b", "h"],
-    "unit": "sq units"
+    "variables": [
+      "b",
+      "h"
+    ],
+    "unit": "m²"
   },
   {
-    "id": "geom2d_herons_formula",
+    "id": "geo2d_triangle_heron",
     "name": "Triangle Area (Heron's Formula)",
-    "desc": "Area = √(s*(s-a)*(s-b)*(s-c)) where s = (a+b+c)/2",
-    "expression": "sqrt(((a+b+c)/2) * (((a+b+c)/2)-a) * (((a+b+c)/2)-b) * (((a+b+c)/2)-c))",
-    "variables": ["a", "b", "c"],
-    "unit": "sq units"
+    "desc": "s = (a+b+c)/2; A = sqrt(s*(s-a)*(s-b)*(s-c))",
+    "expression": "sqrt(((a + b + c) / 2) * (((a + b + c) / 2) - a) * (((a + b + c) / 2) - b) * (((a + b + c) / 2) - c))",
+    "variables": [
+      "a",
+      "b",
+      "c"
+    ],
+    "unit": "m²"
   },
   {
-    "id": "geom2d_parallelogram_area",
-    "name": "Parallelogram Area",
-    "desc": "Area = base * height",
-    "expression": "b * h",
-    "variables": ["b", "h"],
-    "unit": "sq units"
+    "id": "geo2d_triangle_sas_area",
+    "name": "Triangle Area (SAS Sine)",
+    "desc": "A = 0.5 * a * b * sin(C)",
+    "expression": "0.5 * a * b * sin(C)",
+    "variables": [
+      "a",
+      "b",
+      "C"
+    ],
+    "unit": "m²"
   },
   {
-    "id": "geom2d_trapezoid_area",
-    "name": "Trapezoid Area",
-    "desc": "Area = 0.5 * (a + b) * h",
-    "expression": "0.5 * (a + b) * h",
-    "variables": ["a", "b", "h"],
-    "unit": "sq units"
+    "id": "geo2d_equilateral_area",
+    "name": "Equilateral Triangle Area",
+    "desc": "A = (sqrt(3) / 4) * s²",
+    "expression": "(sqrt(3) / 4) * (s^2)",
+    "variables": [
+      "s"
+    ],
+    "unit": "m²"
   },
   {
-    "id": "geom2d_rhombus_area",
-    "name": "Rhombus Area (Diagonals)",
-    "desc": "Area = (d1 * d2) / 2",
-    "expression": "(d1 * d2) / 2",
-    "variables": ["d1", "d2"],
-    "unit": "sq units"
+    "id": "geo2d_pythagoras",
+    "name": "Pythagorean Hypotenuse",
+    "desc": "c = sqrt(a² + b²)",
+    "expression": "sqrt(a^2 + b^2)",
+    "variables": [
+      "a",
+      "b"
+    ],
+    "unit": "m"
   },
   {
-    "id": "geom2d_circle_circumference",
+    "id": "geo2d_circle_area",
+    "name": "Circle Area",
+    "desc": "A = pi * r²",
+    "expression": "pi * (r^2)",
+    "variables": [
+      "r"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_circle_circ",
     "name": "Circle Circumference",
-    "desc": "C = 2 * π * r",
+    "desc": "C = 2 * pi * r",
     "expression": "2 * pi * r",
-    "variables": ["r"],
-    "unit": "units"
+    "variables": [
+      "r"
+    ],
+    "unit": "m"
   },
   {
-    "id": "geom2d_sector_area",
-    "name": "Circle Sector Area",
-    "desc": "Area = (theta / 360) * π * r²",
-    "expression": "(theta / 360) * pi * (r^2)",
-    "variables": ["theta", "r"],
-    "unit": "sq units"
+    "id": "geo2d_sector_area",
+    "name": "Circular Sector Area",
+    "desc": "A = 0.5 * (r^2) * theta",
+    "expression": "0.5 * (r^2) * theta",
+    "variables": [
+      "r",
+      "theta"
+    ],
+    "unit": "m²"
   },
   {
-    "id": "geom2d_ellipse_area",
+    "id": "geo2d_arc_length",
+    "name": "Circular Arc Length",
+    "desc": "s = r * theta",
+    "expression": "r * theta",
+    "variables": [
+      "r",
+      "theta"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "geo2d_annulus_area",
+    "name": "Annulus Ring Area",
+    "desc": "A = pi * (R² - r²)",
+    "expression": "pi * (R^2 - r^2)",
+    "variables": [
+      "R",
+      "r"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_trapezoid_area",
+    "name": "Trapezoid Area",
+    "desc": "A = 0.5 * (a + b) * h",
+    "expression": "0.5 * (a + b) * h",
+    "variables": [
+      "a",
+      "b",
+      "h"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_parallelogram_area",
+    "name": "Parallelogram Area",
+    "desc": "A = b * h",
+    "expression": "b * h",
+    "variables": [
+      "b",
+      "h"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_rhombus_area",
+    "name": "Rhombus Diagonal Area",
+    "desc": "A = 0.5 * d1 * d2",
+    "expression": "0.5 * d1 * d2",
+    "variables": [
+      "d1",
+      "d2"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_kite_area",
+    "name": "Kite Diagonal Area",
+    "desc": "A = 0.5 * d1 * d2",
+    "expression": "0.5 * d1 * d2",
+    "variables": [
+      "d1",
+      "d2"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_pentagon_area",
+    "name": "Regular Pentagon Area",
+    "desc": "A = 0.25 * sqrt(5 * (5 + 2 * sqrt(5))) * s²",
+    "expression": "0.25 * sqrt(5 * (5 + 2 * sqrt(5))) * (s^2)",
+    "variables": [
+      "s"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_hexagon_area",
+    "name": "Regular Hexagon Area",
+    "desc": "A = (3 * sqrt(3) / 2) * s²",
+    "expression": "(3 * sqrt(3) / 2) * (s^2)",
+    "variables": [
+      "s"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_octagon_area",
+    "name": "Regular Octagon Area",
+    "desc": "A = 2 * (1 + sqrt(2)) * s²",
+    "expression": "2 * (1 + sqrt(2)) * (s^2)",
+    "variables": [
+      "s"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_ellipse_area",
     "name": "Ellipse Area",
-    "desc": "Area = π * a * b (semi-major and semi-minor axes)",
+    "desc": "A = pi * a * b",
     "expression": "pi * a * b",
-    "variables": ["a", "b"],
-    "unit": "sq units"
+    "variables": [
+      "a",
+      "b"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "geo2d_ellipse_perimeter",
+    "name": "Ellipse Perimeter Ramanujan",
+    "desc": "P = pi * (3*(a + b) - sqrt((3*a + b)*(a + 3*b)))",
+    "expression": "pi * (3 * (a + b) - sqrt((3 * a + b) * (a + 3 * b)))",
+    "variables": [
+      "a",
+      "b"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "geo2d_polygon_angle_sum",
+    "name": "n-gon Interior Angles Sum",
+    "desc": "Sum = (n - 2) * 180",
+    "expression": "(n - 2) * 180",
+    "variables": [
+      "n"
+    ],
+    "unit": "deg"
   }
 ]

@@ -87,6 +87,18 @@ class ConstantsDatabase:
         """
         return self.constants
 
+    def get_by_category(self, category: str) -> Dict[str, Dict[str, Any]]:
+        """
+        Filters constants by their scientific category domain.
+
+        Args:
+            category (str): Target domain category (e.g. 'Physics', 'Quantum', 'Math').
+
+        Returns:
+            Dict[str, Dict[str, Any]]: Filtered map of matching constants.
+        """
+        return {k: v for k, v in self.constants.items() if v.get("category", "").lower() == category.lower()}
+
 
 # Global database instance for direct module imports
 DB = ConstantsDatabase()

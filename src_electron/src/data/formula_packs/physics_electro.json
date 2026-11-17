@@ -1,66 +1,264 @@
 [
   {
-    "id": "elec_coulombs_law",
-    "name": "Coulomb's Electrostatic Force",
-    "desc": "F = k * q1 * q2 / r²",
-    "expression": "(8.9875517923e9 * q1 * q2) / (r^2)",
-    "variables": ["q1", "q2", "r"],
+    "id": "electro_coulomb_force",
+    "name": "Coulomb's Law Force",
+    "desc": "F = ke * q1 * q2 / r²",
+    "expression": "ke * q1 * q2 / (r^2)",
+    "variables": [
+      "ke",
+      "q1",
+      "q2",
+      "r"
+    ],
     "unit": "N"
   },
   {
-    "id": "elec_field_strength",
-    "name": "Electric Field Strength",
-    "desc": "E = F / q",
-    "expression": "F / q",
-    "variables": ["F", "q"],
+    "id": "electro_electric_field",
+    "name": "Electric Field from Point Charge",
+    "desc": "E = ke * q / r²",
+    "expression": "ke * q / (r^2)",
+    "variables": [
+      "ke",
+      "q",
+      "r"
+    ],
     "unit": "N/C"
   },
   {
-    "id": "elec_ohms_law",
-    "name": "Ohm's Law (Voltage)",
-    "desc": "V = I * R",
-    "expression": "I * R",
-    "variables": ["I", "R"],
+    "id": "electro_electric_potential",
+    "name": "Electric Potential",
+    "desc": "V = ke * q / r",
+    "expression": "ke * q / r",
+    "variables": [
+      "ke",
+      "q",
+      "r"
+    ],
     "unit": "V"
   },
   {
-    "id": "elec_power",
-    "name": "Electrical Power (P = I²*R)",
-    "desc": "P = (I²) * R",
-    "expression": "(I^2) * R",
-    "variables": ["I", "R"],
-    "unit": "W"
-  },
-  {
-    "id": "elec_capacitance",
-    "name": "Capacitor Charge Storage",
-    "desc": "Q = C * V",
-    "expression": "C * V",
-    "variables": ["C", "V"],
-    "unit": "C"
-  },
-  {
-    "id": "elec_parallel_plate",
+    "id": "electro_parallel_capacitor",
     "name": "Parallel Plate Capacitance",
-    "desc": "C = (e0 * A) / d",
-    "expression": "(8.8541878128e-12 * A) / d",
-    "variables": ["A", "d"],
+    "desc": "C = eps0 * epsr * A / d",
+    "expression": "eps0 * epsr * A / d",
+    "variables": [
+      "eps0",
+      "epsr",
+      "A",
+      "d"
+    ],
     "unit": "F"
   },
   {
-    "id": "elec_magnetic_force",
+    "id": "electro_capacitor_energy",
+    "name": "Capacitor Stored Energy",
+    "desc": "Energy U = 0.5 * C * V²",
+    "expression": "0.5 * C * (V^2)",
+    "variables": [
+      "C",
+      "V"
+    ],
+    "unit": "J"
+  },
+  {
+    "id": "electro_ohms_law",
+    "name": "Ohm's Law Voltage",
+    "desc": "Voltage V = I * R",
+    "expression": "I * R",
+    "variables": [
+      "I",
+      "R"
+    ],
+    "unit": "V"
+  },
+  {
+    "id": "electro_resistance_resistivity",
+    "name": "Electrical Resistance",
+    "desc": "R = rho * L / A",
+    "expression": "rho * L / A",
+    "variables": [
+      "rho",
+      "L",
+      "A"
+    ],
+    "unit": "Ω"
+  },
+  {
+    "id": "electro_power_vi",
+    "name": "Electrical Power (V·I)",
+    "desc": "Power P = V * I",
+    "expression": "V * I",
+    "variables": [
+      "V",
+      "I"
+    ],
+    "unit": "W"
+  },
+  {
+    "id": "electro_power_i2r",
+    "name": "Joule Heating Power (I²·R)",
+    "desc": "Power P = I² * R",
+    "expression": "(I^2) * R",
+    "variables": [
+      "I",
+      "R"
+    ],
+    "unit": "W"
+  },
+  {
+    "id": "electro_power_v2r",
+    "name": "Voltage Power (V²/R)",
+    "desc": "Power P = V² / R",
+    "expression": "(V^2) / R",
+    "variables": [
+      "V",
+      "R"
+    ],
+    "unit": "W"
+  },
+  {
+    "id": "electro_parallel_resistors",
+    "name": "Two Resistors in Parallel",
+    "desc": "Req = (R1 * R2) / (R1 + R2)",
+    "expression": "(R1 * R2) / (R1 + R2)",
+    "variables": [
+      "R1",
+      "R2"
+    ],
+    "unit": "Ω"
+  },
+  {
+    "id": "electro_rc_tau",
+    "name": "RC Time Constant",
+    "desc": "tau = R * C",
+    "expression": "R * C",
+    "variables": [
+      "R",
+      "C"
+    ],
+    "unit": "s"
+  },
+  {
+    "id": "electro_rc_charging",
+    "name": "RC Capacitor Charging Voltage",
+    "desc": "V(t) = V0 * (1 - exp(-t / (R * C)))",
+    "expression": "V0 * (1 - exp(-t / (R * C)))",
+    "variables": [
+      "V0",
+      "t",
+      "R",
+      "C"
+    ],
+    "unit": "V"
+  },
+  {
+    "id": "electro_rc_discharging",
+    "name": "RC Capacitor Discharging Voltage",
+    "desc": "V(t) = V0 * exp(-t / (R * C))",
+    "expression": "V0 * exp(-t / (R * C))",
+    "variables": [
+      "V0",
+      "t",
+      "R",
+      "C"
+    ],
+    "unit": "V"
+  },
+  {
+    "id": "electro_lorentz_force",
     "name": "Lorentz Magnetic Force",
     "desc": "F = q * v * B * sin(theta)",
-    "expression": "q * v * B * sin(theta * pi / 180)",
-    "variables": ["q", "v", "B", "theta"],
+    "expression": "q * v * B * sin(theta)",
+    "variables": [
+      "q",
+      "v",
+      "B",
+      "theta"
+    ],
     "unit": "N"
   },
   {
-    "id": "elec_transformer_ratio",
-    "name": "Transformer Voltage Ratio (Vs)",
+    "id": "electro_wire_force",
+    "name": "Magnetic Force on Current Wire",
+    "desc": "F = I * L * B * sin(theta)",
+    "expression": "I * L * B * sin(theta)",
+    "variables": [
+      "I",
+      "L",
+      "B",
+      "theta"
+    ],
+    "unit": "N"
+  },
+  {
+    "id": "electro_biot_savart_wire",
+    "name": "Wire Magnetic Field",
+    "desc": "B = mu0 * I / (2 * pi * r)",
+    "expression": "mu0 * I / (2 * pi * r)",
+    "variables": [
+      "mu0",
+      "I",
+      "r"
+    ],
+    "unit": "T"
+  },
+  {
+    "id": "electro_solenoid_field",
+    "name": "Solenoid Magnetic Field",
+    "desc": "B = mu0 * n * I",
+    "expression": "mu0 * n * I",
+    "variables": [
+      "mu0",
+      "n",
+      "I"
+    ],
+    "unit": "T"
+  },
+  {
+    "id": "electro_magnetic_flux",
+    "name": "Magnetic Flux",
+    "desc": "Phi = B * A * cos(theta)",
+    "expression": "B * A * cos(theta)",
+    "variables": [
+      "B",
+      "A",
+      "theta"
+    ],
+    "unit": "Wb"
+  },
+  {
+    "id": "electro_faradays_law",
+    "name": "Faraday Induced EMF",
+    "desc": "EMF = N * dPhi / dt",
+    "expression": "N * dPhi / dt",
+    "variables": [
+      "N",
+      "dPhi",
+      "dt"
+    ],
+    "unit": "V"
+  },
+  {
+    "id": "electro_transformer_ratio",
+    "name": "Transformer Secondary Voltage",
     "desc": "Vs = Vp * (Ns / Np)",
     "expression": "Vp * (Ns / Np)",
-    "variables": ["Vp", "Ns", "Np"],
+    "variables": [
+      "Vp",
+      "Ns",
+      "Np"
+    ],
     "unit": "V"
+  },
+  {
+    "id": "electro_lc_frequency",
+    "name": "LC Resonant Angular Frequency",
+    "desc": "omega = 1 / sqrt(L * C)",
+    "expression": "1 / sqrt(L * C)",
+    "variables": [
+      "L",
+      "C"
+    ],
+    "unit": "rad/s"
   }
 ]

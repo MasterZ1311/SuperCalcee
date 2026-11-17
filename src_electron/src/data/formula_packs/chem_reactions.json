@@ -1,66 +1,242 @@
 [
   {
+    "id": "chem_molarity",
+    "name": "Solution Molarity",
+    "desc": "M = moles / V_liters",
+    "expression": "moles / V_liters",
+    "variables": [
+      "moles",
+      "V_liters"
+    ],
+    "unit": "mol/L"
+  },
+  {
+    "id": "chem_molality",
+    "name": "Solution Molality",
+    "desc": "m = moles / kg_solvent",
+    "expression": "moles / kg_solvent",
+    "variables": [
+      "moles",
+      "kg_solvent"
+    ],
+    "unit": "mol/kg"
+  },
+  {
+    "id": "chem_dilution",
+    "name": "Solution Dilution Final Volume",
+    "desc": "V2 = (M1 * V1) / M2",
+    "expression": "(M1 * V1) / M2",
+    "variables": [
+      "M1",
+      "V1",
+      "M2"
+    ],
+    "unit": "L"
+  },
+  {
+    "id": "chem_mass_percent",
+    "name": "Mass Percentage (w/w)",
+    "desc": "pct = (mass_solute / mass_solution) * 100",
+    "expression": "(mass_solute / mass_solution) * 100",
+    "variables": [
+      "mass_solute",
+      "mass_solution"
+    ],
+    "unit": "%"
+  },
+  {
+    "id": "chem_mole_fraction",
+    "name": "Solute Mole Fraction",
+    "desc": "X_A = n_A / (n_A + n_B)",
+    "expression": "n_A / (n_A + n_B)",
+    "variables": [
+      "n_A",
+      "n_B"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "chem_raoults_law",
+    "name": "Raoult's Vapor Pressure",
+    "desc": "P = X_solvent * P_pure",
+    "expression": "X_solvent * P_pure",
+    "variables": [
+      "X_solvent",
+      "P_pure"
+    ],
+    "unit": "Pa"
+  },
+  {
+    "id": "chem_boiling_elevation",
+    "name": "Boiling Point Elevation",
+    "desc": "dTb = i * Kb * m",
+    "expression": "i * Kb * m",
+    "variables": [
+      "i",
+      "Kb",
+      "m"
+    ],
+    "unit": "K"
+  },
+  {
+    "id": "chem_freezing_depression",
+    "name": "Freezing Point Depression",
+    "desc": "dTf = i * Kf * m",
+    "expression": "i * Kf * m",
+    "variables": [
+      "i",
+      "Kf",
+      "m"
+    ],
+    "unit": "K"
+  },
+  {
+    "id": "chem_osmotic_pressure",
+    "name": "van 't Hoff Osmotic Pressure",
+    "desc": "Pi = i * M * R * T",
+    "expression": "i * M * R * T",
+    "variables": [
+      "i",
+      "M",
+      "R",
+      "T"
+    ],
+    "unit": "Pa"
+  },
+  {
     "id": "chem_arrhenius_k",
-    "name": "Arrhenius Reaction Rate Constant",
-    "desc": "k = A * e^(-Ea / (R * T)) rate constant from activation energy",
-    "expression": "A * exp(-Ea / (8.31446 * T))",
-    "variables": ["A", "Ea", "T"],
-    "unit": "s⁻¹"
+    "name": "Arrhenius Rate Constant",
+    "desc": "k = A * exp(-Ea / (R * T))",
+    "expression": "A * exp(-Ea / (R * T))",
+    "variables": [
+      "A",
+      "Ea",
+      "R",
+      "T"
+    ],
+    "unit": "rate"
+  },
+  {
+    "id": "chem_arrhenius_ea",
+    "name": "Arrhenius Activation Energy",
+    "desc": "Ea = (R * log(k2 / k1)) / (1/T1 - 1/T2)",
+    "expression": "(R * log(k2 / k1)) / ((1 / T1) - (1 / T2))",
+    "variables": [
+      "R",
+      "k2",
+      "k1",
+      "T1",
+      "T2"
+    ],
+    "unit": "J/mol"
+  },
+  {
+    "id": "chem_gibbs_free_energy",
+    "name": "Gibbs Free Energy Change",
+    "desc": "dG = dH - T * dS",
+    "expression": "dH - T * dS",
+    "variables": [
+      "dH",
+      "T",
+      "dS"
+    ],
+    "unit": "J/mol"
+  },
+  {
+    "id": "chem_electrochem_gibbs",
+    "name": "Standard Cell Potential to Gibbs Energy",
+    "desc": "dG = -n * F * E0",
+    "expression": "-n * F * E0",
+    "variables": [
+      "n",
+      "F",
+      "E0"
+    ],
+    "unit": "J/mol"
+  },
+  {
+    "id": "chem_equilibrium_gibbs",
+    "name": "Equilibrium Constant Free Energy",
+    "desc": "dG = -R * T * log(K)",
+    "expression": "-R * T * log(K)",
+    "variables": [
+      "R",
+      "T",
+      "K"
+    ],
+    "unit": "J/mol"
+  },
+  {
+    "id": "chem_nernst_potential",
+    "name": "Nernst Non-Standard Cell Potential",
+    "desc": "E = E0 - ((R * T) / (n * F)) * log(Q)",
+    "expression": "E0 - ((R * T) / (n * F)) * log(Q)",
+    "variables": [
+      "E0",
+      "R",
+      "T",
+      "n",
+      "F",
+      "Q"
+    ],
+    "unit": "V"
+  },
+  {
+    "id": "chem_nernst_25c",
+    "name": "Nernst Equation at 25 °C (log10)",
+    "desc": "E = E0 - (0.0592 / n) * (log(Q) / log(10))",
+    "expression": "E0 - (0.0592 / n) * (log(Q) / log(10))",
+    "variables": [
+      "E0",
+      "n",
+      "Q"
+    ],
+    "unit": "V"
   },
   {
     "id": "chem_henderson_hasselbalch",
     "name": "Henderson-Hasselbalch Buffer pH",
-    "desc": "pH = pKa + log10([A-] / [HA])",
-    "expression": "pKa + log10(A_minus / HA)",
-    "variables": ["pKa", "A_minus", "HA"],
+    "desc": "pH = pKa + log10(conjugate_base / weak_acid)",
+    "expression": "pKa + (log(conjugate_base / weak_acid) / log(10))",
+    "variables": [
+      "pKa",
+      "conjugate_base",
+      "weak_acid"
+    ],
+    "unit": "pH"
+  },
+  {
+    "id": "chem_poh_to_ph",
+    "name": "pH from pOH Relation",
+    "desc": "pH = 14 - pOH",
+    "expression": "14 - pOH",
+    "variables": [
+      "pOH"
+    ],
     "unit": "pH"
   },
   {
     "id": "chem_beer_lambert",
     "name": "Beer-Lambert Absorbance",
-    "desc": "A = ε * c * l absorbance given molar absorptivity ε, concentration c, and path length l",
+    "desc": "A = epsilon * c * l",
     "expression": "epsilon * c * l",
-    "variables": ["epsilon", "c", "l"],
+    "variables": [
+      "epsilon",
+      "c",
+      "l"
+    ],
     "unit": "absorbance"
   },
   {
-    "id": "chem_molarity",
-    "name": "Solution Molarity (M)",
-    "desc": "M = moles / volume in liters",
-    "expression": "moles / volume",
-    "variables": ["moles", "volume"],
+    "id": "chem_first_order_kinetics",
+    "name": "First-Order Integrated Concentration",
+    "desc": "At = A0 * exp(-k * t)",
+    "expression": "A0 * exp(-k * t)",
+    "variables": [
+      "A0",
+      "k",
+      "t"
+    ],
     "unit": "mol/L"
-  },
-  {
-    "id": "chem_dilution",
-    "name": "Dilution Equation (Final Volume V2)",
-    "desc": "V2 = (M1 * V1) / M2",
-    "expression": "(M1 * V1) / M2",
-    "variables": ["M1", "V1", "M2"],
-    "unit": "L"
-  },
-  {
-    "id": "chem_half_life_first_order",
-    "name": "First-Order Half-Life",
-    "desc": "t1/2 = ln(2) / k = 0.693147 / k",
-    "expression": "0.69314718 / k",
-    "variables": ["k"],
-    "unit": "s"
-  },
-  {
-    "id": "chem_osmotic_pressure",
-    "name": "Van 't Hoff Osmotic Pressure",
-    "desc": "Π = i * M * R * T osmotic pressure in atmospheres",
-    "expression": "i * M * 0.082057 * T",
-    "variables": ["i", "M", "T"],
-    "unit": "atm"
-  },
-  {
-    "id": "chem_boyles_law",
-    "name": "Boyle's Law (Final Pressure P2)",
-    "desc": "P2 = (P1 * V1) / V2 at constant temperature",
-    "expression": "(P1 * V1) / V2",
-    "variables": ["P1", "V1", "V2"],
-    "unit": "atm"
   }
 ]

@@ -1,66 +1,259 @@
 [
   {
-    "id": "alg_quad_pos",
-    "name": "Quadratic Root (+)",
-    "desc": "x = (-b + √(b² - 4ac)) / (2a)",
-    "expression": "(-b + sqrt(b^2 - 4*a*c)) / (2*a)",
-    "variables": ["a", "b", "c"],
-    "unit": ""
+    "id": "alg_quadratic_disc",
+    "name": "Quadratic Discriminant",
+    "desc": "Delta = b² - 4*a*c",
+    "expression": "b^2 - 4 * a * c",
+    "variables": [
+      "b",
+      "a",
+      "c"
+    ],
+    "unit": "dimensionless"
   },
   {
-    "id": "alg_quad_neg",
-    "name": "Quadratic Root (-)",
-    "desc": "x = (-b - √(b² - 4ac)) / (2a)",
-    "expression": "(-b - sqrt(b^2 - 4*a*c)) / (2*a)",
-    "variables": ["a", "b", "c"],
-    "unit": ""
+    "id": "alg_vertex_x",
+    "name": "Parabola Vertex X-Coordinate",
+    "desc": "x_v = -b / (2 * a)",
+    "expression": "-b / (2 * a)",
+    "variables": [
+      "b",
+      "a"
+    ],
+    "unit": "coordinate"
   },
   {
-    "id": "alg_arithmetic_sum",
-    "name": "Arithmetic Progression (AP) Sum",
-    "desc": "Sn = (n / 2) * (2*a + (n - 1)*d)",
-    "expression": "(n / 2) * (2*a + (n - 1)*d)",
-    "variables": ["n", "a", "d"],
-    "unit": ""
-  },
-  {
-    "id": "alg_geometric_sum",
-    "name": "Geometric Progression (GP) Sum",
-    "desc": "Sn = a * (1 - r^n) / (1 - r)",
-    "expression": "a * ((1 - (r^n)) / (1 - r))",
-    "variables": ["a", "r", "n"],
-    "unit": ""
+    "id": "alg_vertex_y",
+    "name": "Parabola Vertex Y-Coordinate",
+    "desc": "y_v = c - (b² / (4 * a))",
+    "expression": "c - (b^2 / (4 * a))",
+    "variables": [
+      "c",
+      "b",
+      "a"
+    ],
+    "unit": "coordinate"
   },
   {
     "id": "alg_distance_2d",
-    "name": "Euclidean Distance (2D)",
-    "desc": "d = √((x2-x1)² + (y2-y1)²)",
+    "name": "2D Cartesian Distance",
+    "desc": "d = sqrt((x2 - x1)² + (y2 - y1)²)",
     "expression": "sqrt((x2 - x1)^2 + (y2 - y1)^2)",
-    "variables": ["x1", "y1", "x2", "y2"],
-    "unit": ""
+    "variables": [
+      "x2",
+      "x1",
+      "y2",
+      "y1"
+    ],
+    "unit": "m"
   },
   {
-    "id": "alg_line_slope",
-    "name": "Slope of a Line (m)",
+    "id": "alg_distance_3d",
+    "name": "3D Cartesian Distance",
+    "desc": "d = sqrt((x2 - x1)² + (y2 - y1)² + (z2 - z1)²)",
+    "expression": "sqrt((x2 - x1)^2 + (y2 - y1)^2 + (z2 - z1)^2)",
+    "variables": [
+      "x2",
+      "x1",
+      "y2",
+      "y1",
+      "z2",
+      "z1"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "alg_midpoint_x",
+    "name": "Midpoint X-Coordinate",
+    "desc": "xm = (x1 + x2) / 2",
+    "expression": "(x1 + x2) / 2",
+    "variables": [
+      "x1",
+      "x2"
+    ],
+    "unit": "coordinate"
+  },
+  {
+    "id": "alg_slope",
+    "name": "Slope of a Line",
     "desc": "m = (y2 - y1) / (x2 - x1)",
     "expression": "(y2 - y1) / (x2 - x1)",
-    "variables": ["x1", "y1", "x2", "y2"],
-    "unit": ""
+    "variables": [
+      "y2",
+      "y1",
+      "x2",
+      "x1"
+    ],
+    "unit": "slope"
   },
   {
-    "id": "trig_sine_law",
-    "name": "Law of Sines (Side b)",
-    "desc": "b = (a * sin(B)) / sin(A)",
-    "expression": "(a * sin(B * pi / 180)) / sin(A * pi / 180)",
-    "variables": ["a", "B", "A"],
-    "unit": "units"
+    "id": "alg_point_line_dist",
+    "name": "Point-to-Line Distance",
+    "desc": "d = abs(A*x0 + B*y0 + C) / sqrt(A² + B²)",
+    "expression": "abs(A * x0 + B * y0 + C) / sqrt(A^2 + B^2)",
+    "variables": [
+      "A",
+      "x0",
+      "B",
+      "y0",
+      "C"
+    ],
+    "unit": "distance"
   },
   {
-    "id": "trig_cosine_law",
-    "name": "Law of Cosines (Side c)",
-    "desc": "c = √(a² + b² - 2ab*cos(C))",
-    "expression": "sqrt((a^2) + (b^2) - 2*a*b*cos(C * pi / 180))",
-    "variables": ["a", "b", "C"],
-    "unit": "units"
+    "id": "alg_ap_nth_term",
+    "name": "Arithmetic Progression n-th Term",
+    "desc": "an = a + (n - 1) * d",
+    "expression": "a + (n - 1) * d",
+    "variables": [
+      "a",
+      "n",
+      "d"
+    ],
+    "unit": "term"
+  },
+  {
+    "id": "alg_ap_sum",
+    "name": "Arithmetic Series Sum",
+    "desc": "Sn = (n / 2) * (2*a + (n - 1)*d)",
+    "expression": "(n / 2) * (2 * a + (n - 1) * d)",
+    "variables": [
+      "n",
+      "a",
+      "d"
+    ],
+    "unit": "sum"
+  },
+  {
+    "id": "alg_gp_nth_term",
+    "name": "Geometric Progression n-th Term",
+    "desc": "an = a * (r^(n - 1))",
+    "expression": "a * (r^(n - 1))",
+    "variables": [
+      "a",
+      "r",
+      "n"
+    ],
+    "unit": "term"
+  },
+  {
+    "id": "alg_gp_finite_sum",
+    "name": "Geometric Series Finite Sum",
+    "desc": "Sn = a * (1 - r^n) / (1 - r)",
+    "expression": "a * (1 - r^n) / (1 - r)",
+    "variables": [
+      "a",
+      "r",
+      "n"
+    ],
+    "unit": "sum"
+  },
+  {
+    "id": "alg_gp_infinite_sum",
+    "name": "Geometric Infinite Sum (|r| < 1)",
+    "desc": "S_inf = a / (1 - r)",
+    "expression": "a / (1 - r)",
+    "variables": [
+      "a",
+      "r"
+    ],
+    "unit": "sum"
+  },
+  {
+    "id": "alg_log_change_base",
+    "name": "Logarithm Change of Base",
+    "desc": "log_b(a) = log(a) / log(b)",
+    "expression": "log(a) / log(b)",
+    "variables": [
+      "a",
+      "b"
+    ],
+    "unit": "value"
+  },
+  {
+    "id": "alg_law_cosines_side",
+    "name": "Law of Cosines Side Length",
+    "desc": "c = sqrt(a² + b² - 2*a*b*cos(C))",
+    "expression": "sqrt(a^2 + b^2 - 2 * a * b * cos(C))",
+    "variables": [
+      "a",
+      "b",
+      "C"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "alg_law_cosines_angle",
+    "name": "Law of Cosines Angle",
+    "desc": "C = acos((a² + b² - c²) / (2 * a * b))",
+    "expression": "acos((a^2 + b^2 - c^2) / (2 * a * b))",
+    "variables": [
+      "a",
+      "b",
+      "c"
+    ],
+    "unit": "rad"
+  },
+  {
+    "id": "alg_trig_double_sin",
+    "name": "Sine Double Angle",
+    "desc": "sin(2*theta) = 2 * sin(theta) * cos(theta)",
+    "expression": "2 * sin(theta) * cos(theta)",
+    "variables": [
+      "theta"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "alg_trig_double_cos",
+    "name": "Cosine Double Angle",
+    "desc": "cos(2*theta) = cos(theta)² - sin(theta)²",
+    "expression": "(cos(theta)^2) - (sin(theta)^2)",
+    "variables": [
+      "theta"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "alg_harmonic_mean",
+    "name": "Harmonic Mean of Two Values",
+    "desc": "H = 2 * a * b / (a + b)",
+    "expression": "2 * a * b / (a + b)",
+    "variables": [
+      "a",
+      "b"
+    ],
+    "unit": "mean"
+  },
+  {
+    "id": "alg_geometric_mean",
+    "name": "Geometric Mean of Two Values",
+    "desc": "G = sqrt(a * b)",
+    "expression": "sqrt(a * b)",
+    "variables": [
+      "a",
+      "b"
+    ],
+    "unit": "mean"
+  },
+  {
+    "id": "alg_combinations",
+    "name": "Combinations C(n, 2)",
+    "desc": "n*(n-1)/2 pairs",
+    "expression": "n * (n - 1) / 2",
+    "variables": [
+      "n"
+    ],
+    "unit": "combinations"
+  },
+  {
+    "id": "alg_pythagorean_identity",
+    "name": "Pythagorean Identity Verification",
+    "desc": "sin(theta)² + cos(theta)² = 1",
+    "expression": "(sin(theta)^2) + (cos(theta)^2)",
+    "variables": [
+      "theta"
+    ],
+    "unit": "identity"
   }
 ]

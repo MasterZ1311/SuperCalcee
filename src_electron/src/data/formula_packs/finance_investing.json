@@ -1,66 +1,258 @@
 [
   {
-    "id": "fin_pe_ratio",
-    "name": "P/E Ratio (Price-to-Earnings)",
-    "desc": "Stock Price / Earnings Per Share",
-    "expression": "StockPrice / EPS",
-    "variables": ["StockPrice", "EPS"],
+    "id": "inv_pe_ratio",
+    "name": "Price-to-Earnings Ratio (P/E)",
+    "desc": "P/E = Price / EPS",
+    "expression": "Price / EPS",
+    "variables": [
+      "Price",
+      "EPS"
+    ],
+    "unit": "multiple"
+  },
+  {
+    "id": "inv_pb_ratio",
+    "name": "Price-to-Book Ratio (P/B)",
+    "desc": "P/B = Price / BVPS",
+    "expression": "Price / BVPS",
+    "variables": [
+      "Price",
+      "BVPS"
+    ],
+    "unit": "multiple"
+  },
+  {
+    "id": "inv_ps_ratio",
+    "name": "Price-to-Sales Ratio (P/S)",
+    "desc": "P/S = Market_Cap / Total_Revenue",
+    "expression": "Market_Cap / Total_Revenue",
+    "variables": [
+      "Market_Cap",
+      "Total_Revenue"
+    ],
+    "unit": "multiple"
+  },
+  {
+    "id": "inv_peg_ratio",
+    "name": "PEG Valuation Ratio",
+    "desc": "PEG = PE / Growth_Rate_Pct",
+    "expression": "PE / Growth_Rate_Pct",
+    "variables": [
+      "PE",
+      "Growth_Rate_Pct"
+    ],
     "unit": "ratio"
   },
   {
-    "id": "fin_pb_ratio",
-    "name": "P/B Ratio (Price-to-Book)",
-    "desc": "Stock Price / Book Value Per Share",
-    "expression": "StockPrice / BVPS",
-    "variables": ["StockPrice", "BVPS"],
+    "id": "inv_dividend_yield",
+    "name": "Dividend Yield",
+    "desc": "Yield = Annual_Dividend / Stock_Price",
+    "expression": "Annual_Dividend / Stock_Price",
+    "variables": [
+      "Annual_Dividend",
+      "Stock_Price"
+    ],
     "unit": "ratio"
   },
   {
-    "id": "fin_div_yield",
-    "name": "Dividend Yield (%)",
-    "desc": "(Annual Dividend / Stock Price) * 100",
-    "expression": "(Dividend / StockPrice) * 100",
-    "variables": ["Dividend", "StockPrice"],
-    "unit": "%"
+    "id": "inv_dividend_payout",
+    "name": "Dividend Payout Ratio",
+    "desc": "Payout = Total_Dividends / Net_Income",
+    "expression": "Total_Dividends / Net_Income",
+    "variables": [
+      "Total_Dividends",
+      "Net_Income"
+    ],
+    "unit": "ratio"
   },
   {
-    "id": "fin_gordon_growth",
-    "name": "Gordon Growth Model (Stock Value)",
+    "id": "inv_retention_ratio",
+    "name": "Plowback Retention Ratio",
+    "desc": "b = 1 - Payout_Ratio",
+    "expression": "1 - Payout_Ratio",
+    "variables": [
+      "Payout_Ratio"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_sustainable_growth",
+    "name": "Sustainable Growth Rate (SGR)",
+    "desc": "SGR = ROE * (1 - Payout)",
+    "expression": "ROE * (1 - Payout)",
+    "variables": [
+      "ROE",
+      "Payout"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_gordon_stock_price",
+    "name": "Gordon Growth Intrinsic Stock Value",
     "desc": "P0 = D1 / (r - g)",
-    "expression": "D1 / ((r / 100) - (g / 100))",
-    "variables": ["D1", "r", "g"],
+    "expression": "D1 / (r - g)",
+    "variables": [
+      "D1",
+      "r",
+      "g"
+    ],
     "unit": "$"
   },
   {
-    "id": "fin_roe",
+    "id": "inv_enterprise_value",
+    "name": "Enterprise Value (EV)",
+    "desc": "EV = Market_Cap + Total_Debt - Cash",
+    "expression": "Market_Cap + Total_Debt - Cash",
+    "variables": [
+      "Market_Cap",
+      "Total_Debt",
+      "Cash"
+    ],
+    "unit": "$"
+  },
+  {
+    "id": "inv_ev_ebitda",
+    "name": "EV to EBITDA Multiple",
+    "desc": "Multiple = EV / EBITDA",
+    "expression": "EV / EBITDA",
+    "variables": [
+      "EV",
+      "EBITDA"
+    ],
+    "unit": "multiple"
+  },
+  {
+    "id": "inv_roe",
     "name": "Return on Equity (ROE)",
-    "desc": "(Net Income / Shareholder Equity) * 100",
-    "expression": "(NetIncome / Equity) * 100",
-    "variables": ["NetIncome", "Equity"],
-    "unit": "%"
+    "desc": "ROE = Net_Income / Shareholders_Equity",
+    "expression": "Net_Income / Shareholders_Equity",
+    "variables": [
+      "Net_Income",
+      "Shareholders_Equity"
+    ],
+    "unit": "ratio"
   },
   {
-    "id": "fin_roa",
+    "id": "inv_roa",
     "name": "Return on Assets (ROA)",
-    "desc": "(Net Income / Total Assets) * 100",
-    "expression": "(NetIncome / TotalAssets) * 100",
-    "variables": ["NetIncome", "TotalAssets"],
-    "unit": "%"
-  },
-  {
-    "id": "fin_sharpe_ratio",
-    "name": "Sharpe Ratio",
-    "desc": "(PortfolioReturn - RiskFreeRate) / StdDev",
-    "expression": "(Return - Rf) / StdDev",
-    "variables": ["Return", "Rf", "StdDev"],
+    "desc": "ROA = Net_Income / Total_Assets",
+    "expression": "Net_Income / Total_Assets",
+    "variables": [
+      "Net_Income",
+      "Total_Assets"
+    ],
     "unit": "ratio"
   },
   {
-    "id": "fin_debt_equity",
-    "name": "Debt-to-Equity Ratio",
-    "desc": "Total Liabilities / Shareholder Equity",
-    "expression": "TotalLiabilities / Equity",
-    "variables": ["TotalLiabilities", "Equity"],
+    "id": "inv_roce",
+    "name": "Return on Capital Employed",
+    "desc": "ROCE = EBIT / (Total_Assets - Current_Liabilities)",
+    "expression": "EBIT / (Total_Assets - Current_Liabilities)",
+    "variables": [
+      "EBIT",
+      "Total_Assets",
+      "Current_Liabilities"
+    ],
     "unit": "ratio"
+  },
+  {
+    "id": "inv_dupont_3step",
+    "name": "DuPont 3-Step ROE",
+    "desc": "ROE = Net_Margin * Asset_Turnover * Equity_Multiplier",
+    "expression": "Net_Margin * Asset_Turnover * Equity_Multiplier",
+    "variables": [
+      "Net_Margin",
+      "Asset_Turnover",
+      "Equity_Multiplier"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_sharpe_ratio",
+    "name": "Sharpe Risk-Adjusted Ratio",
+    "desc": "Sharpe = (Rp - Rf) / sigma_p",
+    "expression": "(Rp - Rf) / sigma_p",
+    "variables": [
+      "Rp",
+      "Rf",
+      "sigma_p"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_treynor_ratio",
+    "name": "Treynor Volatility Ratio",
+    "desc": "Treynor = (Rp - Rf) / beta_p",
+    "expression": "(Rp - Rf) / beta_p",
+    "variables": [
+      "Rp",
+      "Rf",
+      "beta_p"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_sortino_ratio",
+    "name": "Sortino Downside Ratio",
+    "desc": "Sortino = (Rp - Rf) / sigma_down",
+    "expression": "(Rp - Rf) / sigma_down",
+    "variables": [
+      "Rp",
+      "Rf",
+      "sigma_down"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_jensens_alpha",
+    "name": "Jensen's Alpha",
+    "desc": "Alpha = Rp - (Rf + beta * (Rm - Rf))",
+    "expression": "Rp - (Rf + beta * (Rm - Rf))",
+    "variables": [
+      "Rp",
+      "Rf",
+      "beta",
+      "Rm"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_cagr",
+    "name": "Compound Annual Growth Rate",
+    "desc": "CAGR = (End_Val / Start_Val)^(1 / t) - 1",
+    "expression": "((End_Val / Start_Val)^(1 / t)) - 1",
+    "variables": [
+      "End_Val",
+      "Start_Val",
+      "t"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_portfolio_return_2asset",
+    "name": "Two-Asset Portfolio Expected Return",
+    "desc": "Rp = w1 * R1 + w2 * R2",
+    "expression": "w1 * R1 + w2 * R2",
+    "variables": [
+      "w1",
+      "R1",
+      "w2",
+      "R2"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "inv_portfolio_variance_2asset",
+    "name": "Two-Asset Portfolio Variance",
+    "desc": "Var = w1²*s1² + w2²*s2² + 2*w1*w2*cov",
+    "expression": "(w1^2) * (s1^2) + (w2^2) * (s2^2) + 2 * w1 * w2 * cov",
+    "variables": [
+      "w1",
+      "s1",
+      "w2",
+      "s2",
+      "cov"
+    ],
+    "unit": "variance"
   }
 ]

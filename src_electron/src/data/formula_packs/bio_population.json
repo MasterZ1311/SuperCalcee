@@ -1,66 +1,230 @@
 [
   {
     "id": "bio_exponential_growth",
-    "name": "Exponential Population Growth (Nt)",
-    "desc": "Nt = N0 * e^(r * t) unrestricted population growth",
+    "name": "Exponential Population Growth",
+    "desc": "N(t) = N0 * exp(r * t)",
     "expression": "N0 * exp(r * t)",
-    "variables": ["N0", "r", "t"],
+    "variables": [
+      "N0",
+      "r",
+      "t"
+    ],
     "unit": "individuals"
   },
   {
+    "id": "bio_doubling_time",
+    "name": "Population Doubling Time",
+    "desc": "td = log(2) / r",
+    "expression": "log(2) / r",
+    "variables": [
+      "r"
+    ],
+    "unit": "time"
+  },
+  {
     "id": "bio_logistic_growth_rate",
-    "name": "Logistic Growth Rate (dN/dt)",
-    "desc": "dN/dt = r * N * (1 - N / K) population growth with carrying capacity K",
-    "expression": "r * N * (1 - (N / K))",
-    "variables": ["r", "N", "K"],
+    "name": "Logistic Growth Instantaneous Rate",
+    "desc": "dN/dt = r * N * (1 - N / K)",
+    "expression": "r * N * (1 - N / K)",
+    "variables": [
+      "r",
+      "N",
+      "K"
+    ],
     "unit": "individuals/time"
   },
   {
-    "id": "bio_bmi_metric",
+    "id": "bio_logistic_integrated",
+    "name": "Logistic Population Over Time",
+    "desc": "N(t) = K / (1 + ((K - N0) / N0) * exp(-r * t))",
+    "expression": "K / (1 + ((K - N0) / N0) * exp(-r * t))",
+    "variables": [
+      "K",
+      "N0",
+      "r",
+      "t"
+    ],
+    "unit": "individuals"
+  },
+  {
+    "id": "bio_hardy_weinberg_hetero",
+    "name": "Hardy-Weinberg Heterozygotes (2pq)",
+    "desc": "Freq = 2 * p * (1 - p)",
+    "expression": "2 * p * (1 - p)",
+    "variables": [
+      "p"
+    ],
+    "unit": "frequency"
+  },
+  {
+    "id": "bio_hardy_weinberg_recessive",
+    "name": "Hardy-Weinberg Homozygous Recessive (q²)",
+    "desc": "Freq = (1 - p)²",
+    "expression": "(1 - p)^2",
+    "variables": [
+      "p"
+    ],
+    "unit": "frequency"
+  },
+  {
+    "id": "bio_michaelis_menten",
+    "name": "Michaelis-Menten Reaction Velocity",
+    "desc": "v = (Vmax * S) / (Km + S)",
+    "expression": "(Vmax * S) / (Km + S)",
+    "variables": [
+      "Vmax",
+      "S",
+      "Km"
+    ],
+    "unit": "mol/(L·s)"
+  },
+  {
+    "id": "bio_lineweaver_burk_slope",
+    "name": "Lineweaver-Burk Reciprocal Slope",
+    "desc": "slope = Km / Vmax",
+    "expression": "Km / Vmax",
+    "variables": [
+      "Km",
+      "Vmax"
+    ],
+    "unit": "s"
+  },
+  {
+    "id": "bio_bmi",
     "name": "Body Mass Index (BMI)",
-    "desc": "BMI = weight / (height²) with weight in kg and height in meters",
-    "expression": "weight / (height^2)",
-    "variables": ["weight", "height"],
+    "desc": "BMI = weight_kg / (height_m²)",
+    "expression": "weight_kg / (height_m^2)",
+    "variables": [
+      "weight_kg",
+      "height_m"
+    ],
     "unit": "kg/m²"
   },
   {
-    "id": "bio_cardiac_output",
-    "name": "Cardiac Output (CO)",
-    "desc": "CO = HR * SV (Heart Rate in bpm * Stroke Volume in mL)",
-    "expression": "HR * SV",
-    "variables": ["HR", "SV"],
-    "unit": "mL/min"
-  },
-  {
-    "id": "bio_ficks_diffusion",
-    "name": "Fick's First Law of Diffusion",
-    "desc": "J = -D * (delta_C / delta_x) diffusion flux across membrane",
-    "expression": "-1 * D * (delta_C / delta_x)",
-    "variables": ["D", "delta_C", "delta_x"],
-    "unit": "mol/(m²·s)"
-  },
-  {
-    "id": "bio_harris_benedict_bmr_male",
-    "name": "Basal Metabolic Rate (BMR Male)",
-    "desc": "BMR = 88.362 + (13.397 * weight_kg) + (4.799 * height_cm) - (5.677 * age_years)",
-    "expression": "88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)",
-    "variables": ["weight", "height", "age"],
+    "id": "bio_bmr_harris_male",
+    "name": "BMR Harris-Benedict (Men)",
+    "desc": "BMR = 88.362 + 13.397*w + 4.799*h - 5.677*a",
+    "expression": "88.362 + 13.397 * w + 4.799 * h - 5.677 * a",
+    "variables": [
+      "w",
+      "h",
+      "a"
+    ],
     "unit": "kcal/day"
   },
   {
-    "id": "bio_generation_time",
-    "name": "Bacterial Generation Doubling Time (G)",
-    "desc": "G = t / (3.3 * log10(b / B)) doubling time where b is final and B is initial cell count",
-    "expression": "t / (3.322 * log10(b / B))",
-    "variables": ["t", "b", "B"],
-    "unit": "minutes"
+    "id": "bio_bmr_harris_female",
+    "name": "BMR Harris-Benedict (Women)",
+    "desc": "BMR = 447.593 + 9.247*w + 3.098*h - 4.330*a",
+    "expression": "447.593 + 9.247 * w + 3.098 * h - 4.330 * a",
+    "variables": [
+      "w",
+      "h",
+      "a"
+    ],
+    "unit": "kcal/day"
   },
   {
-    "id": "bio_simpsons_diversity",
-    "name": "Simpson's Dominance Index (D)",
-    "desc": "D = sum(n * (n - 1)) / (N * (N - 1)) for species with count n in total community N",
-    "expression": "(n * (n - 1)) / (N * (N - 1))",
-    "variables": ["n", "N"],
-    "unit": "index"
+    "id": "bio_bmr_mifflin_male",
+    "name": "BMR Mifflin-St Jeor (Men)",
+    "desc": "BMR = 10*w + 6.25*h - 5*a + 5",
+    "expression": "10 * w + 6.25 * h - 5 * a + 5",
+    "variables": [
+      "w",
+      "h",
+      "a"
+    ],
+    "unit": "kcal/day"
+  },
+  {
+    "id": "bio_bmr_mifflin_female",
+    "name": "BMR Mifflin-St Jeor (Women)",
+    "desc": "BMR = 10*w + 6.25*h - 5*a - 161",
+    "expression": "10 * w + 6.25 * h - 5 * a - 161",
+    "variables": [
+      "w",
+      "h",
+      "a"
+    ],
+    "unit": "kcal/day"
+  },
+  {
+    "id": "bio_mosteller_bsa",
+    "name": "Mosteller Body Surface Area",
+    "desc": "BSA = sqrt((height_cm * weight_kg) / 3600)",
+    "expression": "sqrt((height_cm * weight_kg) / 3600)",
+    "variables": [
+      "height_cm",
+      "weight_kg"
+    ],
+    "unit": "m²"
+  },
+  {
+    "id": "bio_cardiac_output",
+    "name": "Cardiac Output",
+    "desc": "CO = stroke_volume * heart_rate",
+    "expression": "stroke_volume * heart_rate",
+    "variables": [
+      "stroke_volume",
+      "heart_rate"
+    ],
+    "unit": "mL/min"
+  },
+  {
+    "id": "bio_mean_arterial_pressure",
+    "name": "Mean Arterial Pressure (MAP)",
+    "desc": "MAP = DBP + (SBP - DBP) / 3",
+    "expression": "DBP + (SBP - DBP) / 3",
+    "variables": [
+      "DBP",
+      "SBP"
+    ],
+    "unit": "mmHg"
+  },
+  {
+    "id": "bio_pulse_pressure",
+    "name": "Arterial Pulse Pressure",
+    "desc": "PP = SBP - DBP",
+    "expression": "SBP - DBP",
+    "variables": [
+      "SBP",
+      "DBP"
+    ],
+    "unit": "mmHg"
+  },
+  {
+    "id": "bio_stroke_volume",
+    "name": "Cardiac Stroke Volume",
+    "desc": "SV = EDV - ESV",
+    "expression": "EDV - ESV",
+    "variables": [
+      "EDV",
+      "ESV"
+    ],
+    "unit": "mL"
+  },
+  {
+    "id": "bio_fick_diffusion",
+    "name": "Fick's Diffusion Flux",
+    "desc": "J = -D * (dC / dx)",
+    "expression": "-D * (dC / dx)",
+    "variables": [
+      "D",
+      "dC",
+      "dx"
+    ],
+    "unit": "mol/(m²·s)"
+  },
+  {
+    "id": "bio_alveolar_gas",
+    "name": "Alveolar Oxygen Tension",
+    "desc": "PAO2 = FiO2 * (Patm - 47) - (PaCO2 / 0.8)",
+    "expression": "FiO2 * (Patm - 47) - (PaCO2 / 0.8)",
+    "variables": [
+      "FiO2",
+      "Patm",
+      "PaCO2"
+    ],
+    "unit": "mmHg"
   }
 ]

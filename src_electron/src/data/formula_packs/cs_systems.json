@@ -1,66 +1,245 @@
 [
   {
-    "id": "cs_cpu_exec_time",
+    "id": "cs_shannon_binary_entropy",
+    "name": "Shannon Binary Entropy",
+    "desc": "H = -p * (log(p)/log(2)) - (1-p) * (log(1-p)/log(2))",
+    "expression": "-p * (log(p) / log(2)) - (1 - p) * (log(1 - p) / log(2))",
+    "variables": [
+      "p"
+    ],
+    "unit": "bits"
+  },
+  {
+    "id": "cs_shannon_channel_capacity",
+    "name": "Shannon-Hartley Channel Capacity",
+    "desc": "C = B * (log(1 + SNR) / log(2))",
+    "expression": "B * (log(1 + SNR) / log(2))",
+    "variables": [
+      "B",
+      "SNR"
+    ],
+    "unit": "bps"
+  },
+  {
+    "id": "cs_hartley_law",
+    "name": "Hartley Maximum Baud Rate",
+    "desc": "R = 2 * B * (log(M) / log(2))",
+    "expression": "2 * B * (log(M) / log(2))",
+    "variables": [
+      "B",
+      "M"
+    ],
+    "unit": "bps"
+  },
+  {
+    "id": "cs_cpu_execution_time",
     "name": "CPU Execution Time",
-    "desc": "Time = InstructionCount * CPI * ClockCycleTime (in seconds)",
-    "expression": "instructions * cpi * cycle_time",
-    "variables": ["instructions", "cpi", "cycle_time"],
+    "desc": "Time = IC * CPI * clock_cycle_time",
+    "expression": "IC * CPI * clock_cycle_time",
+    "variables": [
+      "IC",
+      "CPI",
+      "clock_cycle_time"
+    ],
     "unit": "s"
   },
   {
-    "id": "cs_shannon_capacity",
-    "name": "Shannon Channel Capacity (Hartley-Shannon)",
-    "desc": "C = B * log2(1 + SNR) maximum error-free data rate over bandwidth B",
-    "expression": "B * (log(1 + snr) / log(2))",
-    "variables": ["B", "snr"],
-    "unit": "bits/s"
+    "id": "cs_cpu_mips",
+    "name": "CPU MIPS Processing Rate",
+    "desc": "MIPS = clock_frequency / (CPI * 1000000)",
+    "expression": "clock_frequency / (CPI * 1000000)",
+    "variables": [
+      "clock_frequency",
+      "CPI"
+    ],
+    "unit": "MIPS"
   },
   {
-    "id": "cs_cache_amat",
+    "id": "cs_clock_frequency",
+    "name": "Clock Frequency from Period",
+    "desc": "f = 1 / period",
+    "expression": "1 / period",
+    "variables": [
+      "period"
+    ],
+    "unit": "Hz"
+  },
+  {
+    "id": "cs_amat_single",
     "name": "Average Memory Access Time (AMAT)",
-    "desc": "AMAT = HitTime + (MissRate * MissPenalty)",
-    "expression": "hit_time + (miss_rate * miss_penalty)",
-    "variables": ["hit_time", "miss_rate", "miss_penalty"],
+    "desc": "AMAT = t_hit + miss_rate * t_miss",
+    "expression": "t_hit + miss_rate * t_miss",
+    "variables": [
+      "t_hit",
+      "miss_rate",
+      "t_miss"
+    ],
+    "unit": "ns"
+  },
+  {
+    "id": "cs_amat_two_level",
+    "name": "Two-Level Cache AMAT",
+    "desc": "AMAT = t_L1 + m_L1 * (t_L2 + m_L2 * t_mem)",
+    "expression": "t_L1 + m_L1 * (t_L2 + m_L2 * t_mem)",
+    "variables": [
+      "t_L1",
+      "m_L1",
+      "t_L2",
+      "m_L2",
+      "t_mem"
+    ],
     "unit": "ns"
   },
   {
     "id": "cs_ram_bandwidth",
-    "name": "DDR RAM Theoretical Peak Bandwidth",
-    "desc": "Bandwidth = ClockFreq_MHz * 8 bytes * 2 transfers_per_clock / 1000",
-    "expression": "(clock_mhz * 8 * 2) / 1000",
-    "variables": ["clock_mhz"],
-    "unit": "GB/s"
+    "name": "DDR RAM Peak Bandwidth",
+    "desc": "BW = (bus_width_bits / 8) * clock_rate_hz * transfers_per_cycle",
+    "expression": "(bus_width_bits / 8) * clock_rate_hz * transfers_per_cycle",
+    "variables": [
+      "bus_width_bits",
+      "clock_rate_hz",
+      "transfers_per_cycle"
+    ],
+    "unit": "B/s"
   },
   {
-    "id": "cs_amdahls_law",
-    "name": "Amdahl's Law Speedup",
-    "desc": "Speedup = 1 / ((1 - p) + (p / s)) with parallel fraction p (0-1) and s processor count",
+    "id": "cs_amdahl_speedup",
+    "name": "Amdahl's Parallel Speedup",
+    "desc": "Speedup = 1 / ((1 - p) + (p / s))",
     "expression": "1 / ((1 - p) + (p / s))",
-    "variables": ["p", "s"],
+    "variables": [
+      "p",
+      "s"
+    ],
     "unit": "speedup"
   },
   {
-    "id": "cs_littles_law",
-    "name": "Little's Law (Queueing Theory)",
-    "desc": "L = λ * W average items in system given arrival rate λ and average wait time W",
-    "expression": "arrival_rate * wait_time",
-    "variables": ["arrival_rate", "wait_time"],
+    "id": "cs_gustafson_speedup",
+    "name": "Gustafson's Scaled Speedup",
+    "desc": "Speedup = s + p * (1 - s)",
+    "expression": "s + p * (1 - s)",
+    "variables": [
+      "s",
+      "p"
+    ],
+    "unit": "speedup"
+  },
+  {
+    "id": "cs_littles_law_items",
+    "name": "Little's Law Queue Capacity",
+    "desc": "Items L = lambda_arrival * W_wait",
+    "expression": "lambda_arrival * W_wait",
+    "variables": [
+      "lambda_arrival",
+      "W_wait"
+    ],
     "unit": "items"
   },
   {
-    "id": "cs_network_delay",
-    "name": "Total Network Propagation + Transmission Delay",
-    "desc": "Delay = (PacketSize_bits / Bandwidth_bps) + (Distance_meters / PropagationSpeed)",
-    "expression": "(packet_bits / bandwidth_bps) + (distance_m / 200000000)",
-    "variables": ["packet_bits", "bandwidth_bps", "distance_m"],
-    "unit": "s"
+    "id": "cs_nyquist_sampling",
+    "name": "Nyquist Minimum Sampling Rate",
+    "desc": "fs = 2 * f_max",
+    "expression": "2 * f_max",
+    "variables": [
+      "f_max"
+    ],
+    "unit": "Hz"
   },
   {
-    "id": "cs_mips_rating",
-    "name": "Processor MIPS Rating",
-    "desc": "MIPS = ClockFrequency_MHz / (CPI)",
-    "expression": "clock_freq_mhz / cpi",
-    "variables": ["clock_freq_mhz", "cpi"],
-    "unit": "MIPS"
+    "id": "cs_binary_search_steps",
+    "name": "Binary Search Max Comparisons",
+    "desc": "Steps = floor(log(n) / log(2)) + 1",
+    "expression": "floor(log(n) / log(2)) + 1",
+    "variables": [
+      "n"
+    ],
+    "unit": "comparisons"
+  },
+  {
+    "id": "cs_hash_load_factor",
+    "name": "Hash Table Load Factor",
+    "desc": "alpha = n_elements / m_slots",
+    "expression": "n_elements / m_slots",
+    "variables": [
+      "n_elements",
+      "m_slots"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "cs_bdp_network",
+    "name": "Bandwidth-Delay Product (BDP)",
+    "desc": "BDP = (bandwidth_bps / 8) * rtt_seconds",
+    "expression": "(bandwidth_bps / 8) * rtt_seconds",
+    "variables": [
+      "bandwidth_bps",
+      "rtt_seconds"
+    ],
+    "unit": "bytes"
+  },
+  {
+    "id": "cs_raid0_capacity",
+    "name": "RAID 0 Total Capacity",
+    "desc": "Cap = n * disk_size",
+    "expression": "n * disk_size",
+    "variables": [
+      "n",
+      "disk_size"
+    ],
+    "unit": "TB"
+  },
+  {
+    "id": "cs_raid1_capacity",
+    "name": "RAID 1 Mirrored Capacity",
+    "desc": "Cap = disk_size",
+    "expression": "disk_size",
+    "variables": [
+      "disk_size"
+    ],
+    "unit": "TB"
+  },
+  {
+    "id": "cs_raid5_capacity",
+    "name": "RAID 5 Usable Capacity",
+    "desc": "Cap = (n - 1) * disk_size",
+    "expression": "(n - 1) * disk_size",
+    "variables": [
+      "n",
+      "disk_size"
+    ],
+    "unit": "TB"
+  },
+  {
+    "id": "cs_raid6_capacity",
+    "name": "RAID 6 Usable Capacity",
+    "desc": "Cap = (n - 2) * disk_size",
+    "expression": "(n - 2) * disk_size",
+    "variables": [
+      "n",
+      "disk_size"
+    ],
+    "unit": "TB"
+  },
+  {
+    "id": "cs_raid10_capacity",
+    "name": "RAID 10 Striped-Mirror Capacity",
+    "desc": "Cap = (n / 2) * disk_size",
+    "expression": "(n / 2) * disk_size",
+    "variables": [
+      "n",
+      "disk_size"
+    ],
+    "unit": "TB"
+  },
+  {
+    "id": "cs_landauer_limit",
+    "name": "Landauer Bit Erasure Minimal Energy",
+    "desc": "E = kB * T * log(2)",
+    "expression": "kB * T * log(2)",
+    "variables": [
+      "kB",
+      "T"
+    ],
+    "unit": "J"
   }
 ]

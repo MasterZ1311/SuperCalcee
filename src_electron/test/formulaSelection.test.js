@@ -48,7 +48,7 @@ describe('Formula Selection & Pack Registry Catalog', () => {
       assert.ok(formulas.length > 0, `Pack ${file} is empty`);
       totalFormulas += formulas.length;
     }
-    assert.equal(totalFormulas, 116);
+    assert.equal(totalFormulas, 297);
   });
 
   it('resolves active domain formulas combining presets and installed packs', () => {
@@ -66,7 +66,7 @@ describe('Formula Selection & Pack Registry Catalog', () => {
       }
     ];
 
-    // Replicate App.jsx:127-144 logic
+    // Replicate App.jsx logic
     const categoryMap = {
       physics: 'Physics',
       accounts: 'Accounts',
@@ -79,9 +79,28 @@ describe('Formula Selection & Pack Registry Catalog', () => {
       .flatMap(pack => pack.formulas);
 
     const combined = [...builtIn, ...installedFromPacks];
-    // Builtin physics: 14, Mechanics pack: 14 -> Total: 28
+    // Builtin physics: 14, Mechanics pack: 25 -> Total: 39
     assert.equal(builtIn.length, 14);
-    assert.equal(installedFromPacks.length, 14);
-    assert.equal(combined.length, 28);
+    assert.equal(installedFromPacks.length, 25);
+    assert.equal(combined.length, 39);
+  });
+
+  it('validates Option B compressed zip archives and pack registry metadata', () => {
+    const archiveDir = path.join(__dirname, '..', 'public', 'formula_packs_archive');
+    assert.ok(fs.existsSync(archiveDir), 'public/formula_packs_archive must exist');
+
+    const zipFiles = fs.readdirSync(archiveDir).filter(f => f.endsWith('.zip'));
+    assert.equal(zipFiles.length, 14, 'Must have exactly 14 compressed .zip archives');
+
+    for (const z of zipFiles) {
+      const stats = fs.statSync(path.join(archiveDir, z));
+      assert.ok(stats.size > 500, `ZIP archive ${z} is unexpectedly small: ${stats.size} bytes`);
+      assert.ok(stats.size < 5000, `ZIP archive ${z} is unexpectedly large: ${stats.size} bytes`);
+    }
+
+    const catalogPath = path.join(archiveDir, 'catalog.json');
+    assert.ok(fs.existsSync(catalogPath), 'catalog.json must exist');
+    const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf-8'));
+    assert.equal(catalog.length, 14);
   });
 });

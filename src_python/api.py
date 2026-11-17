@@ -36,6 +36,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 # Ensure parent root directory is in sys.path for internal imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from src_python import pack_manager
 from src_python.cas.symbolic_engine import cas_engine
 from src_python.constants.loader import DB
 from src_python.domains.astrophysics import astro_engine
@@ -1076,6 +1077,57 @@ def numerical_limit(data: NumericalLimitInput, request: Request) -> Dict[str, An
     res = robust_limit(func, data.x0, direction=data.direction)
     res_dict = res.to_dict()
     return {"success": True, "result": res_dict, **res_dict, "request_id": req_id}
+
+
+# --- Formula Pack Storage & Lifecycle Endpoints (Option B) ---
+
+
+@v1_router.get("/packs", summary="List Available and Installed Formula Packs")
+def list_formula_packs(request: Request) -> Dict[str, Any]:
+    """Retrieves catalog of all compressed formula packs with their local install status and sizes."""
+    req_id = get_request_id(request)
+    packs = pack_manager.list_packs()
+    return {"success": True, "packs": packs, "request_id": req_id}
+
+
+@v1_router.get("/packs/storage-summary", summary="Get Formula Packs Storage Metrics")
+def get_packs_storage_summary(request: Request) -> Dict[str, Any]:
+    """Returns storage metrics comparing compressed offline archive vs extracted active storage."""
+    req_id = get_request_id(request)
+    summary = pack_manager.get_storage_summary()
+    return {"success": True, **summary, "request_id": req_id}
+
+
+@v1_router.post("/packs/{pack_id}/install", summary="Install / Extract Compressed Formula Pack")
+def install_formula_pack(pack_id: str, request: Request) -> Dict[str, Any]:
+    """Extracts a compressed .zip pack into local persistent storage (AppData) and returns its formulas."""
+    req_id = get_request_id(request)
+    try:
+        res = pack_manager.install_pack(pack_id)
+        return {"success": True, **res, "request_id": req_id}
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@v1_router.delete("/packs/{pack_id}", summary="Uninstall Formula Pack / Free Storage Space")
+def uninstall_formula_pack(pack_id: str, request: Request) -> Dict[str, Any]:
+    """Removes an extracted formula pack from local storage to reclaim disk space."""
+    req_id = get_request_id(request)
+    res = pack_manager.uninstall_pack(pack_id)
+    return {"success": True, **res, "request_id": req_id}
+
+
+@v1_router.get("/packs/{pack_id}/formulas", summary="Fetch Formulas for Installed Pack")
+def get_pack_formulas(pack_id: str, request: Request) -> Dict[str, Any]:
+    """Retrieves formula definitions from an installed pack in local storage."""
+    req_id = get_request_id(request)
+    try:
+        formulas = pack_manager.get_installed_formulas(pack_id)
+        return {"success": True, "pack_id": pack_id, "formulas": formulas, "request_id": req_id}
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e))
 
 
 # Mount API v1 router both under /api/v1 (versioned) and / (backward-compatible)

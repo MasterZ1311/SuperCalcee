@@ -55,7 +55,7 @@ import HistoryPanel from './components/HistoryPanel';
 import CASStudio from './components/CASStudio';
 import BackendStatusBanner from './components/BackendStatusBanner';
 import { PRESET_FORMULAS } from './data/presetFormulas';
-import { FORMULA_PACKS, loadMultiplePacks } from './data/packRegistry';
+import { FORMULA_PACKS, loadMultiplePacks, fetchPacksCatalog } from './data/packRegistry';
 
 /**
  * Sidebar navigation tab item configuration list.
@@ -101,6 +101,20 @@ function App() {
       return [];
     }
   });
+
+  // Synchronize installed packs with backend AppData on mount (Option B)
+  useEffect(() => {
+    fetchPacksCatalog().then(packs => {
+      const backendInstalled = packs.filter(p => p.is_installed).map(p => p.id);
+      if (backendInstalled.length > 0) {
+        setInstalledPackIds(prev => {
+          const union = Array.from(new Set([...prev, ...backendInstalled]));
+          localStorage.setItem('supercalcee_installed_pack_ids', JSON.stringify(union));
+          return union;
+        });
+      }
+    }).catch(() => {});
+  }, []);
 
   // Loaded pack formulas cache (loaded dynamically from packRegistry)
   const [loadedPackFormulas, setLoadedPackFormulas] = useState({});

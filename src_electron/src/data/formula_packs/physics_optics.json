@@ -1,50 +1,229 @@
 [
   {
-    "id": "opt_snells_law",
-    "name": "Snell's Law (Reflected Angle θ2)",
-    "desc": "sin(theta2) = (n1 / n2) * sin(theta1)",
-    "expression": "asin((n1 / n2) * sin(theta1 * pi / 180)) * 180 / pi",
-    "variables": ["n1", "n2", "theta1"],
-    "unit": "deg"
+    "id": "optics_wave_speed",
+    "name": "Wave Propagation Speed",
+    "desc": "v = f * lambda",
+    "expression": "f * lambda",
+    "variables": [
+      "f",
+      "lambda"
+    ],
+    "unit": "m/s"
   },
   {
-    "id": "opt_lens_formula",
-    "name": "Lens / Mirror Focal Length (f)",
-    "desc": "1/f = 1/v + 1/u => f = (u*v) / (u+v)",
-    "expression": "(u * v) / (u + v)",
-    "variables": ["u", "v"],
-    "unit": "m"
-  },
-  {
-    "id": "opt_photon_energy",
-    "name": "Photon Energy (E = h*f)",
+    "id": "optics_photon_energy",
+    "name": "Photon Energy Planck",
     "desc": "E = h * f",
-    "expression": "6.62607015e-34 * f",
-    "variables": ["f"],
+    "expression": "h * f",
+    "variables": [
+      "h",
+      "f"
+    ],
     "unit": "J"
   },
   {
-    "id": "opt_de_broglie",
-    "name": "de Broglie Wavelength",
-    "desc": "lambda = h / p (p = momentum)",
-    "expression": "6.62607015e-34 / p",
-    "variables": ["p"],
+    "id": "optics_snells_law",
+    "name": "Snell's Law Refracted Angle",
+    "desc": "theta2 = asin((n1 * sin(theta1)) / n2)",
+    "expression": "asin((n1 * sin(theta1)) / n2)",
+    "variables": [
+      "n1",
+      "theta1",
+      "n2"
+    ],
+    "unit": "rad"
+  },
+  {
+    "id": "optics_critical_angle",
+    "name": "Critical Total Reflection Angle",
+    "desc": "theta_c = asin(n2 / n1)",
+    "expression": "asin(n2 / n1)",
+    "variables": [
+      "n2",
+      "n1"
+    ],
+    "unit": "rad"
+  },
+  {
+    "id": "optics_lens_image_dist",
+    "name": "Thin Lens Image Distance",
+    "desc": "di = (f * do) / (do - f)",
+    "expression": "(f * do) / (do - f)",
+    "variables": [
+      "f",
+      "do"
+    ],
     "unit": "m"
   },
   {
-    "id": "opt_einstein_mass_energy",
-    "name": "Mass-Energy Equivalence (E = m*c²)",
-    "desc": "E = m * c²",
-    "expression": "m * (299792458^2)",
-    "variables": ["m"],
+    "id": "optics_lens_focal_len",
+    "name": "Thin Lens Focal Length",
+    "desc": "f = (do * di) / (do + di)",
+    "expression": "(do * di) / (do + di)",
+    "variables": [
+      "do",
+      "di"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "optics_magnification",
+    "name": "Optical Magnification",
+    "desc": "m = -di / do",
+    "expression": "-di / do",
+    "variables": [
+      "di",
+      "do"
+    ],
+    "unit": "ratio"
+  },
+  {
+    "id": "optics_lens_power",
+    "name": "Optical Power (Diopters)",
+    "desc": "P = 1 / f",
+    "expression": "1 / f",
+    "variables": [
+      "f"
+    ],
+    "unit": "dpt"
+  },
+  {
+    "id": "optics_double_slit_fringe",
+    "name": "Young's Double-Slit Fringe Width",
+    "desc": "beta = lambda * L / d",
+    "expression": "lambda * L / d",
+    "variables": [
+      "lambda",
+      "L",
+      "d"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "optics_single_slit_diff",
+    "name": "Single Slit Angular Half-Width",
+    "desc": "theta = lambda / a",
+    "expression": "lambda / a",
+    "variables": [
+      "lambda",
+      "a"
+    ],
+    "unit": "rad"
+  },
+  {
+    "id": "optics_rayleigh_criterion",
+    "name": "Rayleigh Criterion Resolution",
+    "desc": "theta = 1.22 * lambda / D",
+    "expression": "1.22 * lambda / D",
+    "variables": [
+      "lambda",
+      "D"
+    ],
+    "unit": "rad"
+  },
+  {
+    "id": "optics_malus_law",
+    "name": "Malus's Polarized Intensity",
+    "desc": "I = I0 * (cos(theta)^2)",
+    "expression": "I0 * (cos(theta)^2)",
+    "variables": [
+      "I0",
+      "theta"
+    ],
+    "unit": "W/m²"
+  },
+  {
+    "id": "optics_photoelectric_ke",
+    "name": "Photoelectric Max Kinetic Energy",
+    "desc": "Kmax = h * f - phi_work",
+    "expression": "h * f - phi_work",
+    "variables": [
+      "h",
+      "f",
+      "phi_work"
+    ],
     "unit": "J"
   },
   {
-    "id": "opt_radioactive_decay",
-    "name": "Radioactive Decay Remaining (N)",
-    "desc": "N = N0 * e^(-lambda * t)",
-    "expression": "N0 * e^(-1 * lambda * t)",
-    "variables": ["N0", "lambda", "t"],
-    "unit": "particles"
+    "id": "optics_de_broglie_wavelength",
+    "name": "De Broglie Matter Wavelength",
+    "desc": "lambda = h / (m * v)",
+    "expression": "h / (m * v)",
+    "variables": [
+      "h",
+      "m",
+      "v"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "optics_compton_shift",
+    "name": "Compton Wavelength Shift",
+    "desc": "dlambda = (h / (m * c)) * (1 - cos(theta))",
+    "expression": "(h / (m * c)) * (1 - cos(theta))",
+    "variables": [
+      "h",
+      "m",
+      "c",
+      "theta"
+    ],
+    "unit": "m"
+  },
+  {
+    "id": "optics_bohr_energy",
+    "name": "Bohr Model Hydrogen Energy Level",
+    "desc": "En = -13.6 / (n^2)",
+    "expression": "-13.6 / (n^2)",
+    "variables": [
+      "n"
+    ],
+    "unit": "eV"
+  },
+  {
+    "id": "optics_rydberg_wavenumber",
+    "name": "Rydberg Spectral Wave Number",
+    "desc": "wavenumber = R_inf * (1/(n1^2) - 1/(n2^2))",
+    "expression": "R_inf * (1 / (n1^2) - 1 / (n2^2))",
+    "variables": [
+      "R_inf",
+      "n1",
+      "n2"
+    ],
+    "unit": "1/m"
+  },
+  {
+    "id": "optics_lorentz_gamma",
+    "name": "Relativistic Lorentz Gamma",
+    "desc": "gamma = 1 / sqrt(1 - (v / c)^2)",
+    "expression": "1 / sqrt(1 - (v / c)^2)",
+    "variables": [
+      "v",
+      "c"
+    ],
+    "unit": "dimensionless"
+  },
+  {
+    "id": "optics_mass_energy",
+    "name": "Einstein Mass-Energy",
+    "desc": "E = m * (c^2)",
+    "expression": "m * (c^2)",
+    "variables": [
+      "m",
+      "c"
+    ],
+    "unit": "J"
+  },
+  {
+    "id": "optics_doppler_sound",
+    "name": "Acoustic Doppler Approaching Frequency",
+    "desc": "fo = fs * (v + vo) / (v - vs)",
+    "expression": "fs * (v + vo) / (v - vs)",
+    "variables": [
+      "fs",
+      "v",
+      "vo",
+      "vs"
+    ],
+    "unit": "Hz"
   }
 ]

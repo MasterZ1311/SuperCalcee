@@ -20,7 +20,11 @@ const ALLOWED_INVOKE_CHANNELS = [
   'app:get-version',
   'app:get-platform',
   'app:open-external-url',
-  'app:check-backend-status'
+  'app:check-backend-status',
+  'packs:get-packs',
+  'packs:get-storage-summary',
+  'packs:install',
+  'packs:uninstall'
 ];
 
 /**
@@ -60,5 +64,15 @@ contextBridge.exposeInMainWorld('electronAPI', {
    * Checks the readiness status of the backend Python process.
    * @returns {Promise<{ ready: boolean, port: number }>} Backend readiness and port.
    */
-  checkBackendStatus: () => safeInvoke('app:check-backend-status')
+  checkBackendStatus: () => safeInvoke('app:check-backend-status'),
+
+  /**
+   * Formula Pack Storage & Lifecycle Management (Option B)
+   */
+  packs: {
+    getPacks: () => safeInvoke('packs:get-packs'),
+    getStorageSummary: () => safeInvoke('packs:get-storage-summary'),
+    installPack: (packId) => safeInvoke('packs:install', packId),
+    uninstallPack: (packId) => safeInvoke('packs:uninstall', packId)
+  }
 });

@@ -167,6 +167,47 @@ function registerIpcHandlers() {
     ipcMain.handle('app:check-backend-status', () => {
         return { ready: pythonController.isReady, port: 8000 };
     });
+
+    // Formula Packs Storage & Lifecycle IPC Handlers (Option B)
+    ipcMain.handle('packs:get-packs', async () => {
+        try {
+            const res = await fetch('http://127.0.0.1:8000/api/v1/packs');
+            return await res.json();
+        } catch (err) {
+            return { success: false, error: err.message, packs: [] };
+        }
+    });
+
+    ipcMain.handle('packs:get-storage-summary', async () => {
+        try {
+            const res = await fetch('http://127.0.0.1:8000/api/v1/packs/storage-summary');
+            return await res.json();
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
+    });
+
+    ipcMain.handle('packs:install', async (_event, packId) => {
+        try {
+            const res = await fetch(`http://127.0.0.1:8000/api/v1/packs/${encodeURIComponent(packId)}/install`, {
+                method: 'POST'
+            });
+            return await res.json();
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
+    });
+
+    ipcMain.handle('packs:uninstall', async (_event, packId) => {
+        try {
+            const res = await fetch(`http://127.0.0.1:8000/api/v1/packs/${encodeURIComponent(packId)}`, {
+                method: 'DELETE'
+            });
+            return await res.json();
+        } catch (err) {
+            return { success: false, error: err.message };
+        }
+    });
 }
 
 /**
